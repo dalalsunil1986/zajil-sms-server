@@ -9,5 +9,7 @@ class Hall extends Model
     protected $guarded = ['id'];
     protected $hidden = [];
     protected $table = 'halls';
+    public $timestamps = false;
+
 
 }

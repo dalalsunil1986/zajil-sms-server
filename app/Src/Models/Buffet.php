@@ -9,4 +9,6 @@ class Buffet extends Model
     protected $guarded = ['id'];
     protected $hidden = [];
     protected $table = 'buffets';
+    public $timestamps = false;
+
 }

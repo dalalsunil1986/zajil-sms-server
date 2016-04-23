@@ -9,4 +9,6 @@ class BuffetPackage extends Model
     protected $guarded = ['id'];
     protected $hidden = [];
     protected $table = 'buffet_packages';
+    public $timestamps = false;
+
 }

@@ -22,6 +22,5 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::resource('photographers', 'PhotgrapherController');
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
-    Route::resource('board_services', 'BoardServiceController');
     Route::resource('orders', 'OrderController');
 });

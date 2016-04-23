@@ -9,5 +9,6 @@ class Photographer extends Model
     protected $guarded = ['id'];
     protected $hidden = [];
     protected $table = 'photographers';
+    public $timestamps = false;
 
 }

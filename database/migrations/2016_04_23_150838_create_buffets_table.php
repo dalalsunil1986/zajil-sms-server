@@ -14,7 +14,10 @@ class CreateBuffetsTable extends Migration
     {
         Schema::create('buffets', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->string('location')->nullable();
+            $table->text('address')->nullable();
         });
     }
 

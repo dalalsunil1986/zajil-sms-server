@@ -14,6 +14,8 @@ class CreateHallBookingsTable extends Migration
     {
         Schema::create('hall_bookings', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('hall_id');
+            $table->timestamp('booking_date')->nullable();
             $table->timestamps();
         });
     }

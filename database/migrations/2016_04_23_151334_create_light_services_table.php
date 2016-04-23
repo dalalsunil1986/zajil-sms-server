@@ -14,7 +14,8 @@ class CreateLightServicesTable extends Migration
     {
         Schema::create('light_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name')->nullable();
+            $table->decimal('price',5,2)->nullable();
         });
     }
 

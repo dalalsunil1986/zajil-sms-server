@@ -14,7 +14,8 @@ class CreatePhotographersTable extends Migration
     {
         Schema::create('photographers', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name')->nullable();
+            $table->decimal('price',5,2)->nullable();
         });
     }
 

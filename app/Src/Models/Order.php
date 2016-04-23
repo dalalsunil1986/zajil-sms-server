@@ -10,5 +10,4 @@ class Order extends Model
     protected $hidden = [];
     protected $table = 'orders';
 
-
 }

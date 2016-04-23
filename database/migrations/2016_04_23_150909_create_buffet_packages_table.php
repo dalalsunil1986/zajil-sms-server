@@ -14,7 +14,9 @@ class CreateBuffetPackagesTable extends Migration
     {
         Schema::create('buffet_packages', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('buffet_id');
+            $table->text('description')->nullable();
+            $table->decimal('price',5,2)->nullable();
         });
     }
 

@@ -9,4 +9,6 @@ class HallBooking extends Model
     protected $guarded = ['id'];
     protected $hidden = [];
     protected $table = 'hall_bookings';
+    public $timestamps = false;
+
 }

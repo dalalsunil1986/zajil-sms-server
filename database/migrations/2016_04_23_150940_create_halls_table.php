@@ -14,7 +14,10 @@ class CreateHallsTable extends Migration
     {
         Schema::create('halls', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->text('address')->nullable();
+            $table->decimal('price',5,2)->nullable();
         });
     }
 

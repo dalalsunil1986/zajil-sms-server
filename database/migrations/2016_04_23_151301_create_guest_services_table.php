@@ -14,7 +14,8 @@ class CreateGuestServicesTable extends Migration
     {
         Schema::create('guest_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name')->nullable();
+            $table->decimal('price',5,2)->nullable();
         });
     }
 

@@ -11,19 +11,84 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Src\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
+        'api_token' => $faker->word,
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(\App\Src\Category\Category::class, function (Faker\Generator $faker) {
+$factory->define(\App\Src\Models\Message::class, function (Faker\Generator $faker) {
     return [
-        'name_en' => $faker->randomElement(['spa','salon','clinic']),
-//        'description_en' => $faker->sentence(10),
-        'image' => $faker->imageUrl($width = 640, $height = 480)
+        'location' => $faker->name,
+        'price' => '100.00',
+        'recepient_count' => '2000',
+    ];
+});
+
+$factory->define(\App\Src\Models\Buffet::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence(5),
+        'location' => $faker->word,
+        'address' => $faker->address,
+    ];
+});
+
+$factory->define(\App\Src\Models\BuffetPackage::class, function (Faker\Generator $faker) {
+    return [
+        'buffet_id' => App\Src\Models\Buffet::orderByRaw("RAND()")->first()->id,
+        'description' => $faker->sentence(5),
+        'price' => '20.00',
+    ];
+});
+
+$factory->define(\App\Src\Models\Hall::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence(5),
+        'address' => $faker->address,
+        'price' => '20.00',
+    ];
+});
+
+$factory->define(\App\Src\Models\Photographer::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'price' => '20.00',
+    ];
+});
+
+$factory->define(\App\Src\Models\GuestService::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'price' => '20.00',
+    ];
+});
+
+$factory->define(\App\Src\Models\LightService::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'price' => '20.00',
+    ];
+});
+
+$factory->define(\App\Src\Models\Order::class, function (Faker\Generator $faker) {
+    return [
+    'name'=>$faker->name,
+    'email'=>$faker->safeEmail,
+    'phone'=>$faker->phoneNumber,
+    'address'=>$faker->address,
+    'message_id'=>App\Src\Models\Message::orderByRaw("RAND()")->first()->id,
+    'message_text'=>$faker->sentence(2),
+    'message_send_date'=>$faker->dateTime,
+    'buffet_package_id'=>App\Src\Models\BuffetPackage::orderByRaw("RAND()")->first()->id,
+    'hall_id'=>App\Src\Models\Hall::orderByRaw("RAND()")->first()->id,
+    'photographer_id'=>App\Src\Models\Photographer::orderByRaw("RAND()")->first()->id,
+    'guest_service_id'=>App\Src\Models\GuestService::orderByRaw("RAND()")->first()->id,
+    'light_service_id'=>App\Src\Models\LightService::orderByRaw("RAND()")->first()->id,
     ];
 });

@@ -9,5 +9,5 @@ class Message extends Model
     protected $guarded = ['id'];
     protected $hidden = [];
     protected $table = 'messages';
-
+    public $timestamps = false;
 }
