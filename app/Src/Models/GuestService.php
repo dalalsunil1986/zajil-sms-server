@@ -11,4 +11,9 @@ class GuestService extends Model
     protected $table = 'guest_services';
     public $timestamps = false;
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

@@ -10,4 +10,10 @@ class Message extends Model
     protected $hidden = [];
     protected $table = 'messages';
     public $timestamps = false;
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

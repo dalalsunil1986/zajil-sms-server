@@ -11,4 +11,15 @@ class BuffetPackage extends Model
     protected $table = 'buffet_packages';
     public $timestamps = false;
 
+
+    public function buffet()
+    {
+        return $this->belongsTo(Buffet::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

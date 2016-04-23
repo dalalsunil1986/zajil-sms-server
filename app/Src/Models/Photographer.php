@@ -11,4 +11,9 @@ class Photographer extends Model
     protected $table = 'photographers';
     public $timestamps = false;
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

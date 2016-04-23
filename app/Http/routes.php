@@ -20,7 +20,7 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::resource('buffets', 'BuffetController');
     Route::get('buffets/{id}/packages', 'BuffetController@getPackages');
     Route::resource('halls', 'HallController');
-    Route::resource('photographers', 'PhotgrapherController');
+    Route::resource('photographers', 'PhotographerController');
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController');
