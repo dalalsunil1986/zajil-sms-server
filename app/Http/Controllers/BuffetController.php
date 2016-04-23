@@ -30,13 +30,13 @@ class BuffetController extends Controller
 
     public function index()
     {
-        $buffets = $this->buffet->all();
+        $buffets = $this->buffet->with('packages')->get();
         return response()->json(['data' => $buffets]);
     }
 
     public function getPackages($buffetID)
     {
-        $buffetPackages = $this->buffetPackage->all()->where('buffet_id',$buffetID);
+        $buffetPackages = $this->buffet->with('packages')->find($buffetID);
         return response()->json(['data' => $buffetPackages]);
     }
 

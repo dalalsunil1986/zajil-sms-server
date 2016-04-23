@@ -11,4 +11,9 @@ class Buffet extends Model
     protected $table = 'buffets';
     public $timestamps = false;
 
+    public function packages()
+    {
+        return $this->hasMany(BuffetPackage::class);
+    }
+
 }

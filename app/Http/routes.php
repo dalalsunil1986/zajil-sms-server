@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'api/v1'], function () {
     Route::resource('messages', 'MessageController');
     Route::resource('buffets', 'BuffetController');
+    Route::get('buffets/{id}/packages', 'BuffetController@getPackages');
     Route::resource('halls', 'HallController');
     Route::resource('photographers', 'PhotgrapherController');
     Route::resource('guest_services', 'GuestServiceController');
