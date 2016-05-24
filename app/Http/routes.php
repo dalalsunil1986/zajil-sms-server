@@ -1,21 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::group(['prefix' => 'api/v1'], function () {
+Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'], function () {
     Route::resource('messages', 'MessageController');
     Route::resource('buffets', 'BuffetController');
     Route::get('buffets/{id}/packages', 'BuffetController@getPackages');
@@ -24,4 +9,22 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController');
+});
+
+/*********************************************************************************************************
+ * Admin Routes
+ ********************************************************************************************************/
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin']], function () {
+    Route::resource('message', 'MessageController');
+    Route::resource('buffet', 'BuffetController');
+    Route::get('/', 'HomeController@index');
+});
+
+/**
+ * Font End Routes
+ */
+Route::group([], function () {
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
 });
