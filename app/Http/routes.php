@@ -9,8 +9,8 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController');
-    Route::post('payments/process','PaymentController@processResult');
-    Route::get('payments/process','PaymentController@processResult');
+    Route::post('payment/process','PaymentController@processResult');
+    Route::get('payment/process','PaymentController@processResult');
     Route::resource('payments', 'PaymentController');
 });
 

@@ -23,7 +23,7 @@ class PaymentController extends Controller
             ['name'=>'merchant','contents'=>'EPG2014'],
             ['name'=>'transaction_id','contents'=>uniqid()],
             ['name'=>'amount','contents'=>$request->get('amount')],
-            ['name'=>'processpage','contents'=>url('api/v1/payments/process')],
+            ['name'=>'processpage','contents'=>url('api/v1/payment/process')],
             ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
             ['name'=>'op_post','contents'=>false],
             ['name'=>'user_mail','contents'=>$request->email],
@@ -59,7 +59,7 @@ class PaymentController extends Controller
 
     public function processResult(Request $request)
     {
-        return '<html></html>';
+        return '<html><h1>Success</h1></html>';
     }
 
 }
