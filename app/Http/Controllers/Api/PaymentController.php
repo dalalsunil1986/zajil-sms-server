@@ -28,30 +28,30 @@ class PaymentController extends Controller
     {
         $weddingDate = $request->wedding_date;
         $amount = $request->amount;
-        $params = [
+        $params = (object) [
             'merchant' => 'EPG2014',
             'transaction_id' => uniqid(),
             'amount' => $request->get('amount'),
             'processPage' => url('/api/v1/payments/process'),
-//            'sec_key' => '',
+            'sec_key' => 'F82D2878',
             'op_post' => true,
             'user_mail' => $request->email,
             'currency ' => 'KWD',
         ];
 
-        $client = new \GuzzleHttp\Client();
+//        $client = new \GuzzleHttp\Client();
 //        dd($params);
 //        dd($client->request('POST','http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx'));
 //        <form name=”myform” method=”POST” action=””>
-        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
+//        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
 //        $response = $client->request('POST', 'http://dealer.e.net.kw/merchant/payment', [
-            'form_params' => $params
-        ]);
+//            'form_params' => $params
+//        ]);
 
-        return $response;
+//        return $response;
 
 
-//        return view('module.payment.index',compact('weddingDate','amount'));
+        return view('module.payment.index',compact('params','amount'));
     }
 
     public function store(Request $request)
