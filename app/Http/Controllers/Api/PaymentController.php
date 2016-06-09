@@ -66,7 +66,6 @@ class PaymentController extends Controller
 
     public function processResult(Request $request)
     {
-        dd($request);
         return view('module.payment.process');
     }
 
