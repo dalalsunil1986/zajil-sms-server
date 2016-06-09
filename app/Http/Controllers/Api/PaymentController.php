@@ -11,7 +11,7 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['csrf'=>['except'=>'processResult']]);
+//        $this->middleware(['csrf'=>['except'=>'processResult']]);
     }
 
     /**
