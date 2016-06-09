@@ -20,15 +20,15 @@ class PaymentController extends Controller
         $weddingDate = $request->wedding_date;
         $amount = $request->amount;
         $params = [
-            ['name'=>'merchant','content'=>'EPG2014'],
-            ['name'=>'transaction_id','content'=>uniqid()],
-            ['name'=>'amount','content'=>$request->get('amount')],
-            ['name'=>'processpage','content'=>url('/api/v1/payments/process')],
-            ['name'=>'sec_key','content'=>'8h12dwrtu83d153'],
-            ['name'=>'op_post','content'=>true],
-            ['name'=>'user_mail','content'=>$request->email],
-            ['name'=>'currency','content'=>'KWD'],
-            ['name'=>'remotepassword','content'=>'F82D2878'],
+            ['name'=>'merchant','contents'=>'EPG2014'],
+            ['name'=>'transaction_id','contents'=>uniqid()],
+            ['name'=>'amount','contents'=>$request->get('amount')],
+            ['name'=>'processpage','contents'=>url('/api/v1/payments/process')],
+            ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
+            ['name'=>'op_post','contents'=>true],
+            ['name'=>'user_mail','contents'=>$request->email],
+            ['name'=>'currency','contents'=>'KWD'],
+            ['name'=>'remotepassword','contents'=>'F82D2878'],
 
 //            'merchant' => 'EPG2014',
 //            'transaction_id' => uniqid(),
