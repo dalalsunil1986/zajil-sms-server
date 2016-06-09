@@ -29,7 +29,7 @@ class PaymentController extends Controller
         $weddingDate = $request->wedding_date;
         $amount = $request->amount;
         $params = [
-            'merchant_id' => 'EPG2014',
+            'merchant' => 'EPG2014',
             'transaction_id' => uniqid(),
             'amount' => $request->get('amount'),
             'processPage' => url('/payments/process'),
