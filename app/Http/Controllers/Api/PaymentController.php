@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware(['csrf'=>['except'=>'processResult']]);
+    }
+
     /**
      * Show the application dashboard.
      *
