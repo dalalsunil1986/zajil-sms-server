@@ -11,6 +11,8 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('orders', 'OrderController');
     Route::post('payment/process','PaymentController@processResult');
     Route::get('payment/process','PaymentController@processResult');
+    Route::get('eNetCpgMainAPI.aspx','PaymentController@processResult');
+
     Route::resource('payments', 'PaymentController');
 });
 
