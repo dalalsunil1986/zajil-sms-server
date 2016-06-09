@@ -31,7 +31,7 @@ class PaymentController extends Controller
             ['name'=>'processpage','contents'=>url('api/v1/payment/process')],
             ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
             ['name'=>'op_post','contents'=>true],
-            ['name'=>'md_flds','transaction_id:amount:processpage'],
+            ['name'=>'md_flds','contents'=>'transaction_id:amount:processpage'],
             ['name'=>'user_mail','contents'=>$request->email],
             ['name'=>'currency','contents'=>'KWD'],
             ['name'=>'remotepassword','contents'=>'F82D2878'],
