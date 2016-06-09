@@ -54,22 +54,12 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
-        $params = [
-            'transaction_id' => uniqid(),
-            'amount' => $request->get('amount'),
-            'processPage' => url('/payments/process'),
-            'sec_key' => '',
-            'op_post' => true,
-            'user_mail' => $request->email,
-            'currency ' => 'KWD',
-            ''
-        ];
         dd($request->all());
     }
 
     public function processResult(Request $request)
     {
-        dd($request->all());
+        return '<html></html>';
     }
 
 }
