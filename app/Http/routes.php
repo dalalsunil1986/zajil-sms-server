@@ -10,6 +10,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController');
     Route::post('payments/process','PaymentController@processResult');
+    Route::get('payments/process','PaymentController@processResult');
     Route::resource('payments', 'PaymentController');
 });
 
