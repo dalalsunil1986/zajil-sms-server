@@ -8,15 +8,6 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-//        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -41,11 +32,7 @@ class PaymentController extends Controller
         ];
 
         $client = new \GuzzleHttp\Client();
-//        dd($params);
-//        dd($client->request('POST','http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx'));
-//        <form name=”myform” method=”POST” action=””>
         $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
-//        $response = $client->request('POST', 'http://dealer.e.net.kw/merchant/payment', [
             'form_params' => $params
         ]);
 
@@ -57,7 +44,6 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $params = [
             'transaction_id' => uniqid(),
             'amount' => $request->get('amount'),
