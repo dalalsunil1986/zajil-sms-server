@@ -1,7 +1,3 @@
-@extends('layouts.app')
+<html>
 
-@section('content')
-    <div class="container">
-
-    </div>
-@endsection
+</html>
