@@ -32,7 +32,7 @@ class PaymentController extends Controller
             'merchant' => 'EPG2014',
             'transaction_id' => uniqid(),
             'amount' => $request->get('amount'),
-            'processPage' => url('/payments/process'),
+            'processPage' => url('/api/v1/payments/process'),
 //            'sec_key' => '',
             'op_post' => true,
             'user_mail' => $request->email,
@@ -43,8 +43,8 @@ class PaymentController extends Controller
 //        dd($params);
 //        dd($client->request('POST','http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx'));
 //        <form name=”myform” method=”POST” action=””>
-//        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
-        $response = $client->request('POST', 'http://dealer.e.net.kw/merchant/payment', [
+        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
+//        $response = $client->request('POST', 'http://dealer.e.net.kw/merchant/payment', [
             'form_params' => $params
         ]);
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3178750b-26ec-4410-8795-fd263d000b4f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PaymentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PaymentController.php" />
     </list>
     <ignored path="ZajilKnet.iws" />
@@ -26,7 +27,7 @@
       <file leaf-file-name="PaymentController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/PaymentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
+            <state relative-caret-position="531">
               <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
               <folding>
                 <element signature="e#44#80#0#PHP" expanded="true" />
@@ -326,12 +327,12 @@
       <workItem from="1464192330274" duration="236000" />
       <workItem from="1464480590907" duration="133000" />
       <workItem from="1465138348359" duration="1260000" />
-      <workItem from="1465301568903" duration="6087000" />
+      <workItem from="1465301568903" duration="6198000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14230000" />
+    <option name="totallyTimeSpent" value="14341000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -734,7 +735,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/PaymentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
+        <state relative-caret-position="531">
           <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
           <folding>
             <element signature="e#44#80#0#PHP" expanded="true" />
