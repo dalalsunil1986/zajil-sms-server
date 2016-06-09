@@ -32,7 +32,7 @@ class PaymentController extends Controller
             'merchant' => 'EPG2014',
             'transaction_id' => uniqid(),
             'amount' => $request->get('amount'),
-            'processPage' => url('/api/v1/payments/process'),
+            'processpage' => url('/api/v1/payments/process'),
             'sec_key' => 'F82D2878',
             'op_post' => true,
             'user_mail' => $request->email,
