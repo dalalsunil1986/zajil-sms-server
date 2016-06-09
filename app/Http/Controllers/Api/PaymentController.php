@@ -20,19 +20,31 @@ class PaymentController extends Controller
         $weddingDate = $request->wedding_date;
         $amount = $request->amount;
         $params = [
-            'merchant' => 'EPG2014',
-            'transaction_id' => uniqid(),
-            'amount' => $request->get('amount'),
-            'processpage' => url('/api/v1/payments/process'),
-            'sec_key' => '8h12dwrtu83d153',
-            'op_post' => true,
-            'user_mail' => $request->email,
-            'currency ' => 'KWD',
-            'remotepassword' => 'F82D2878'
+            ['name'=>'merchant','content'=>'EPG2014'],
+            ['name'=>'transaction_id','content'=>uniqid()],
+            ['name'=>'amount','content'=>$request->get('amount')],
+            ['name'=>'processpage','content'=>url('/api/v1/payments/process')],
+            ['name'=>'sec_key','content'=>'8h12dwrtu83d153'],
+            ['name'=>'op_post','content'=>true],
+            ['name'=>'user_mail','content'=>$request->email],
+            ['name'=>'currency','content'=>'KWD'],
+            ['name'=>'remotepassword','content'=>'F82D2878'],
+
+//            'merchant' => 'EPG2014',
+//            'transaction_id' => uniqid(),
+//            'amount' => $request->get('amount'),
+//            'processpage' => url('/api/v1/payments/process'),
+//            'sec_key' => '8h12dwrtu83d153',
+//            'op_post' => true,
+//            'user_mail' => $request->email,
+//            'currency ' => 'KWD',
+//            'remotepassword' => 'F82D2878'
         ];
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', $params);
+        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
+            'multipart' => $params
+        ]);
 
         return $response;
 
