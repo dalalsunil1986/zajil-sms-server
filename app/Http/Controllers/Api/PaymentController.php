@@ -33,10 +33,11 @@ class PaymentController extends Controller
             'transaction_id' => uniqid(),
             'amount' => $request->get('amount'),
             'processpage' => url('/api/v1/payments/process'),
-            'sec_key' => 'F82D2878',
+            'sec_key' => '8h12dwrtu83d153',
             'op_post' => true,
             'user_mail' => $request->email,
             'currency ' => 'KWD',
+            'remotepassword' => 'F82D2878'
         ];
 
         $client = new \GuzzleHttp\Client();
