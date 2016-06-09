@@ -25,7 +25,7 @@ class PaymentController extends Controller
             ['name'=>'amount','contents'=>$request->get('amount')],
             ['name'=>'processpage','contents'=>url('api/v1/payments/process')],
             ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
-            ['name'=>'op_post','contents'=>true],
+            ['name'=>'op_post','contents'=>false],
             ['name'=>'user_mail','contents'=>$request->email],
             ['name'=>'currency','contents'=>'KWD'],
             ['name'=>'remotepassword','contents'=>'F82D2878'],
