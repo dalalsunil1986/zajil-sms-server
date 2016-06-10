@@ -4,10 +4,8 @@
     <div class="container">
         <div class="row">
             {!! Form::open(['url' => ['http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx'], 'method' => 'post'], ['class'=>'']) !!}
-{{--            {!! Form::open(['action' => 'Api\PaymentController@store', 'method' => 'post'], ['class'=>'']) !!}--}}
-
-            @foreach($params as $key )
-                {!! Form::hidden($key['name'],$key['contents']) !!}
+            @foreach($params as $key => $val )
+                {!! Form::hidden($key,$val) !!}
             @endforeach
         </div>
         <div class="form-group">
