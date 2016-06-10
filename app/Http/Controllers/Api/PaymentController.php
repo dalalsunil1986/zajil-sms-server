@@ -47,13 +47,13 @@ class PaymentController extends Controller
 //            'remotepassword' => 'F82D2878'
         ];
 
-        $client = new \GuzzleHttp\Client();
+//        $client = new \GuzzleHttp\Client();
 //        $response = $client->request('POST', 'https://dealer.e.net.kw/merchant/payment', [
-        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
-            'multipart' => $params
-        ]);
+//        $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
+//            'multipart' => $params
+//        ]);
 
-        return $response;
+//        return $response;
 
 
         return view('module.payment.index',compact('params','amount'));
