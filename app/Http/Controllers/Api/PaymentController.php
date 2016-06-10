@@ -67,7 +67,8 @@ class PaymentController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        dd($request);
+
+//        dd($request);
         return view('module.payment.success');
     }
 
