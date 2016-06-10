@@ -65,8 +65,7 @@ class PaymentController extends Controller
     {
         $request = $request;
 
-        dd($request);
-        if($request->request == 'CAPTURED') {
+        if($request->result == 'CAPTURED') {
             return view('module.payment.success',compact('request'));
         }
         return view('module.payment.failure',compact('request'));
