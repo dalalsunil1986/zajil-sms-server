@@ -61,24 +61,15 @@ class PaymentController extends Controller
         return view('module.payment.index',compact('params','amount'));
     }
 
-    public function store(Request $request)
-    {
-        dd($request->all());
-    }
-
     public function paymentProcess(Request $request)
     {
         $request = $request;
 
+        dd($request);
         if($request->request == 'CAPTURED') {
             return view('module.payment.success',compact('request'));
         }
         return view('module.payment.failure',compact('request'));
-    }
-
-    public function paymentFailure(Request $request)
-    {
-        return view('module.payment.failure');
     }
 
 }
