@@ -5,13 +5,12 @@
         <div class="row">
             {!! Form::open(['url' => ['http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx'], 'method' => 'post'], ['class'=>'']) !!}
 {{--            {!! Form::open(['url' => ['https://dealer.e.net.kw/merchant/payment'], 'method' => 'post'], ['class'=>'']) !!}--}}
-            @foreach($params as $key )
-                {!! Form::hidden($key['name'],$key['contents']) !!}
-            @endforeach
-
-            {{--@foreach($params as $key => $val )--}}
-                {{--{!! Form::hidden($key,$val) !!}--}}
+            {{--@foreach($params as $key )--}}
+                {{--{!! Form::hidden($key['name'],$key['contents']) !!}--}}
             {{--@endforeach--}}
+            @foreach($params as $key => $val )
+                {!! Form::hidden($key,$val) !!}
+            @endforeach
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success" style="width: 100%">ادفع {{ $amount }}</button>

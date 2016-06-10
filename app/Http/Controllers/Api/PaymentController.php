@@ -25,27 +25,28 @@ class PaymentController extends Controller
         $weddingDate = $request->wedding_date;
         $amount = $request->amount;
         $params = [
-            ['name'=>'merchant','contents'=>'EPG2014'],
-            ['name'=>'transaction_id','contents'=>uniqid()],
-            ['name'=>'amount','contents'=>$request->get('amount')],
-            ['name'=>'processpage','contents'=>url('api/v1/payment/process')],
-            ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
-            ['name'=>'op_post','contents'=> 'false'],
-            ['name'=>'md_flds','contents'=>'transaction_id:amount:processpage'],
-            ['name'=>'user_mail','contents'=>$request->email],
-            ['name'=>'currency','contents'=>'KWD'],
-            ['name'=>'remotepassword','contents'=>'F82D2878'],
 
-//            'merchant' => 'EPG2014',
-//            'transaction_id' => uniqid(),
-//            'amount' => $request->get('amount'),
-//            'processpage' => url('api/v1/payments/success'),
-//            'sec_key' => '8h12dwrtu83d153',
-//            'op_post' => 'true',
-//            'md_flds' => 'transaction_id:amount:processpage',
-//            'user_mail' => $request->email,
-//            'currency ' => 'KWD',
-//            'remotepassword' => 'F82D2878'
+//            ['name'=>'merchant','contents'=>'EPG2014'],
+//            ['name'=>'transaction_id','contents'=>uniqid()],
+//            ['name'=>'amount','contents'=>$request->get('amount')],
+//            ['name'=>'processpage','contents'=>url('api/v1/payment/process')],
+//            ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
+//            ['name'=>'op_post','contents'=> 'false'],
+//            ['name'=>'md_flds','contents'=>'transaction_id:amount:processpage'],
+//            ['name'=>'user_mail','contents'=>$request->email],
+//            ['name'=>'currency','contents'=>'KWD'],
+//            ['name'=>'remotepassword','contents'=>'F82D2878'],
+
+            'merchant'=>'EPG2014',
+            'transaction_id'=>uniqid(),
+            'amount'=>$request->get('amount'),
+            'processpage'=>url('api/v1/payment/process'),
+            'sec_key'=>'8h12dwrtu83d153',
+            'op_post'=> 'false',
+            'md_flds'=>'transaction_id:amount:processpage',
+            'user_mail'=>$request->email,
+            'currency'=>'KWD',
+            'remotepassword'=>'F82D2878',
         ];
 
 //        $client = new \GuzzleHttp\Client();
@@ -68,8 +69,11 @@ class PaymentController extends Controller
     public function paymentProcess(Request $request)
     {
         $request = $request;
-//        dd($request);
-        return view('module.payment.success',compact('request'));
+
+        if($request->request == 'CAPTURED') {
+            return view('module.payment.success',compact('request'));
+        }
+        return view('module.payment.failure',compact('request'));
     }
 
     public function paymentFailure(Request $request)
