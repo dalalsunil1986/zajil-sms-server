@@ -28,7 +28,7 @@ class PaymentController extends Controller
             ['name'=>'merchant','contents'=>'EPG2014'],
             ['name'=>'transaction_id','contents'=>uniqid()],
             ['name'=>'amount','contents'=>$request->get('amount')],
-            ['name'=>'processpage','contents'=>url('api/v1/payment/success').';'.url('api/v1/payment/failure')],
+            ['name'=>'processpage','contents'=>url('api/v1/payment/success')],
             ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
             ['name'=>'op_post','contents'=> 'true'],
             ['name'=>'md_flds','contents'=>'transaction_id:amount:processpage'],
