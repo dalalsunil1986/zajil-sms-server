@@ -66,12 +66,12 @@ class PaymentController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        return view('module.payment.failure');
+        return view('module.payment.success');
     }
 
     public function paymentFailure(Request $request)
     {
-        return view('module.payment.success');
+        return view('module.payment.failure');
     }
 
 }
