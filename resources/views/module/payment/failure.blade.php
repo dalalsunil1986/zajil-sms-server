@@ -1,5 +1,8 @@
-<html>
-<body>
-<h1>Transaction Failed</h1>
-</body>
-</html>
+@extends('layouts.app')
+@section('content')
+    <div class="container">
+        <div class="center-block">
+            <h1 style="text-align: center; padding-top: 100px; color:red">Transaction Failed</h1>
+        </div>
+    </div>
+@endsection
