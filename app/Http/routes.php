@@ -9,10 +9,10 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController');
-    Route::post('payment/process','PaymentController@processResult');
-    Route::get('payment/process','PaymentController@processResult');
-    Route::get('eNetCpgMainAPI.aspx','PaymentController@processResult');
-    Route::post('eNetCpgMainAPI.aspx','PaymentController@processResult');
+    Route::get('payment/success','PaymentController@paymentSuccess');
+    Route::get('payment/failure','PaymentController@paymentFailure');
+//    Route::get('eNetCpgMainAPI.aspx','PaymentController@processResult');
+//    Route::post('eNetCpgMainAPI.aspx','PaymentController@processResult');
     Route::resource('payments', 'PaymentController');
 });
 

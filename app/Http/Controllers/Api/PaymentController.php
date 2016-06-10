@@ -28,7 +28,7 @@ class PaymentController extends Controller
             ['name'=>'merchant','contents'=>'EPG2014'],
             ['name'=>'transaction_id','contents'=>uniqid()],
             ['name'=>'amount','contents'=>$request->get('amount')],
-            ['name'=>'processpage','contents'=>url('api/v1/payment/process')],
+            ['name'=>'processpage','contents'=>url('api/v1/payment/success').';'.url('api/v1/payment/failure')],
             ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
             ['name'=>'op_post','contents'=> 'false'],
             ['name'=>'md_flds','contents'=>'transaction_id:amount:processpage'],
@@ -64,9 +64,14 @@ class PaymentController extends Controller
         dd($request->all());
     }
 
-    public function processResult(Request $request)
+    public function paymentSuccess(Request $request)
     {
-        return view('module.payment.process');
+        return view('module.payment.failure');
+    }
+
+    public function paymentFailure(Request $request)
+    {
+        return view('module.payment.success');
     }
 
 }
