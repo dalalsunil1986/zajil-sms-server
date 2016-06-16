@@ -13,7 +13,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
 //    Route::post('payment/success','PaymentController@paymentSuccess');
 //    Route::get('payment/failure','PaymentController@paymentFailure');
     Route::get('payment/process','PaymentController@paymentProcess');
-    Route::get('payments/curl','PaymentController@paymentProcess');
+    Route::get('payment/curl','PaymentController@paymentProcess');
     Route::resource('payments', 'PaymentController');
 });
 
