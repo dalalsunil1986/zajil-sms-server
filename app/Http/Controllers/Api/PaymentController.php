@@ -26,6 +26,38 @@ class PaymentController extends Controller
         $amount = $request->amount;
         $email = $request->email;
         $params = [
+            'merchant'=>'EPG2014',
+            'transaction_id'=>uniqid(),
+            'amount'=>$amount,
+            'processpage'=>url('api/v1/payment/process'),
+            'sec_key'=>'8h12dwrtu83d153',
+            'op_post'=> 'false',
+            'md_flds'=>'transaction_id:amount:processpage',
+            'user_mail'=>$email,
+            'currency'=>'KWD',
+            'remotepassword'=>'F82D2878',
+        ];
+
+        return view('module.payment.index',compact('params','amount'));
+    }
+
+    public function paymentProcess(Request $request)
+    {
+        $request = $request;
+
+        if($request->result == 'CAPTURED') {
+            return view('module.payment.success',compact('request'));
+        }
+        return view('module.payment.failure',compact('request'));
+    }
+
+
+    public function paymentCurl(Request $request)
+    {
+        $weddingDate = $request->wedding_date;
+        $amount = $request->amount;
+        $email = $request->email;
+        $params = [
 
             ['name'=>'merchant','contents'=>'EPG2014'],
             ['name'=>'transaction_id','contents'=>uniqid()],
@@ -40,38 +72,16 @@ class PaymentController extends Controller
 
 
         ];
-
         $client = new \GuzzleHttp\Client();
 //        $response = $client->request('POST', 'https://dealer.e.net.kw/merchant/payment', [
         $response = $client->request('POST', 'http://test.e.net.kw/Merchant/Payment/eNetCpgMainAPI.aspx', [
             'multipart' => $params
         ]);
 
-//            'merchant'=>'EPG2014',
-//            'transaction_id'=>uniqid(),
-//            'amount'=>$request->get('amount'),
-//            'processpage'=>url('api/v1/payment/process'),
-//            'sec_key'=>'8h12dwrtu83d153',
-//            'op_post'=> 'false',
-//            'md_flds'=>'transaction_id:amount:processpage',
-//            'user_mail'=>$request->email,
-//            'currency'=>'KWD',
-//            'remotepassword'=>'F82D2878',
-
         return $response;
 
 
-//        return view('module.payment.index',compact('params','amount'));
-    }
-
-    public function paymentProcess(Request $request)
-    {
-        $request = $request;
-
-        if($request->result == 'CAPTURED') {
-            return view('module.payment.success',compact('request'));
-        }
-        return view('module.payment.failure',compact('request'));
     }
 
 }
+

@@ -13,8 +13,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
 //    Route::post('payment/success','PaymentController@paymentSuccess');
 //    Route::get('payment/failure','PaymentController@paymentFailure');
     Route::get('payment/process','PaymentController@paymentProcess');
-//    Route::get('eNetCpgMainAPI.aspx','PaymentController@processResult');
-//    Route::post('eNetCpgMainAPI.aspx','PaymentController@processResult');
+    Route::get('payments/curl','PaymentController@paymentProcess');
     Route::resource('payments', 'PaymentController');
 });
 
