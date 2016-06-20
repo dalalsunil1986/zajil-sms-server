@@ -74,7 +74,7 @@ class PaymentController extends Controller
         ];
         $client = new \GuzzleHttp\Client(['base_uri'=>'http://test.e.net.kw/Merchant/Payment']);
 //        $response = $client->request('POST', 'https://dealer.e.net.kw/merchant/payment', [
-        $response = $client->request('POST', '/eNetCpgMainAPI.aspx', [
+        $response = $client->request('POST', 'eNetCpgMainAPI.aspx', [
             'multipart' => $params
         ]);
 
