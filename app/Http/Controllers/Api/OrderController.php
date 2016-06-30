@@ -29,4 +29,30 @@ class OrderController extends Controller
         return response()->json(['data' => $orders]);
     }
 
+    public function store(Request $request)
+    {
+        $params = (object) $request->json()->all();
+        $this->order->create([
+            'secret_token' => $params->secret_token,
+            'name' => $params->name,
+//            'email' => $params->email,
+            'phone' => $params->mobile,
+            'message_id' => $params->message_id,
+            'hall_id' => $params->hall_id,
+            'buffet_package_id' => $params->buffet_package_id,
+            'light_service_id' => $params->light_service_id,
+            'guest_service_id' => $params->guest_service_id,
+            'photographer_id' => $params->photographer_id
+        ]);
+
+        $order = $this->order->where('secret_token',$params->secret_token)->first();
+
+        if(!$order) {
+            return response()->json(['success'=>false,'message'=>'Could not save to database']);
+        }
+        
+        return response()->json(['success'=>true,'data'=>$order]);
+
+    }
+
 }

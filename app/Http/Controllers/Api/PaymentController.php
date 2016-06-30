@@ -23,6 +23,7 @@ class PaymentController extends Controller
     public function index(Request $request)
     {
         $weddingDate = $request->wedding_date;
+        $secretToken = $request->secret_token;
         $amount = $request->amount;
         $email = $request->email;
         $params = [
@@ -36,6 +37,7 @@ class PaymentController extends Controller
             'user_mail'=>$email,
             'currency'=>'KWD',
             'remotepassword'=>'F82D2878',
+            'UDF1' => $secretToken
         ];
 
         return view('module.payment.index',compact('params','amount'));

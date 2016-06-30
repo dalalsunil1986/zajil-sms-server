@@ -26,6 +26,8 @@ class CreateOrdersTable extends Migration
             $table->integer('photographer_id')->nullable();
             $table->integer('guest_service_id')->nullable();
             $table->integer('light_service_id')->nullable();
+            $table->string('secret_token')->nullable();
+            $table->enum('status',['pending','failed','success'])->default('pending');
             $table->timestamps();
         });
     }
