@@ -4,14 +4,24 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Src\Models\Order;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    /**
+     * @var Order
+     */
+    private $orderRepository;
 
-    public function __construct()
+    /**
+     * PaymentController constructor.
+     * @param Order $orderRepository
+     */
+    public function __construct(Order $orderRepository)
     {
 //        $this->middleware(['csrf'=>['except'=>'processResult']]);
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -28,7 +38,7 @@ class PaymentController extends Controller
         $email = $request->email;
         $params = [
             'merchant'=>'EPG2014',
-            'transaction_id'=>uniqid(),
+            'transaction_id'=>$secretToken,
             'amount'=>$amount,
             'processpage'=>url('api/v1/payment/process'),
             'sec_key'=>'8h12dwrtu83d153',
@@ -37,7 +47,6 @@ class PaymentController extends Controller
             'user_mail'=>$email,
             'currency'=>'KWD',
             'remotepassword'=>'F82D2878',
-            'UDF1' => $secretToken
         ];
 
         return view('module.payment.index',compact('params','amount'));
@@ -45,10 +54,18 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
-        $request = $request;
-
         if($request->result == 'CAPTURED') {
-            return view('module.payment.success',compact('request'));
+
+            $secretToken = $request->transaction_id;
+
+            $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+
+            if($order) {
+                $order->status('success');
+                $order->save();
+                return view('module.payment.success',compact('request'));
+            }
+            return view('module.payment.failure',compact('request'));
         }
         return view('module.payment.failure',compact('request'));
     }
