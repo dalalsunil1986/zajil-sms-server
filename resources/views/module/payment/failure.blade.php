@@ -3,6 +3,9 @@
     <div class="container">
         <div class="center-block">
             <h1 style="text-align: center; padding-top: 100px; color:red">Transaction Failed</h1>
+            <div>
+                {{ $request }}
+            </div>
         </div>
     </div>
 @endsection

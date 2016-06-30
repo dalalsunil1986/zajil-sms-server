@@ -38,7 +38,8 @@ class PaymentController extends Controller
         $email = $request->email;
         $params = [
             'merchant'=>'EPG2014',
-            'transaction_id'=>$secretToken,
+//            'transaction_id'=>$secretToken,
+            'transaction_id'=>uniqid(),
             'amount'=>$amount,
             'processpage'=>url('api/v1/payment/process'),
             'sec_key'=>'8h12dwrtu83d153',
@@ -56,15 +57,16 @@ class PaymentController extends Controller
     {
         if($request->result == 'CAPTURED') {
 
-            $secretToken = $request->transaction_id;
-
-            $order = $this->orderRepository->where('secret_token',$secretToken)->first();
-
-            if($order) {
-                $order->status('success');
-                $order->save();
-                return view('module.payment.success',compact('request'));
-            }
+//            $secretToken = $request->transaction_id;
+//
+//
+//            $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+//
+//            if($order) {
+//                $order->status('success');
+//                $order->save();
+//                return view('module.payment.success',compact('request'));
+//            }
             return view('module.payment.failure',compact('request'));
         }
         return view('module.payment.failure',compact('request'));
