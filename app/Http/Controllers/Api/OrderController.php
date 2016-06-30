@@ -45,6 +45,8 @@ class OrderController extends Controller
             'photographer_id' => $params->photographer_id
         ]);
 
+        Mail::
+
         $order = $this->order->where('secret_token',$params->secret_token)->first();
 
         if(!$order) {

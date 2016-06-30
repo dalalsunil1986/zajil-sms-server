@@ -23,6 +23,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('message', 'MessageController');
     Route::resource('buffet', 'BuffetController');
+    Route::resource('order', 'OrderController');
     Route::get('/', 'HomeController@index');
 });
 

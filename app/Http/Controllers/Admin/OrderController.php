@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Src\Models\Order;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +11,20 @@ use App\Http\Controllers\Controller;
 class OrderController extends Controller
 {
     /**
+     * @var Order
+     */
+    private $orderRepository;
+
+    /**
+     * OrderController constructor.
+     * @param Order $orderRepository
+     */
+    public function __construct(Order $orderRepository)
+    {
+
+        $this->orderRepository = $orderRepository;
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,6 +32,12 @@ class OrderController extends Controller
     public function index()
     {
         //
+        
+        $orders = $this->orderRepository->all();
+        return view('admin.module.order.index',compact('orders'));
+        
+        
+        
     }
 
     /**

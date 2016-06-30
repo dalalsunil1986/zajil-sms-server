@@ -109,7 +109,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ action('Admin\HomeController@index') }}" class=" hvr-bounce-to-right">
+                        <a href="{{ action('Admin\OrderController@index') }}" class=" hvr-bounce-to-right">
                             <i class="fa fa-picture-o nav_icon"></i>
                             <span class="nav-label">Orders</span>
                         </a>
