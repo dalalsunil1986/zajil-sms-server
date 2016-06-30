@@ -67,7 +67,7 @@ class PaymentController extends Controller
 //                $order->save();
 //                return view('module.payment.success',compact('request'));
 //            }
-            return view('module.payment.failure',compact('request'));
+            return view('module.payment.success',compact('request'));
         }
         return view('module.payment.failure',compact('request'));
     }
