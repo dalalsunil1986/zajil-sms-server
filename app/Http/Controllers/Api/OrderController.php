@@ -36,7 +36,7 @@ class OrderController extends Controller
             'secret_token' => $params->secret_token,
             'name' => $params->name,
 //            'email' => $params->email,
-            'phone' => $params->mobile,
+            'phone' => $params->phone,
             'message_id' => $params->message_id,
             'hall_id' => $params->hall_id,
             'buffet_package_id' => $params->buffet_package_id,
