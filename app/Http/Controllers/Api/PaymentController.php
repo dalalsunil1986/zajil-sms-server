@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Src\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -56,6 +57,7 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
+        Session::forget('PAYMENT_STATUS');
         if($request->result == 'CAPTURED') {
 
 //            $secretToken = $request->transaction_id;
@@ -69,8 +71,12 @@ class PaymentController extends Controller
 //                return view('module.payment.success',compact('request'));
 //            }
 //            return view('module.payment.success',compact('request'));
+            Session::put('PAYMENT_STATUS','SUCCESS');
+
             return redirect()->route('payment.success')->with('request',$request);
         }
+        Session::put('PAYMENT_STATUS','FAILURE');
+
         return redirect()->route('payment.failure')->with('request',$request);
 
 //        return view('module.payment.failure',compact('request'));
@@ -115,7 +121,12 @@ class PaymentController extends Controller
 
     public function endPayment(Request $request)
     {
-        dd($request);
+        $paymentStatus = Session::get('PAYMENT_STATUS');
+        if($paymentStatus == 'SUCCESS') {
+            return redirect()->route('payment.success')->with('request',$request);
+        } else {
+            return redirect()->route('payment.failure')->with('request',$request);
+        }
     }
 
     public function getSuccess(Request $request)
