@@ -76,10 +76,12 @@ class PaymentController extends Controller
                 $order->save();
                 return redirect()->route('payment.success')->with('request',$request);
             }
+            dd('was not captured');
             Session::put('PAYMENT_STATUS','FAILURE');
             $order->status = 'failed';
             $order->save();
         }
+        dd('no order found');
 
         return redirect()->route('payment.failure')->with('request',$request);
     }
