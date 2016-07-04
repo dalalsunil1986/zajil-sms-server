@@ -33,13 +33,14 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $secretToken = $request->json('secret_token');
+        $secretToken = $request->secret_token;
         Session::forget('PAYMENT_TOKEN');
         Session::put('PAYMENT_TOKEN',$secretToken);
 
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
-        if(!$order || !$order->status == 'pending') {
+        if(!$order) {
+//        if(!$order || !$order->status == 'pending') {
             return view('module.payment.failure');
         }
 
