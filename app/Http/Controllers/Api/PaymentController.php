@@ -33,26 +33,29 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $weddingDate = $request->wedding_date;
         $secretToken = $request->secret_token;
         Session::forget('PAYMENT_TOKEN');
-        Session::put('PAYMENT_TOKEN',$request->secret_token);
-        $amount = $request->amount;
-        $email = $request->email;
-        $name = $request->email;
+        Session::put('PAYMENT_TOKEN',$secretToken);
+
+        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+
+        if(!$order || !$order->status == 'pending') {
+            return view('module.payment.failure');
+        }
+
         $params = [
             'merchant'=>'EPG2014',
             'transaction_id'=>uniqid(),
-            'amount'=>$amount,
+            'amount'=>$order->amount,
             'processpage'=>url('api/v1/payment/process'),
             'sec_key'=>'8h12dwrtu83d153',
             'op_post'=> 'false',
             'md_flds'=>'transaction_id:amount:processpage',
-            'user_mail'=>$email,
+            'user_mail'=>$order->email,
             'currency'=>'KWD',
             'remotepassword'=>'F82D2878',
             'UDF1' => $secretToken,
-            'UDF2' => $name,
+            'UDF2' => $order->name,
         ];
 
         return view('module.payment.index',compact('params','amount'));
@@ -115,7 +118,6 @@ class PaymentController extends Controller
         return $response;
 
     }
-
 
     public function completed(Request $request)
     {
