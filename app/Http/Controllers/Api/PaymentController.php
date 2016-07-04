@@ -121,12 +121,11 @@ class PaymentController extends Controller
 
     public function endPayment(Request $request)
     {
-        $paymentStatus = Session::get('PAYMENT_STATUS');
-        if($paymentStatus == 'SUCCESS') {
-            return redirect()->route('payment.success')->with('request',$request);
-        } else {
+        if(!Session::get('PAYMENT_STATUS') || Session::get('PAYMENT_STATUS') !== 'SUCCESS') {
             return redirect()->route('payment.failure')->with('request',$request);
+
         }
+        return redirect()->route('payment.success')->with('request',$request);
     }
 
     public function getSuccess(Request $request)
