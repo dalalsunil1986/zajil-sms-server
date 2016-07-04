@@ -58,7 +58,7 @@ class PaymentController extends Controller
             'UDF2' => $order->name,
         ];
 
-        return view('module.payment.index',compact('params','amount'));
+        return view('module.payment.index',compact('params','order'));
     }
 
     public function paymentProcess(Request $request)

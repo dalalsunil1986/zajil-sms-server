@@ -13,7 +13,7 @@
             @endforeach
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success" style="width: 100%">ادفع {{ $amount }}</button>
+            <button type="submit" class="btn btn-success" style="width: 100%">ادفع {{ $order->amount }}</button>
         </div>
 
     </div>
