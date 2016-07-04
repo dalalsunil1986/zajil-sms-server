@@ -33,13 +33,16 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
+        dd($request->secret_token);
+        Session::set('PAYMENT_TOKEN',$request->secret_token);
+        dd(Session::get('PAYMENT_TOKEN'));
         $weddingDate = $request->wedding_date;
         $secretToken = $request->secret_token;
         $amount = $request->amount;
         $email = $request->email;
+        $name = $request->email;
         $params = [
             'merchant'=>'EPG2014',
-//            'transaction_id'=>$secretToken,
             'transaction_id'=>uniqid(),
             'amount'=>$amount,
             'processpage'=>url('api/v1/payment/process'),
@@ -49,14 +52,31 @@ class PaymentController extends Controller
             'user_mail'=>$email,
             'currency'=>'KWD',
             'remotepassword'=>'F82D2878',
-            'UDF1' => $secretToken
+            'UDF1' => $secretToken,
+            'UDF2' => $name,
         ];
-
 
 //        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
         $order = $this->orderRepository->create([
-//            'secret_token'=>$secretToken
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+            'message_id'=>$request->message_id,
+            'message_text'=>$request->message_text,
+            'buffet_package_id'=>$request->buffet_package_id,
+            'hall_id'=>$request->hall_id,
+            'photographer_id'=>$request->photographer_id,
+            'guest_service_id'=>$request->guest_service_id,
+            'light_service_id'=>$request->light_service_id,
+            'message_date'=>$request->message_date,
+            'buffet_date'=>$request->buffet_date,
+            'hall_date'=>$request->hall_date,
+            'photographer_date'=>$request->photographer_date,
+            'light_service_date'=>$request->light_service_date,
+            'guest_service_date'=>$request->guest_service_date,
+            'amount'=>$amount
         ])
         ;
         
