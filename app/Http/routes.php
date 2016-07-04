@@ -9,11 +9,13 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController');
-//    Route::get('payment/success','PaymentController@paymentSuccess');
 //    Route::post('payment/success','PaymentController@paymentSuccess');
-//    Route::get('payment/failure','PaymentController@paymentFailure');
     Route::get('payment/process','PaymentController@paymentProcess');
     Route::get('payment/curl','PaymentController@paymentCurl');
+    Route::get('payment/completed','PaymentController@completed');
+    Route::get('payment/success',['as'=>'payment.success','uses'=>'PaymentController@getSuccess']);
+    Route::get('payment/failure',['as'=>'payment.failure','uses'=>'PaymentController@getFailure']);
+    Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
     Route::resource('payments', 'PaymentController');
 });
 

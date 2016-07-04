@@ -67,9 +67,12 @@ class PaymentController extends Controller
 //                $order->save();
 //                return view('module.payment.success',compact('request'));
 //            }
-            return view('module.payment.success',compact('request'));
+//            return view('module.payment.success',compact('request'));
+            return redirect()->route('payment.success')->with('request',$request);
         }
-        return view('module.payment.failure',compact('request'));
+        return redirect()->route('payment.failure')->with('request',$request);
+
+//        return view('module.payment.failure',compact('request'));
     }
 
 
@@ -101,7 +104,27 @@ class PaymentController extends Controller
 
         return $response;
 
+    }
 
+
+    public function completed(Request $request)
+    {
+        return view('module.payment.success',compact('request'));
+    }
+
+    public function endPayment(Request $request)
+    {
+        dd($request);
+    }
+
+    public function getSuccess(Request $request)
+    {
+        return view('module.payment.success',compact('request'));
+    }
+
+    public function getFailure(Request $request)
+    {
+        return view('module.payment.failure',compact('request'));
     }
 
 }
