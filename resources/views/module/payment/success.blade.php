@@ -6,7 +6,6 @@
             <div class="text-center">
                 <a href="{{route('payment.end')}}" class="btn btn-success" role="button" style="text-align: center">
                     <h2>Return to Home</h2>
-                    {{ dd($request) }}
                 </a>
             </div>
         </div>

@@ -64,27 +64,22 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
+        $request->result = 'CAPTURED';
+
         $secretToken = Session::get('PAYMENT_TOKEN');
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
-        if($request->result == 'CAPTURED') {
-
-            if($order) {
-                $order->status('success');
-                $order->save();
-            }
-
-            Session::put('PAYMENT_STATUS','SUCCESS');
-
-            return redirect()->route('payment.success')->with('request',$request);
-        }
-
         if($order) {
-            $order->status('failed');
+            if($request->result == 'CAPTURED') {
+                Session::put('PAYMENT_STATUS','SUCCESS');
+                $order->status = 'success';
+                $order->save();
+                return redirect()->route('payment.success')->with('request',$request);
+            }
+            Session::put('PAYMENT_STATUS','FAILURE');
+            $order->status = 'failed';
             $order->save();
         }
-
-        Session::put('PAYMENT_STATUS','FAILURE');
 
         return redirect()->route('payment.failure')->with('request',$request);
     }
