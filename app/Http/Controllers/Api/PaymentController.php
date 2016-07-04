@@ -33,11 +33,10 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request->secret_token);
-        Session::set('PAYMENT_TOKEN',$request->secret_token);
-        dd(Session::get('PAYMENT_TOKEN'));
         $weddingDate = $request->wedding_date;
         $secretToken = $request->secret_token;
+        Session::forget('PAYMENT_TOKEN');
+        Session::put('PAYMENT_TOKEN',$request->secret_token);
         $amount = $request->amount;
         $email = $request->email;
         $name = $request->email;
@@ -56,56 +55,34 @@ class PaymentController extends Controller
             'UDF2' => $name,
         ];
 
-//        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
-
-        $order = $this->orderRepository->create([
-            'name'=>$name,
-            'email'=>$email,
-            'phone'=>$request->phone,
-            'address'=>$request->address,
-            'message_id'=>$request->message_id,
-            'message_text'=>$request->message_text,
-            'buffet_package_id'=>$request->buffet_package_id,
-            'hall_id'=>$request->hall_id,
-            'photographer_id'=>$request->photographer_id,
-            'guest_service_id'=>$request->guest_service_id,
-            'light_service_id'=>$request->light_service_id,
-            'message_date'=>$request->message_date,
-            'buffet_date'=>$request->buffet_date,
-            'hall_date'=>$request->hall_date,
-            'photographer_date'=>$request->photographer_date,
-            'light_service_date'=>$request->light_service_date,
-            'guest_service_date'=>$request->guest_service_date,
-            'amount'=>$amount
-        ])
-        ;
-        
-        
         return view('module.payment.index',compact('params','amount'));
     }
 
     public function paymentProcess(Request $request)
     {
+        $secretToken = Session::get('PAYMENT_TOKEN');
+        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+
         if($request->result == 'CAPTURED') {
-//            $secretToken = $request->transaction_id;
-//
-//
-//            $order = $this->orderRepository->where('secret_token',$secretToken)->first();
-//
-//            if($order) {
-//                $order->status('success');
-//                $order->save();
-//                return view('module.payment.success',compact('request'));
-//            }
-//            return view('module.payment.success',compact('request'));
+
+            if($order) {
+                $order->status('success');
+                $order->save();
+            }
+
             Session::put('PAYMENT_STATUS','SUCCESS');
 
             return redirect()->route('payment.success')->with('request',$request);
         }
 
-        return redirect()->route('payment.failure')->with('request',$request);
+        if($order) {
+            $order->status('failed');
+            $order->save();
+        }
 
-//        return view('module.payment.failure',compact('request'));
+        Session::put('PAYMENT_STATUS','FAILURE');
+
+        return redirect()->route('payment.failure')->with('request',$request);
     }
 
 
