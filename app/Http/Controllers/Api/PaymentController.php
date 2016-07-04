@@ -48,6 +48,7 @@ class PaymentController extends Controller
             'user_mail'=>$email,
             'currency'=>'KWD',
             'remotepassword'=>'F82D2878',
+            'UDF1' => $secretToken
         ];
 
         return view('module.payment.index',compact('params','amount'));
