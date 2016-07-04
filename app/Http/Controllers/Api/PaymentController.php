@@ -59,7 +59,6 @@ class PaymentController extends Controller
     {
         Session::forget('PAYMENT_STATUS');
         if($request->result == 'CAPTURED') {
-
 //            $secretToken = $request->transaction_id;
 //
 //
@@ -121,6 +120,7 @@ class PaymentController extends Controller
 
     public function endPayment(Request $request)
     {
+        dd(Session::get('PAYMENT_SUCCESS'));
         if(!Session::has('PAYMENT_STATUS')) {
             return redirect()->route('payment.failure')->with('request',$request);
         }
