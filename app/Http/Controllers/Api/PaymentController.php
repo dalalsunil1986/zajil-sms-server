@@ -33,7 +33,7 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $secretToken = $request->secret_token;
+        $secretToken = $request->json('secret_token');
         Session::forget('PAYMENT_TOKEN');
         Session::put('PAYMENT_TOKEN',$secretToken);
 
