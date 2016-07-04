@@ -43,13 +43,13 @@ class OrderController extends Controller
             'light_service_id' => $params->light_service_id,
             'guest_service_id' => $params->guest_service_id,
             'photographer_id' => $params->photographer_id,
-            'message_date'=>$request->message_date,
-            'buffet_date'=>$request->buffet_date,
-            'hall_date'=>$request->hall_date,
-            'photographer_date'=>$request->photographer_date,
-            'light_service_date'=>$request->light_service_date,
-            'guest_service_date'=>$request->guest_service_date,
-            'amount'=>$request->amount
+            'message_date'=>$params->message_date,
+            'buffet_date'=>$params->buffet_date,
+            'hall_date'=>$params->hall_date,
+            'photographer_date'=>$params->photographer_date,
+            'light_service_date'=>$params->light_service_date,
+            'guest_service_date'=>$params->guest_service_date,
+            'amount'=>$params->amount
         ]);
 
         $order = $this->order->where('secret_token',$params->secret_token)->first();
