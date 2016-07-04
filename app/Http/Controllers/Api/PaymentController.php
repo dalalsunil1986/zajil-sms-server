@@ -52,12 +52,20 @@ class PaymentController extends Controller
             'UDF1' => $secretToken
         ];
 
+
+//        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+
+        $order = $this->orderRepository->create([
+//            'secret_token'=>$secretToken
+        ])
+        ;
+        
+        
         return view('module.payment.index',compact('params','amount'));
     }
 
     public function paymentProcess(Request $request)
     {
-        Session::forget('PAYMENT_STATUS');
         if($request->result == 'CAPTURED') {
 //            $secretToken = $request->transaction_id;
 //
@@ -74,7 +82,6 @@ class PaymentController extends Controller
 
             return redirect()->route('payment.success')->with('request',$request);
         }
-        Session::put('PAYMENT_STATUS','FAILURE');
 
         return redirect()->route('payment.failure')->with('request',$request);
 
@@ -120,7 +127,6 @@ class PaymentController extends Controller
 
     public function endPayment(Request $request)
     {
-        dd(Session::get('PAYMENT_SUCCESS'));
         if(!Session::has('PAYMENT_STATUS')) {
             return redirect()->route('payment.failure')->with('request',$request);
         }

@@ -78,17 +78,23 @@ $factory->define(\App\Src\Models\LightService::class, function (Faker\Generator 
 
 $factory->define(\App\Src\Models\Order::class, function (Faker\Generator $faker) {
     return [
-    'name'=>$faker->name,
-    'email'=>$faker->safeEmail,
-    'phone'=>$faker->phoneNumber,
-    'address'=>$faker->address,
-    'message_id'=>App\Src\Models\Message::orderByRaw("RAND()")->first()->id,
-    'message_text'=>$faker->sentence(2),
-    'message_send_date'=>$faker->dateTime,
-    'buffet_package_id'=>App\Src\Models\BuffetPackage::orderByRaw("RAND()")->first()->id,
-    'hall_id'=>App\Src\Models\Hall::orderByRaw("RAND()")->first()->id,
-    'photographer_id'=>App\Src\Models\Photographer::orderByRaw("RAND()")->first()->id,
-    'guest_service_id'=>App\Src\Models\GuestService::orderByRaw("RAND()")->first()->id,
-    'light_service_id'=>App\Src\Models\LightService::orderByRaw("RAND()")->first()->id,
+        'name'=>$faker->name,
+        'email'=>$faker->safeEmail,
+        'phone'=>$faker->phoneNumber,
+        'address'=>$faker->address,
+        'message_id'=>App\Src\Models\Message::orderByRaw("RAND()")->first()->id,
+        'message_text'=>$faker->sentence(2),
+        'buffet_package_id'=>App\Src\Models\BuffetPackage::orderByRaw("RAND()")->first()->id,
+        'hall_id'=>App\Src\Models\Hall::orderByRaw("RAND()")->first()->id,
+        'photographer_id'=>App\Src\Models\Photographer::orderByRaw("RAND()")->first()->id,
+        'guest_service_id'=>App\Src\Models\GuestService::orderByRaw("RAND()")->first()->id,
+        'light_service_id'=>App\Src\Models\LightService::orderByRaw("RAND()")->first()->id,
+        'message_date'=>$faker->dateTime,
+        'buffet_date'=>$faker->dateTime,
+        'hall_date'=>$faker->dateTime,
+        'photographer_date'=>$faker->dateTime,
+        'light_service_date'=>$faker->dateTime,
+        'guest_service_date'=>$faker->dateTime,
+        'amount'=>$faker->randomDigit
     ];
 });
