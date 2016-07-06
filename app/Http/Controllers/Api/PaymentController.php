@@ -21,7 +21,6 @@ class PaymentController extends Controller
      */
     public function __construct(Order $orderRepository)
     {
-//        $this->middleware(['csrf'=>['except'=>'processResult']]);
         $this->orderRepository = $orderRepository;
     }
 
@@ -40,7 +39,6 @@ class PaymentController extends Controller
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
         if(!$order) {
-//        if(!$order || !$order->status == 'pending') {
             return view('module.payment.failure');
         }
 
@@ -64,8 +62,6 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
-        $request->result = 'CAPTURED';
-
         $secretToken = Session::get('PAYMENT_TOKEN');
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
@@ -76,12 +72,10 @@ class PaymentController extends Controller
                 $order->save();
                 return redirect()->route('payment.success')->with('request',$request);
             }
-            dd('was not captured');
-            Session::put('PAYMENT_STATUS','FAILURE');
             $order->status = 'failed';
             $order->save();
         }
-        dd('no order found');
+        Session::put('PAYMENT_STATUS','FAILURE');
 
         return redirect()->route('payment.failure')->with('request',$request);
     }
@@ -89,7 +83,6 @@ class PaymentController extends Controller
 
     public function paymentCurl(Request $request)
     {
-        $weddingDate = $request->wedding_date;
         $amount = $request->amount;
         $email = $request->email;
         $params = [
