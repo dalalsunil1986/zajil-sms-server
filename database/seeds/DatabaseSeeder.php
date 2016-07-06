@@ -28,14 +28,14 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         $this->truncateDatabaseTables();
         factory(App\Src\Models\User::class,1)->create(['email'=>'admin@test.com','admin'=>1]);
-//        factory(App\Src\Models\Message::class,5)->create();
-//        factory(App\Src\Models\Buffet::class,3)->create();
-//        factory(App\Src\Models\BuffetPackage::class,6)->create();
-//        factory(App\Src\Models\Hall::class,2)->create();
-//        factory(App\Src\Models\Photographer::class,4)->create();
-//        factory(App\Src\Models\GuestService::class,4)->create();
-//        factory(App\Src\Models\LightService::class,4)->create();
-//        factory(App\Src\Models\Order::class,10)->create();
+        factory(App\Src\Models\Message::class,5)->create();
+        factory(App\Src\Models\Buffet::class,3)->create();
+        factory(App\Src\Models\BuffetPackage::class,6)->create();
+        factory(App\Src\Models\Hall::class,2)->create();
+        factory(App\Src\Models\Photographer::class,4)->create();
+        factory(App\Src\Models\GuestService::class,4)->create();
+        factory(App\Src\Models\LightService::class,4)->create();
+        factory(App\Src\Models\Order::class,10)->create();
         Model::reguard();
 
     }
