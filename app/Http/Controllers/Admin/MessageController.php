@@ -117,5 +117,8 @@ class MessageController extends Controller
     public function destroy($id)
     {
         //
+        $record = $this->messageRepository->find($id);
+        $record->delete();
+        return redirect()->action('Admin\MessageController@index')->with('success','Deleted');
     }
 }

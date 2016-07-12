@@ -80,7 +80,6 @@ class BuffetController extends Controller
     {
         $buffet = $this->buffetRepository->find($id);
         return view('admin.module.buffet.view',compact('buffet'));
-
     }
 
     /**
@@ -119,6 +118,10 @@ class BuffetController extends Controller
      */
     public function destroy($id)
     {
+        $record = $this->buffetRepository->find($id);
+        $record->packages()->delete();
+        $record->delete();
+        return redirect()->action('Admin\BuffetController@index')->with('success','Deleted');
         //
     }
 }

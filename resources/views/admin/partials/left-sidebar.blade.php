@@ -81,28 +81,28 @@
                     </li>
 
                     <li>
-                        <a href="{{ action('Admin\HomeController@index') }}" class=" hvr-bounce-to-right">
+                        <a href="{{ action('Admin\HallController@index') }}" class=" hvr-bounce-to-right">
                             <i class="fa fa-picture-o nav_icon"></i>
                             <span class="nav-label">Halls</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ action('Admin\HomeController@index') }}" class=" hvr-bounce-to-right">
+                        <a href="{{ action('Admin\PhotographerController@index') }}" class=" hvr-bounce-to-right">
                             <i class="fa fa-picture-o nav_icon"></i>
                             <span class="nav-label">Photographers</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ action('Admin\HomeController@index') }}" class=" hvr-bounce-to-right">
+                        <a href="{{ action('Admin\GuestServiceController@index') }}" class=" hvr-bounce-to-right">
                             <i class="fa fa-picture-o nav_icon"></i>
                             <span class="nav-label">Guest Services</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ action('Admin\HomeController@index') }}" class=" hvr-bounce-to-right">
+                        <a href="{{ action('Admin\LightServiceController@index') }}" class=" hvr-bounce-to-right">
                             <i class="fa fa-picture-o nav_icon"></i>
                             <span class="nav-label">Light Services</span>
                         </a>

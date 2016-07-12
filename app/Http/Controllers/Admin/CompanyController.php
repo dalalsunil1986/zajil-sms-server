@@ -160,6 +160,9 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
+        $record = $this->companyRepository->find($id);
+        $record->delete();
+        return redirect()->action('Admin\CompanyController@index')->with('success','Deleted');
         //
     }
 }

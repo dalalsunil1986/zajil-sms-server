@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Src\Models\Photographer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +11,21 @@ use App\Http\Controllers\Controller;
 class PhotographerController extends Controller
 {
     /**
+     * @var Photographer
+     */
+    private $photographerRepository;
+
+    /**
+     * PhotographerController constructor.
+     * @param Photographer $photographerRepository
+     */
+    public function __construct(Photographer $photographerRepository)
+    {
+
+        $this->photographerRepository = $photographerRepository;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,6 +33,8 @@ class PhotographerController extends Controller
     public function index()
     {
         //
+        $photographers = $this->photographerRepository->paginate(100);
+        return view('admin.module.photographer.index',compact('photographers'));
     }
 
     /**
@@ -38,6 +56,15 @@ class PhotographerController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|string|unique:buffets,name',
+            'price' => 'required|number',
+            
+        ]);
+
+        $photographer = $this->photographerRepository->create($request->all());
+
+        return redirect()->action('Admin\PhotographerController@show',$photographer->id)->with('success','Saved');
     }
 
     /**
@@ -49,6 +76,8 @@ class PhotographerController extends Controller
     public function show($id)
     {
         //
+        $photographer = $this->photographerRepository->find($id);
+        return view('admin.module.photographer.view',compact('photographer'));
     }
 
     /**
@@ -72,6 +101,12 @@ class PhotographerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|string|unique:buffets,name,'.$id,
+        ]);
+        $photographer = $this->photographerRepository->find($id);
+        $photographer->update($request->all());
+        return redirect()->action('Admin\PhotographerController@index')->with('success','Saved');
     }
 
     /**
@@ -82,6 +117,8 @@ class PhotographerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = $this->photographerRepository->find($id);
+        $record->delete();
+        return redirect()->action('Admin\PhotographerController@index')->with('success','Deleted');
     }
 }
