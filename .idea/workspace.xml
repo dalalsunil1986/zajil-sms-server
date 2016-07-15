@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3178750b-26ec-4410-8795-fd263d000b4f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/module/hall/add-edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/module/hall/add-edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/module/hall/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/module/hall/index.blade.php" />
     </list>
     <ignored path="ZajilKnet.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,17 +66,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/module/hall/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+            <state relative-caret-position="495">
+              <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add-edit.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="add-edit.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/module/hall/add-edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
@@ -166,7 +166,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/PaymentController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/module/hall/employee/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/partials/left-sidebar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/module/hall/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/module/hall/view.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/module/photographer/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/module/photographer/add-edit.blade.php" />
@@ -189,6 +188,7 @@
         <option value="$PROJECT_DIR$/resources/views/admin/module/buffet/package/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PhotographerController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/module/hall/add-edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/module/hall/index.blade.php" />
       </list>
     </option>
   </component>
@@ -360,12 +360,12 @@
       <workItem from="1468283864014" duration="136000" />
       <workItem from="1468284588814" duration="2751000" />
       <workItem from="1468370061654" duration="103000" />
-      <workItem from="1468542489212" duration="2128000" />
+      <workItem from="1468542489212" duration="2157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55788000" />
+    <option name="totallyTimeSpent" value="55817000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -780,18 +780,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/module/hall/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/module/hall/add-edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/module/hall/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
           <folding />
         </state>
       </provider>

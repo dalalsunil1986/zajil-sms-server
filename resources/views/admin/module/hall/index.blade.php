@@ -33,6 +33,7 @@
             <tr>
                 <th>Hall Name</th>
                 <th>Description</th>
+                <th>Price</th>
                 <th>Address</th>
                 <th></th>
             </tr>
@@ -44,6 +45,7 @@
                         <a href="{{ action('Admin\HallController@show',$hall->id)}}">{{ $hall->name }} </a>
                     </td>
                     <td class="f18">{{ $hall->description }}</td>
+                    <td class="f18">{{ $hall->price }}</td>
                     <td class="f18">{{ $hall->address }}</td>
                     <td class="f18">
                         <a href="#" class="red" data-toggle="modal" data-target="#deleteModalBox"
