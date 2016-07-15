@@ -58,7 +58,7 @@ class PhotographerController extends Controller
         //
         $this->validate($request, [
             'name' => 'required|string|unique:buffets,name',
-            'price' => 'required|number',
+            'price' => 'required',
             
         ]);
 
