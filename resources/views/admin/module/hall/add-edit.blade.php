@@ -7,6 +7,10 @@
         <label for="price">Description</label>
         {!! Form::textarea('description',null,['class'=>'form-control','placeholder'=>'Description','rows'=>3]) !!}
     </div>
+    <div class="form-group" style="padding-top: 20px">
+        <label for="name">Price</label>
+        {!! Form::text('price',null,['class'=>'form-control','placeholder'=>'Price']) !!}
+    </div>
     <div class="form-group" >
         <label for="recepient_count">Address</label>
         {!! Form::textarea('address',null,['class'=>'form-control','placeholder'=>'Address','rows'=>3]) !!}
