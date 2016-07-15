@@ -30,7 +30,7 @@ class BuffetController extends Controller
         $this->buffetRepository = $buffetRepository;
         $this->buffetPackageRepository = $buffetPackageRepository;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -124,4 +124,31 @@ class BuffetController extends Controller
         return redirect()->action('Admin\BuffetController@index')->with('success','Deleted');
         //
     }
+
+    public function getPackages($buffetID)
+    {
+        $buffet = $this->buffetRepository->with('packages')->find($buffetID);
+
+        return view('admin.module.buffet.package.index',compact('buffet'));
+    }
+
+
+    public function createPackage(Request $request)
+    {
+        $this->validate($request,[
+            'description' => 'required',
+            'price' =>'required'
+        ]);
+        $package = $this->buffetPackageRepository->create($request->all());
+        return redirect()->back()->with('success','Saved');
+    }
+
+    public function deletePackage($packageID)
+    {
+
+        $package = $this->buffetPackageRepository->find($packageID);
+        $package->delete();
+        return redirect()->back()->with('success','Deleted');
+    }
+
 }

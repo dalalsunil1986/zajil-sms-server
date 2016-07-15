@@ -24,7 +24,11 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
  ********************************************************************************************************/
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('message', 'MessageController');
+    Route::get('buffet/{id}/packages', 'BuffetController@getPackages');
+    Route::post('buffet/{id}/package/create', 'BuffetController@createPackage');
+    Route::get('package/{id}/delete', 'BuffetController@deletePackage');
     Route::resource('buffet', 'BuffetController');
+    
     Route::resource('hall', 'HallController');
     Route::resource('order', 'OrderController');
     Route::resource('photographer', 'PhotographerController');
