@@ -2,12 +2,7 @@
 @section('content')
     <div class="container">
         <div class="center-block">
-            <h1 style="text-align: center; padding-top: 100px; color:red">Transaction Failed</h1>
-            <div class="text-center">
-                <a href="{{route('payment.failure')}}" class="btn btn-warning" role="button" style="text-align: center">
-                    Return to Home
-                </a>
-            </div>
+            <h1 style="text-align: center; padding-top: 100px; color:red">Transaction Failed. Try Again</h1>
         </div>
     </div>
 @endsection

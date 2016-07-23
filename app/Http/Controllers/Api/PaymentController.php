@@ -81,15 +81,16 @@ class PaymentController extends Controller
             Session::put('PAYMENT_STATUS','SUCCESS');
             $order->status = 'success';
             $order->save();
-            return redirect()->route('payment.success')->with('request',$request);
+            return view('module.payment.success',compact('request'));
+//            return redirect()->route('payment.success')->with('request',$request);
         } else {
             
         }
 //        $order->status = 'failed';
 //        $order->save();
         Session::put('PAYMENT_STATUS','FAILURE');
-
-        return redirect()->route('payment.failure')->with('request',$request);
+        return view('module.payment.failure',compact('request'));
+//        return redirect()->route('payment.failure')->with('request',$request);
     }
 
 
