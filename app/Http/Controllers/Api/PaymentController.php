@@ -48,7 +48,7 @@ class PaymentController extends Controller
             'transaction_id'=>uniqid(),
             'amount'=>$order->amount,
             'processpage'=>url('api/v1/payment/process'),
-            'sec_key'=>'8h12dwrtu83d153',
+            'sec_key'=>'E02CEB71',
             'op_post'=> 'false',
             'md_flds'=>'transaction_id:amount:processpage',
             'user_mail'=>$order->email,
