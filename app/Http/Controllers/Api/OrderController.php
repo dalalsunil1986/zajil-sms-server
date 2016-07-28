@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Src\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -57,7 +58,18 @@ class OrderController extends Controller
         if(!$order) {
             return response()->json(['success'=>false,'message'=>'Could not save to database']);
         }
-        
+
+        Mail::send('emails.contact', [], function ($m) use ($params)  {
+            $m->from($params->email, $params->name . ' Zajil Knet');
+            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
+        });
+
+
+        Mail::send('emails.contact', [], function ($m) use ($params) {
+            $m->from($params->email, $params->name. ' Zajil Knet');
+            $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
+        });
+
         return response()->json(['success'=>true,'data'=>$order]);
 
     }

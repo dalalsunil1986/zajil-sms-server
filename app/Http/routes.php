@@ -42,6 +42,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
  */
 Route::group([], function () {
     Route::auth();
-    Route::get('/home', 'HomeController@index');
+    Route::get('/home', ['as'=>'home','uses'=>'HomeController@index']);
     Route::get('/', 'HomeController@index');
+});
+
+Route::get('test',function(){
+
+    Mail::send('emails.contact', [], function ($m)  {
+        $m->from('hello@app.com', 'Your Application');
+
+        $m->to('z4ls@live.com','ZaLs')->subject('Your Reminder!');
+    });
+
 });

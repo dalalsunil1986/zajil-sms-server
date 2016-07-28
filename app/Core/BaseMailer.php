@@ -17,10 +17,10 @@ class BaseMailer
     public function __construct(Mailer $mailer)
     {
         $this->mailer = $mailer;
-        $this->toEmail = env('MAIL_CONTACT', 'info@no-problem-learning.com');
-        $this->toName = env('MAIL_CONTACT_NAME', 'NPL Contact Mail');
-        $this->fromEmail = env('MAIL_FROM', 'info@no-problem-learning.com');
-        $this->fromName = env('MAIL_FROM_NAME', 'No Problem Learning');
+        $this->toEmail = env('MAIL_CONTACT');
+        $this->toName = env('MAIL_CONTACT_NAME');
+        $this->fromEmail = env('MAIL_FROM');
+        $this->fromName = env('MAIL_FROM_NAME');
         $this->view = 'emails.welcome';
     }
 
