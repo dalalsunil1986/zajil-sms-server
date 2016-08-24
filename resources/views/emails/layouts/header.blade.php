@@ -79,7 +79,7 @@
                                             <table style="width:100%;text-align:center;background-color:white;border-collapse:collapse;border:none;font-weight:bold;font-family:arial;font-size:13px">
                                                 <tbody>
                                                 <tr>
-                                                    <td style="border-right:2px solid #dddad9;height:40px"><a href="{{ URL::route('home') }}" style="display:inline-block;width:100%;text-decoration:none;color:#a9a9a9;word-wrap:break-word;font-weight:normal" title="page" target="_blank">NPL</a></td>
+                                                    <td style="border-right:2px solid #dddad9;height:40px"><a href="{{ URL::route('home') }}" style="display:inline-block;width:100%;text-decoration:none;color:#a9a9a9;word-wrap:break-word;font-weight:normal" title="page" target="_blank">ZajilKnet</a></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
