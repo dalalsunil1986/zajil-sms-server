@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Src\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -33,6 +34,18 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $params = (object) $request->json()->all();
+
+        $validator = Validator::make($request->json()->all(), [
+            'name' => 'required',
+            'amount' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|integer'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['success'=>false,'message'=>$validator->errors()->first()]);
+        }
+
         $this->order->create([
             'secret_token' => $params->secret_token,
             'name' => $params->name,
@@ -57,19 +70,19 @@ class OrderController extends Controller
 
 
         if(!$order) {
-            return response()->json(['success'=>false,'message'=>'Could not save to database']);
+            return response()->json(['success'=>false,'message'=>'Unknown Error Occured, Try again']);
         }
 
-//        Mail::send('emails.contact', [], function ($m) use ($params)  {
-//            $m->from($params->email, $params->name . ' Zajil Knet');
-//            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
-//        });
-//
-//
-//        Mail::send('emails.contact', [], function ($m) use ($params) {
-//            $m->from($params->email, $params->name. ' Zajil Knet');
-//            $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
-//        });
+        Mail::send('emails.contact', [], function ($m) use ($params)  {
+            $m->from($params->email, $params->name . ' Zajil Knet');
+            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
+        });
+
+
+        Mail::send('emails.contact', [], function ($m) use ($params) {
+            $m->from($params->email, $params->name. ' Zajil Knet');
+            $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
+        });
 
         return response()->json(['success'=>true,'data'=>$order]);
 
