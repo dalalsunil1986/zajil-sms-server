@@ -32,8 +32,8 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $secretToken = $request->secret_token;
         Session::forget('PAYMENT_TOKEN');
+        $secretToken = $request->secret_token;
         Session::put('PAYMENT_TOKEN',$secretToken);
 
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
@@ -41,6 +41,7 @@ class PaymentController extends Controller
         if(!$order) {
             return view('module.payment.failure');
         }
+
 
         $params = [
 //            'merchant'=>'EPG2014',
@@ -67,32 +68,22 @@ class PaymentController extends Controller
         $secretToken = Session::get('PAYMENT_TOKEN');
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
-//        if($order) {
-//            if($request->result == 'CAPTURED') {
-//                Session::put('PAYMENT_STATUS','SUCCESS');
-//                $order->status = 'success';
-//                $order->save();
-//                return redirect()->route('payment.success')->with('request',$request);
-//            }
-//            $order->status = 'failed';
-//            $order->save();
-//        }
-//        Session::put('PAYMENT_STATUS','FAILURE');
+        Session::forget('PAYMENT_TOKEN');
 
-        if($request->result == 'CAPTURED') {
-            Session::put('PAYMENT_STATUS','SUCCESS');
-            $order->status = 'success';
+        if($order) {
+            if($request->result == 'CAPTURED') {
+                $order->status = 'success';
+                $order->save();
+                return redirect()->route('payment.success')->with('request',$request);
+            }
+            $order->status = 'failed';
             $order->save();
-            return view('module.payment.success',compact('request'));
-//            return redirect()->route('payment.success')->with('request',$request);
+            return view('module.payment.failure',compact('request'));
+
         } else {
-            
+            return view('module.payment.failure',compact('request'));
         }
-//        $order->status = 'failed';
-//        $order->save();
-        Session::put('PAYMENT_STATUS','FAILURE');
-        return view('module.payment.failure',compact('request'));
-//        return redirect()->route('payment.failure')->with('request',$request);
+
     }
 
 
