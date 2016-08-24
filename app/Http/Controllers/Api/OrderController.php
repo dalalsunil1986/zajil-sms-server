@@ -32,7 +32,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $params = (object) $request->all();
+        $params = (object) $request->json()->all();
         $this->order->create([
             'secret_token' => $params->secret_token,
             'name' => $params->name,
