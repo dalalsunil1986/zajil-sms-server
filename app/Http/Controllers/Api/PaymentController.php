@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Src\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -42,7 +43,6 @@ class PaymentController extends Controller
             return view('module.payment.failure');
         }
 
-
         $params = [
 //            'merchant'=>'EPG2014',
             'merchant'=>'EPG0011',
@@ -59,6 +59,22 @@ class PaymentController extends Controller
             'UDF1' => $secretToken,
             'UDF2' => $order->name,
         ];
+
+        Mail::send('emails.contact', [], function ($m) use ($order)  {
+            $m->from($order->email, $order->name . ' Zajil Knet');
+            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
+        });
+
+
+        Mail::send('emails.contact', [], function ($m) use ($order) {
+            $m->from($order->email, $order->name. ' Zajil Knet');
+            $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
+        });
+
+        Mail::send('emails.contact', [], function ($m) use ($order) {
+            $m->from($order->email, $order->name. ' Zajil Knet');
+            $m->to('z4ls@live.com','Zajil')->subject('New Order From Zajil App');
+        });
 
         return view('module.payment.index',compact('params','order'));
     }
