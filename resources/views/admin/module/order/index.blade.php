@@ -29,6 +29,7 @@
             <thead class="bg-blue">
             <tr>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Mobile</th>
                 <th>Amount</th>
                 <th>Status</th>
@@ -41,8 +42,10 @@
                     <td>
                         <a href="{{ action('Admin\OrderController@show',$order->id)}}">{{ $order->name }} </a>
                     </td>
+                    <td class="f18">{{ $order->email }}</td>
                     <td class="f18">{{ $order->phone }}</td>
                     <td class="f18">{{ $order->amount }}</td>
+                    <td class="f18">{{ $order->created_at->format('d-m-Y') }}</td>
                     <td class="f18">{{ $order->status }}</td>
                     <td class="f18">
                         <a href="#" class="red" data-toggle="modal" data-target="#deleteModalBox"
