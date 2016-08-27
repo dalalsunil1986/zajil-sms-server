@@ -32,6 +32,7 @@
                 <th>Email</th>
                 <th>Mobile</th>
                 <th>Amount</th>
+                <th>Order Date</th>
                 <th>Status</th>
                 <th></th>
             </tr>
