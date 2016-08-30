@@ -60,21 +60,6 @@ class PaymentController extends Controller
             'UDF2' => $order->name,
         ];
 
-        Mail::send('emails.contact', [], function ($m) use ($order)  {
-            $m->from($order->email, $order->name . ' Zajil Knet');
-            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
-        });
-
-
-        Mail::send('emails.contact', [], function ($m) use ($order) {
-            $m->from($order->email, $order->name. ' Zajil Knet');
-            $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
-        });
-
-        Mail::send('emails.contact', [], function ($m) use ($order) {
-            $m->from($order->email, $order->name. ' Zajil Knet');
-            $m->to('z4ls@live.com','Zajil')->subject('New Order From Zajil App');
-        });
 
         return view('module.payment.index',compact('params','order'));
     }
@@ -90,10 +75,37 @@ class PaymentController extends Controller
             if($request->result == 'CAPTURED') {
                 $order->status = 'success';
                 $order->save();
+
+                Mail::send('emails.contact', [], function ($m) use ($order)  {
+                    $m->from($order->email, $order->name . ' Zajil Knet');
+                    $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
+                });
+
+
+                Mail::send('emails.contact', [], function ($m) use ($order) {
+                    $m->from($order->email, $order->name. ' Zajil Knet');
+                    $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
+                });
+
+                Mail::send('emails.contact', [], function ($m) use ($order) {
+                    $m->from($order->email, $order->name. ' Zajil Knet');
+                    $m->to('z4ls@live.com','Zajil')->subject('New Order From Zajil App');
+                });
+
+                if(!empty($order->email)) {
+                    Mail::send('emails.contact', [], function ($m) use ($order) {
+                        $m->from('ZajilKnet App', $order->name. ' Zajil Knet');
+                        $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
+                    });
+                }
+
                 return redirect()->route('payment.success')->with('request',$request);
             }
             $order->status = 'failed';
             $order->save();
+
+
+
             return view('module.payment.failure',compact('request'));
 
         } else {

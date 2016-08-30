@@ -38,7 +38,7 @@ class OrderController extends Controller
         $validator = Validator::make($request->json()->all(), [
             'name' => 'required',
             'amount' => 'required',
-            'email' => 'required|email',
+            'email' => 'email',
             'phone' => 'required|integer'
         ]);
 
