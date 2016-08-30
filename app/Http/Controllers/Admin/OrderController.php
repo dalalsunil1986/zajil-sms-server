@@ -104,5 +104,10 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+        $order = $this->orderRepository->find($id);
+        if($order) {
+            $order->delete();
+        }
+        return redirect()->back()->with('success','Deleted');
     }
 }
