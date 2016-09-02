@@ -39,7 +39,8 @@ class OrderController extends Controller
             'name' => 'required',
             'amount' => 'required',
             'email' => 'email',
-            'phone' => 'required|integer'
+            'phone' => 'required|integer',
+            'address' => 'required'
         ]);
 
         if($validator->fails()) {
