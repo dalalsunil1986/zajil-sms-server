@@ -105,7 +105,6 @@ class PaymentController extends Controller
             $order->save();
 
 
-
             return view('module.payment.failure',compact('request'));
 
         } else {
