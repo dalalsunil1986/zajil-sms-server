@@ -96,7 +96,7 @@ class PaymentController extends Controller
 //                        $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
 //                    });
 //                }
-                return 'Redirect=http://izal.me/api/v1/payment/success';
+                return 'Redirect=http://izal.me/api/v1/payment/failure';
 //                return view('module.payment.success',compact('request'));
 //                return redirect()->route('payment.success')->with('request',$request);
             }
