@@ -33,9 +33,7 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        Session::forget('PAYMENT_TOKEN');
         $secretToken = $request->secret_token;
-        Session::put('PAYMENT_TOKEN',$secretToken);
 
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
@@ -66,8 +64,8 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
-        $secretToken = Session::get('PAYMENT_TOKEN');
-        $order = $this->orderRepository->where('secret_token',$request->UDF1)->first();
+        $secretToken = $request->UDF1;
+        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
         Session::forget('PAYMENT_TOKEN');
 
@@ -87,18 +85,19 @@ class PaymentController extends Controller
 //                    $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
 //                });
 
-                Mail::send('emails.contact', [], function ($m) use ($order) {
-                    $m->from($order->email, $order->name. ' Zajil Knet');
-                    $m->to('z4ls@live.com','Zajil')->subject('New Order From Zajil App. Testttt');
-                });
-
-                if(!empty($order->email)) {
-                    Mail::send('emails.contact', [], function ($m) use ($order) {
-                        $m->from('ZajilKnet App', $order->name. ' Zajil Knet');
-                        $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
-                    });
-                }
-                return view('module.payment.success',compact('request'));
+//                Mail::send('emails.contact', [], function ($m) use ($order) {
+//                    $m->from($order->email, $order->name. ' Zajil Knet');
+//                    $m->to('z4ls@live.com','Zajil')->subject('New Order From Zajil App. Testttt');
+//                });
+//
+//                if(!empty($order->email)) {
+//                    Mail::send('emails.contact', [], function ($m) use ($order) {
+//                        $m->from('ZajilKnet App', $order->name. ' Zajil Knet');
+//                        $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
+//                    });
+//                }
+                return 'Redirect=http://google.com';
+//                return view('module.payment.success',compact('request'));
 //                return redirect()->route('payment.success')->with('request',$request);
             }
             $order->status = 'failed';
