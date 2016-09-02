@@ -67,7 +67,7 @@ class PaymentController extends Controller
     public function paymentProcess(Request $request)
     {
         $secretToken = Session::get('PAYMENT_TOKEN');
-        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+        $order = $this->orderRepository->where('secret_token',$request->UDF1)->first();
 
         Session::forget('PAYMENT_TOKEN');
 
@@ -98,8 +98,8 @@ class PaymentController extends Controller
                         $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
                     });
                 }
-
-                return redirect()->route('payment.success')->with('request',$request);
+                return view('module.payment.success',compact('request'));
+//                return redirect()->route('payment.success')->with('request',$request);
             }
             $order->status = 'failed';
             $order->save();
