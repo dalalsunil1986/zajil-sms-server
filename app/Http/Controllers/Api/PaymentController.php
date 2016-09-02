@@ -76,20 +76,20 @@ class PaymentController extends Controller
                 $order->status = 'success';
                 $order->save();
 
-                Mail::send('emails.contact', [], function ($m) use ($order)  {
-                    $m->from($order->email, $order->name . ' Zajil Knet');
-                    $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
-                });
-
+//                Mail::send('emails.contact', [], function ($m) use ($order)  {
+//                    $m->from($order->email, $order->name . ' Zajil Knet');
+//                    $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From Zajil App');
+//                });
+//
+//
+//                Mail::send('emails.contact', [], function ($m) use ($order) {
+//                    $m->from($order->email, $order->name. ' Zajil Knet');
+//                    $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
+//                });
 
                 Mail::send('emails.contact', [], function ($m) use ($order) {
                     $m->from($order->email, $order->name. ' Zajil Knet');
-                    $m->to('zajilkuwait@gmail.com','Zajil')->subject('New Order From Zajil App');
-                });
-
-                Mail::send('emails.contact', [], function ($m) use ($order) {
-                    $m->from($order->email, $order->name. ' Zajil Knet');
-                    $m->to('z4ls@live.com','Zajil')->subject('New Order From Zajil App');
+                    $m->to('z4ls@live.com','Zajil')->subject('New Order From Zajil App. Testttt');
                 });
 
                 if(!empty($order->email)) {
