@@ -28,6 +28,7 @@
         <table class="table table-striped table-bordered table-hover" >
             <thead class="bg-blue">
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Mobile</th>
@@ -40,9 +41,8 @@
             <tbody>
             @foreach($orders as $order)
                 <tr class="gradeU">
-                    <td>
-                        <a href="{{ action('Admin\OrderController@show',$order->id)}}">{{ $order->name }} </a>
-                    </td>
+                    <td><a href="{{ action('Admin\OrderController@show',$order->id)}}">{{ $order->id }} </a></td>
+                    <td>{{ $order->name }} </td>
                     <td class="f18">{{ $order->email }}</td>
                     <td class="f18">{{ $order->phone }}</td>
                     <td class="f18">{{ $order->amount }}</td>

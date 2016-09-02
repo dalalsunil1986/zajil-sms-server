@@ -1,6 +1,12 @@
 <?php
 
 Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'], function () {
+
+    Route::post('auth/login', 'Auth\AuthController@postLogin');
+//    Route::post('auth/register', 'Auth\AuthController@postRegister');
+//    Route::post('auth/activate', 'Auth\AuthController@postActivate');
+    Route::post('auth/login/token', 'Auth\AuthController@loginUsingToken');
+    
     Route::resource('messages', 'MessageController');
     Route::resource('buffets', 'BuffetController');
     Route::get('buffets/{id}/packages', 'BuffetController@getPackages');

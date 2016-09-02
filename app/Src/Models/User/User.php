@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Src\Models;
+namespace App\Src\Models\User;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    protected $table = 'users';
     protected $fillable = ['name', 'email', 'password'];
     protected $hidden = ['password', 'remember_token'];
 }

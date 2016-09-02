@@ -70,6 +70,8 @@ class OrderController extends Controller
     public function show($id)
     {
         //
+        $order = $this->orderRepository->find($id);
+        return view('admin.module.order.view',compact('order'));
     }
 
     /**
