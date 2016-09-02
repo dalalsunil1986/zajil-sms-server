@@ -99,12 +99,12 @@ class PaymentController extends Controller
                 return 'Redirect=http://zajil.izal.me/api/v1/payment/success';
 //                return view('module.payment.success',compact('request'));
 //                return redirect()->route('payment.success')->with('request',$request);
+            } else {
+                $order->status = 'failed';
+                $order->save();
+
+                return view('module.payment.failure',compact('request'));
             }
-            $order->status = 'failed';
-            $order->save();
-
-
-            return view('module.payment.failure',compact('request'));
 
         } else {
             return view('module.payment.failure',compact('request'));
