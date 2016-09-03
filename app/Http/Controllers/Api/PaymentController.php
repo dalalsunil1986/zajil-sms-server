@@ -35,8 +35,8 @@ class PaymentController extends Controller
     {
         $secretToken = $request->secret_token;
 
-//        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
-        $order = $this->orderRepository->find(1);
+        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+//        $order = $this->orderRepository->find(1);
         $transactionID = uniqid();
 
         if(!$order) {
@@ -127,7 +127,7 @@ class PaymentController extends Controller
                     $m->from($order->email,'ZajilKnet Order');
                     $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
                 });
-                
+
 
                 return 'Redirect=http://zajil.izal.me/api/v1/payment/success';
 //                return view('module.payment.success',compact('request'));
