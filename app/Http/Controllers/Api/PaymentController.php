@@ -46,8 +46,8 @@ class PaymentController extends Controller
         }
 
         $params = [
-//            'merchant'=>'EPG2014',
-            'merchant'=>'EPG0011',
+            'merchant'=>'EPG2014',
+//            'merchant'=>'EPG0011',
             'transaction_id'=>$transactionID,
             'amount'=>$order->amount,
             'processpage'=>url('api/v1/payment/process'),
