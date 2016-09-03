@@ -38,10 +38,13 @@ class PaymentController extends Controller
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
         $order->status = 'payment';
         $order->save();
+
         $transactionID = uniqid();
+
         if(!$order) {
             return view('module.payment.failure');
         }
+
         $params = [
 //            'merchant'=>'EPG2014',
             'merchant'=>'EPG0011',
@@ -87,11 +90,11 @@ class PaymentController extends Controller
 //            $m->from($order->email, 'ZajilKnet Order');
 //            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
 //        });
-
-        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
-            $m->from($order->email,'ZajilKnet Order');
-            $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
-        });
+//
+//        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
+//            $m->from($order->email,'ZajilKnet Order');
+//            $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
+//        });
 //
 //        if(!empty($order->email)) {
 //            Mail::send('emails.contact', $emailArray, function ($m) use ($order) {
