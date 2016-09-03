@@ -61,27 +61,27 @@ class PaymentController extends Controller
         ];
 
 
-        $services = [];
-//
-        if($order->message_id) {
-            $services[] = ['name' => 'Message','amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y')];
-        }
-        if($order->buffet_package_id) {
-            $services[] = ['name' => 'Buffet ('.$order->buffetPackage->buffet->name.' - '.$order->buffetPackage->description.')','amount'=>$order->buffetPackage->price,'date'=>$order->buffet_date->format('d-m-Y')];
-        }
-        if($order->hall_id) {
-            $services[] = ['name' => 'Hall ('.$order->hall->name.')','amount'=>$order->hall->price,'date'=>$order->hall_date->format('d-m-Y')];
-        }
-        if($order->photographer_id) {
-            $services[] = ['name' => 'Photographer ('.$order->photographer->name.')','amount'=>$order->photographer->price,'date'=>$order->photographer_date->format('d-m-Y')];
-        }
-        if($order->light_service_id) {
-            $services[] = ['name' => 'Lighting ('.$order->lightService->name.')','amount'=>$order->lightService->price,'date'=>$order->light_service_date->format('d-m-Y')];
-        }
-        if($order->guest_service_id) {
-            $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
-        }
-        $emailArray = ['date'=>date('d-m-Y'),'invoiceNo'=>$order->id,'name'=>$order->name,'transaction_id'=>$transactionID,'total'=>$order->amount,'services'=>$services];
+//        $services = [];
+////
+//        if($order->message_id) {
+//            $services[] = ['name' => 'Message','amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y')];
+//        }
+//        if($order->buffet_package_id) {
+//            $services[] = ['name' => 'Buffet ('.$order->buffetPackage->buffet->name.' - '.$order->buffetPackage->description.')','amount'=>$order->buffetPackage->price,'date'=>$order->buffet_date->format('d-m-Y')];
+//        }
+//        if($order->hall_id) {
+//            $services[] = ['name' => 'Hall ('.$order->hall->name.')','amount'=>$order->hall->price,'date'=>$order->hall_date->format('d-m-Y')];
+//        }
+//        if($order->photographer_id) {
+//            $services[] = ['name' => 'Photographer ('.$order->photographer->name.')','amount'=>$order->photographer->price,'date'=>$order->photographer_date->format('d-m-Y')];
+//        }
+//        if($order->light_service_id) {
+//            $services[] = ['name' => 'Lighting ('.$order->lightService->name.')','amount'=>$order->lightService->price,'date'=>$order->light_service_date->format('d-m-Y')];
+//        }
+//        if($order->guest_service_id) {
+//            $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
+//        }
+//        $emailArray = ['date'=>date('d-m-Y'),'invoiceNo'=>$order->id,'name'=>$order->name,'transaction_id'=>$transactionID,'total'=>$order->amount,'services'=>$services];
 
 //
 //        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
@@ -140,7 +140,8 @@ class PaymentController extends Controller
             }
 
         } else {
-            return 'Redirect=http://zajil.izal.me/api/v1/payment/failure';
+            return view('module.payment.failure',compact('request'));
+//            return 'Redirect=http://zajil.izal.me/api/v1/payment/failure';
         }
 
     }
