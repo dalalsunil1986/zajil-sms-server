@@ -54,10 +54,11 @@ Route::group([], function () {
 
 Route::get('test',function(){
 
-    Mail::send('emails.contact', [], function ($m)  {
-        $m->from('hello@app.com', 'Your Application');
-
-        $m->to('z4ls@live.com','ZaLs')->subject('Your Reminder!');
-    });
+    return view('emails.transaction_success',['date'=>date('d-m-Y'),'invoiceNo'=>'200','name'=>'ZaL','transaction_id'=>uniqid(),'total'=>'200','services'=>[['name'=>'Service 1 ','amount'=>'100','date'=>'2010-11-20'],['name'=>'Service 2','amount'=>'200','date'=>'2010-11-20']]]);
+//    Mail::send('emails.contact', [], function ($m)  {
+//        $m->from('hello@app.com', 'Your Application');
+//
+//        $m->to('z4ls@live.com','ZaLs')->subject('Your Reminder!');
+//    });
 
 });
