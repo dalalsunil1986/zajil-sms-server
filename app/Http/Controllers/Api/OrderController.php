@@ -68,7 +68,7 @@ class OrderController extends Controller
             'guest_service_date'=>$params->guest_service_date,
         ]);
 
-        $order = $this->order->where('secret_token',$params->secret_token)->first();
+        $order = $this->order->where('secret_token','123zal')->first();
 
 
         if(!$order) {
