@@ -48,7 +48,8 @@ class OrderController extends Controller
         }
 
         $this->order->create([
-            'secret_token' => $params->secret_token,
+//            'secret_token' => $params->secret_token,
+            'secret_token' => '123zal',
             'name' => $params->name,
             'email' => $params->email,
             'phone' => $params->phone,

@@ -36,15 +36,15 @@ class PaymentController extends Controller
         $secretToken = '123zal';
 
         $order = $this->orderRepository->where('secret_token','123zal')->first();
-        $order->status = 'payment';
-        $order->save();
 
 //        $transactionID = uniqid();
 
         if(!$order) {
             return view('module.payment.failure');
         }
-
+        $order->status = 'payment';
+        $order->save();
+        
         $params = [
             'merchant'=>'EPG2014',
 //            'merchant'=>'EPG0011',
