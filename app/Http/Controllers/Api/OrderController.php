@@ -48,8 +48,7 @@ class OrderController extends Controller
         }
 
         $this->order->create([
-//            'secret_token' => $params->secret_token,
-            'secret_token' => '123zal',
+            'secret_token' => $params->secret_token,
             'name' => $params->name,
             'email' => $params->email,
             'phone' => $params->phone,
@@ -68,7 +67,7 @@ class OrderController extends Controller
             'guest_service_date'=>$params->guest_service_date,
         ]);
 
-        $order = $this->order->where('secret_token','123zal')->first();
+        $order = $this->order->where('secret_token',$params->secret_token)->first();
 
 
         if(!$order) {

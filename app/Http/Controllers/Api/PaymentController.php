@@ -33,18 +33,17 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $secretToken = '123zal';
+        $secretToken = $request->secret_token;
 
-        $order = $this->orderRepository->where('secret_token','123zal')->first();
-
-//        $transactionID = uniqid();
+        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
 
         if(!$order) {
             return view('module.payment.failure');
         }
+
         $order->status = 'payment';
         $order->save();
-        
+
         $params = [
             'merchant'=>'EPG2014',
 //            'merchant'=>'EPG0011',
@@ -91,10 +90,10 @@ class PaymentController extends Controller
 //            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
 //        });
 //
-        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
-            $m->from('payment@zajil.app','ZajilKnet Order');
-            $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
-        });
+//        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
+//            $m->from('payment@zajil.app','ZajilKnet Order');
+//            $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
+//        });
 //
 //        if(!empty($order->email)) {
 //            Mail::send('emails.contact', $emailArray, function ($m) use ($order) {
@@ -108,7 +107,7 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
-        $secretToken = '123zal';
+        $secretToken = $request->get('UDF1');
 //        $transactionID = $request->transaction_id;
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
         if($request->result == 'CAPTURED') {
