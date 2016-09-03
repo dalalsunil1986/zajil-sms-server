@@ -44,8 +44,8 @@ class PaymentController extends Controller
         }
 
         $params = [
-//            'merchant'=>'EPG2014',
-            'merchant'=>'EPG0011',
+            'merchant'=>'EPG2014',
+//            'merchant'=>'EPG0011',
             'transaction_id'=>$transactionID,
             'amount'=>$order->amount,
             'processpage'=>url('api/v1/payment/process'),
@@ -54,8 +54,8 @@ class PaymentController extends Controller
             'md_flds'=>'transaction_id:amount:processpage',
             'user_mail'=>$order->email,
             'currency'=>'KWD',
-//            'remotepassword'=>'F82D2878',
-            'remotepassword'=>'E02CEB71',
+            'remotepassword'=>'F82D2878',
+//            'remotepassword'=>'E02CEB71',
             'UDF1' => $secretToken,
             'UDF2' => $order->name,
         ];
