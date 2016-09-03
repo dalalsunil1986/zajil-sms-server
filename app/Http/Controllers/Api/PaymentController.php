@@ -33,9 +33,9 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $secretToken = $request->secret_token;
+        $secretToken = '123zal';
 
-        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+        $order = $this->orderRepository->where('secret_token','123zal')->first();
         $order->status = 'payment';
         $order->save();
 
@@ -108,12 +108,12 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
-        $secretToken = $request->UDF1;
-        $transactionID = $request->transaction_id;
+        $secretToken = '123zal';
+//        $transactionID = $request->transaction_id;
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
         if($request->result == 'CAPTURED') {
             if($order) {
-                $order->transaction_id = $transactionID;
+//                $order->transaction_id = $transactionID;
                 $order->status = 'success';
                 $order->save();
             }
