@@ -83,22 +83,22 @@ class PaymentController extends Controller
 
         $emailArray = ['date'=>date('d-m-Y'),'invoiceNo'=>$order->id,'name'=>$order->name,'transaction_id'=>$transactionID,'total'=>$order->amount,'services'=>$services];
 
-        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
-            $m->from($order->email, 'ZajilKnet Order');
-            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
-        });
+//        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
+//            $m->from($order->email, 'ZajilKnet Order');
+//            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
+//        });
 
         Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
             $m->from($order->email,'ZajilKnet Order');
             $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
         });
-
-        if(!empty($order->email)) {
-            Mail::send('emails.contact', $emailArray, function ($m) use ($order) {
-                $m->from('ZajilKnet App', 'ZajilKnet Order');
-                $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
-            });
-        }
+//
+//        if(!empty($order->email)) {
+//            Mail::send('emails.contact', $emailArray, function ($m) use ($order) {
+//                $m->from('ZajilKnet App', 'ZajilKnet Order');
+//                $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
+//            });
+//        }
 
         return view('module.payment.index',compact('params','order'));
     }
