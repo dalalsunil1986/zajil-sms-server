@@ -136,11 +136,11 @@ class PaymentController extends Controller
                 $order->status = 'failed';
                 $order->save();
 
-                return view('module.payment.failure',compact('request'));
+                return 'Redirect=http://zajil.izal.me/api/v1/payment/failure';
             }
 
         } else {
-            return view('module.payment.failure',compact('request'));
+            return 'Redirect=http://zajil.izal.me/api/v1/payment/failure';
         }
 
     }
