@@ -20,7 +20,9 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::get('payment/curl','PaymentController@paymentCurl');
     Route::get('payment/completed','PaymentController@completed');
     Route::get('payment/success',['as'=>'payment.success','uses'=>'PaymentController@getSuccess']);
+    Route::post('payment/success',['as'=>'payment.success.post','uses'=>'PaymentController@postSuccess']);
     Route::get('payment/failure',['as'=>'payment.failure','uses'=>'PaymentController@getFailure']);
+    Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
     Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
     Route::resource('payments', 'PaymentController');
 });
@@ -54,7 +56,6 @@ Route::group([], function () {
 
 Route::get('test',function(){
 
-    return view('emails.transaction_success',['date'=>date('d-m-Y'),'invoiceNo'=>'200','name'=>'ZaL','transaction_id'=>uniqid(),'total'=>'200','services'=>[['name'=>'Service 1 ','amount'=>'100','date'=>'2010-11-20'],['name'=>'Service 2','amount'=>'200','date'=>'2010-11-20']]]);
 //    Mail::send('emails.contact', [], function ($m)  {
 //        $m->from('hello@app.com', 'Your Application');
 //

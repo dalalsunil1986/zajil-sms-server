@@ -69,11 +69,9 @@ class OrderController extends Controller
 
         $order = $this->order->where('secret_token',$params->secret_token)->first();
 
-
         if(!$order) {
             return response()->json(['success'=>false,'message'=>'Unknown Error Occured, Try again']);
         }
-
 
         return response()->json(['success'=>true,'data'=>$order]);
 

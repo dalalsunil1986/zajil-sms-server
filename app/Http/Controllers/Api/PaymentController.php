@@ -61,7 +61,49 @@ class PaymentController extends Controller
             'UDF2' => $order->name,
         ];
 
+        return view('module.payment.index',compact('params','order'));
+    }
 
+    public function paymentProcess(Request $request)
+    {
+        $secretToken = $request->get('UDF1');
+//        $transactionID = $request->transaction_id;
+        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
+        if($request->result == 'CAPTURED') {
+            if($order) {
+//                $order->transaction_id = $transactionID;
+                $order->status = 'success';
+                $order->save();
+            }
+            return 'Redirect=http://zajil.izal.me/api/v1/payment/success';
+        }  else {
+            return 'Redirect=http://zajil.izal.me/api/v1/payment/failure';
+        }
+
+    }
+
+    public function completed(Request $request)
+    {
+        return view('module.payment.success',compact('request'));
+    }
+
+    public function endPayment(Request $request)
+    {
+        if(!Session::has('PAYMENT_STATUS')) {
+            return redirect()->route('payment.failure')->with('request',$request);
+        }
+        return redirect()->route('payment.success')->with('request',$request);
+    }
+
+    public function getSuccess(Request $request)
+    {
+        return view('module.payment.success',compact('request'));
+    }
+
+    public function postSuccess(Request $request)
+    {
+        $secretToken = $request->secret_token;
+        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
         $services = [];
 
         if($order->message_id) {
@@ -83,93 +125,28 @@ class PaymentController extends Controller
             $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
         }
 
-        $emailArray = ['date'=>date('d-m-Y'),'invoiceNo'=>$order->id,'name'=>$order->name,'transaction_id'=>$params['transaction_id'],'total'=>$order->amount,'services'=>$services];
+        $emailArray = ['date'=>date('d-m-Y'),'invoiceNo'=>$order->id,'name'=>$order->name,'transaction_id'=>$secretToken,'total'=>$order->amount,'services'=>$services];
 
-        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
-            $m->from('payment@zajil.app', 'ZajilKnet Order');
-            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
-        });
+//        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
+//            $m->from('payment@zajil.app', 'ZajilKnet Order');
+//            $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
+//        });
 
         Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
             $m->from('payment@zajil.app','ZajilKnet Order');
             $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
         });
 
-        if(!empty($order->email)) {
-            Mail::send('emails.contact', $emailArray, function ($m) use ($order) {
-                $m->from('payment@zajil.app', 'ZajilKnet Order');
-                $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
-            });
-        }
+//        if(!empty($order->email)) {
+//            Mail::send('emails.contact', $emailArray, function ($m) use ($order) {
+//                $m->from('payment@zajil.app', 'ZajilKnet Order');
+//                $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
+//            });
+//        }
 
-        return view('module.payment.index',compact('params','order'));
+        return response()->json(['success'=>true]);
     }
 
-    public function paymentProcess(Request $request)
-    {
-        $secretToken = $request->get('UDF1');
-//        $transactionID = $request->transaction_id;
-        $order = $this->orderRepository->where('secret_token',$secretToken)->first();
-        if($request->result == 'CAPTURED') {
-            if($order) {
-//                $order->transaction_id = $transactionID;
-                $order->status = 'success';
-                $order->save();
-            }
-            return 'Redirect=http://zajil.izal.me/api/v1/payment/success';
-        }  else {
-            return view('module.payment.failure',compact('request'));
-        }
-
-    }
-
-
-    public function paymentCurl(Request $request)
-    {
-        $amount = $request->amount;
-        $email = $request->email;
-        $params = [
-
-            ['name'=>'merchant','contents'=>'EPG2014'],
-            ['name'=>'transaction_id','contents'=>uniqid()],
-            ['name'=>'amount','contents'=>$amount],
-            ['name'=>'processpage','contents'=>url('api/v1/payment/process')],
-            ['name'=>'sec_key','contents'=>'8h12dwrtu83d153'],
-            ['name'=>'op_post','contents'=> 'false'],
-            ['name'=>'md_flds','contents'=>'transaction_id:amount:processpage'],
-            ['name'=>'user_mail','contents'=>$email],
-            ['name'=>'currency','contents'=>'KWD'],
-            ['name'=>'remotepassword','contents'=>'F82D2878'],
-
-
-        ];
-        $client = new \GuzzleHttp\Client(['base_uri'=>'http://test.e.net.kw/merchant/payment/']);
-//        $response = $client->request('POST', 'https://dealer.e.net.kw/merchant/payment', [
-        $response = $client->request('POST', 'eNetCpgMainAPI.aspx', [
-            'multipart' => $params
-        ]);
-
-        return $response;
-
-    }
-
-    public function completed(Request $request)
-    {
-        return view('module.payment.success',compact('request'));
-    }
-
-    public function endPayment(Request $request)
-    {
-        if(!Session::has('PAYMENT_STATUS')) {
-            return redirect()->route('payment.failure')->with('request',$request);
-        }
-        return redirect()->route('payment.success')->with('request',$request);
-    }
-
-    public function getSuccess(Request $request)
-    {
-        return view('module.payment.success',compact('request'));
-    }
 
     public function getFailure(Request $request)
     {
