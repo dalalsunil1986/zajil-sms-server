@@ -210,7 +210,6 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-<<<<<<< HEAD
 --
 -- Dumping data for table `migrations`
 --
@@ -222,8 +221,6 @@ INSERT INTO `migrations` VALUES ('2014_10_12_000000_create_users_table',1),('201
 UNLOCK TABLES;
 
 --
-=======
->>>>>>> a3cafa5e06a2b5915a6d1565c6bc3d882b6c933f
 -- Table structure for table `orders`
 --
 
@@ -232,7 +229,6 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `transaction_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -362,4 +358,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-04  4:31:41
+-- Dump completed on 2016-09-04  4:45:41
