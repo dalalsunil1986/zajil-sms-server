@@ -7,7 +7,7 @@
             <i class="fa fa-angle-right"></i>
             <a href="{{action('Admin\OrderController@index')}}">Orders</a>
             <i class="fa fa-angle-right"></i>
-            <span>{{ $order->secret_token }}</span>
+            <span>{{ $order->transaction_id }}</span>
         </h2>
     </div>
 @endsection
@@ -40,6 +40,14 @@
             <tr>
                 <th>Order Date</th>
                 <td>{{ $order->created_at->format('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>Transaction ID</th>
+                <td>{{ $order->transaction_id }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ $order->status }}</td>
             </tr>
 
             </tbody>
@@ -79,8 +87,7 @@
         </div>
 
         <div class="panel-footer ">
-            <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$order->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
-            <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$order->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
         </div>
         @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
 
@@ -122,8 +129,7 @@
         </div>
 
         <div class="panel-footer ">
-            <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$order->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
-            <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$order->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
         </div>
         @include('admin.partials.delete-modal',['info' => 'Remove Buffet From Service ?.'])
 
@@ -160,8 +166,7 @@
         </div>
 
         <div class="panel-footer ">
-            <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$order->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
-            <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$order->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
         </div>
         @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
 
@@ -198,8 +203,7 @@
         </div>
 
         <div class="panel-footer ">
-            <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$order->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
-            <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$order->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
         </div>
         @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
 
@@ -235,8 +239,7 @@
         </div>
 
         <div class="panel-footer ">
-            <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$order->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
-            <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$order->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
         </div>
         @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
 
@@ -273,8 +276,7 @@
         </div>
 
         <div class="panel-footer ">
-            <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$order->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
-            <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$order->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
         </div>
         @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
 

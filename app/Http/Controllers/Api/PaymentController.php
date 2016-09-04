@@ -66,7 +66,6 @@ class PaymentController extends Controller
 
     public function paymentProcess(Request $request)
     {
-//        return view('module.payment.success',compact('request'));
         $secretToken = $request->get('UDF1');
         $transactionID = $request->get('transaction_id');
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
