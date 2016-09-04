@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('api_token')->nullable();
             $table->boolean('admin')->defaul(0);
             $table->string('activation_code')->nullable();
+            $table->boolean('active')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

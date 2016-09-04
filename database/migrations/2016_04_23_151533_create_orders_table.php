@@ -14,6 +14,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('transaction_id')->nullable();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
@@ -32,9 +33,10 @@ class CreateOrdersTable extends Migration
             $table->timestamp('guest_service_date')->nullable();
             $table->timestamp('light_service_date')->nullable();
             $table->string('secret_token')->nullable();
-            $table->float('amount',5,2)->nullable();
+            $table->string('amount')->nullable();
             $table->enum('status',['pending','failed','success'])->default('pending');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
