@@ -102,7 +102,7 @@ class PaymentController extends Controller
 
     public function postSuccess(Request $request)
     {
-        $secretToken = $request->secret_token;
+        $secretToken = $request->json('secret_token');
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
         $services = [];
 
