@@ -140,7 +140,7 @@ class PaymentController extends Controller
             });
 
             if(!empty($order->email)) {
-                Mail::send('emails.contact', $emailArray, function ($m) use ($order) {
+                Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
                     $m->from('payment@zajil.app', 'ZajilKnet Order');
                     $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
                 });
