@@ -67,11 +67,11 @@ class PaymentController extends Controller
     public function paymentProcess(Request $request)
     {
         $secretToken = $request->get('UDF1');
-//        $transactionID = $request->transaction_id;
+        $transactionID = $request->get('transaction_id');
         $order = $this->orderRepository->where('secret_token',$secretToken)->first();
         if($request->result == 'CAPTURED') {
             if($order) {
-//                $order->transaction_id = $transactionID;
+                $order->transaction_id = $transactionID;
                 $order->status = 'success';
                 $order->save();
             }
@@ -127,7 +127,7 @@ class PaymentController extends Controller
                 $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
             }
 
-            $emailArray = ['date'=>date('d-m-Y'),'invoiceNo'=>$order->id,'name'=>$order->name,'transaction_id'=>$secretToken,'total'=>$order->amount,'services'=>$services];
+            $emailArray = ['date'=>date('d-m-Y'),'invoiceNo'=>$order->id,'name'=>$order->name,'transaction_id'=>$order->transaction_id,'total'=>$order->amount,'services'=>$services];
 
 //        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
 //            $m->from('payment@zajil.app', 'ZajilKnet Order');
