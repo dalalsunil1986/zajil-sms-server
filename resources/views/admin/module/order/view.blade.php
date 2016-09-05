@@ -78,10 +78,12 @@
                     <th>Message Date</th>
                     <td>{{ $order->message_date }}</td>
                 </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ $order->message->price }}</td>
-                </tr>
+                @if($order->message)
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ $order->message->price }}</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
@@ -106,24 +108,26 @@
                 <tbody>
                 <tr>
                     <th>Buffet Package ID</th>
-                    <td>{{ $order->buffetPackage->id }}</td>
+                    <td>{{ $order->buffet_package_id }}</td>
                 </tr>
-                <tr>
-                    <th>Buffet Co</th>
-                    <td>{{ $order->buffetPackage->buffet->name }}</td>
-                </tr>
-                <tr>
-                    <th>Buffet Package </th>
-                    <td>{{ $order->buffetPackage->description }}</td>
-                </tr>
-                <tr>
-                    <th>Buffet Date</th>
-                    <td>{{ $order->buffet_date }}</td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ $order->buffetPackage->price }}</td>
-                </tr>
+                @if($order->buffetPackage && $order->buffetPackage->buffet)
+                    <tr>
+                        <th>Buffet Co</th>
+                        <td>{{ $order->buffetPackage->buffet->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Buffet Package </th>
+                        <td>{{ $order->buffetPackage->description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Buffet Date</th>
+                        <td>{{ $order->buffet_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ $order->buffetPackage->price }}</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
@@ -146,21 +150,23 @@
                 <tbody>
                 <tr>
                     <th>Hall ID</th>
-                    <td>{{ $order->hall->id }}</td>
+                    <td>{{ $order->hall_id }}</td>
                 </tr>
 
-                <tr>
-                    <th>Name</th>
-                    <td>{{ $order->hall->name }}</td>
-                </tr>
-                <tr>
-                    <th>Hall Date</th>
-                    <td>{{ $order->hall_date }}</td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ $order->hall->price }}</td>
-                </tr>
+                @if($order->hall)
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $order->hall->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Hall Date</th>
+                        <td>{{ $order->hall_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ $order->hall->price }}</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
@@ -183,21 +189,23 @@
                 <tbody>
                 <tr>
                     <th>Photographer ID</th>
-                    <td>{{ $order->photographer->id }}</td>
+                    <td>{{ $order->photographer_id }}</td>
                 </tr>
 
-                <tr>
-                    <th>Name</th>
-                    <td>{{ $order->photographer->name }}</td>
-                </tr>
-                <tr>
-                    <th>Hall Date</th>
-                    <td>{{ $order->photographer_date }}</td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ $order->photographer->price }}</td>
-                </tr>
+                @if($order->photographer)
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $order->photographer->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Hall Date</th>
+                        <td>{{ $order->photographer_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ $order->photographer->price }}</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
@@ -219,21 +227,22 @@
                 <tbody>
                 <tr>
                     <th>Lighting ID</th>
-                    <td>{{ $order->lightService->id }}</td>
+                    <td>{{ $order->light_service_id }}</td>
                 </tr>
-
-                <tr>
-                    <th>Name</th>
-                    <td>{{ $order->lightService->name }}</td>
-                </tr>
-                <tr>
-                    <th>Hall Date</th>
-                    <td>{{ $order->light_service_date }}</td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ $order->lightService->price }}</td>
-                </tr>
+                @if($order->lightService)
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $order->lightService->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Hall Date</th>
+                        <td>{{ $order->light_service_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ $order->lightService->price }}</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
@@ -256,21 +265,23 @@
                 <tbody>
                 <tr>
                     <th>Guest Service ID</th>
-                    <td>{{ $order->guestService->id }}</td>
+                    <td>{{ $order->guest_service_id }}</td>
                 </tr>
 
-                <tr>
-                    <th>Name</th>
-                    <td>{{ $order->guestService->name }}</td>
-                </tr>
-                <tr>
-                    <th>Hall Date</th>
-                    <td>{{ $order->guest_service_date }}</td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ $order->guestService->price }}</td>
-                </tr>
+                @if($order->guestService)
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $order->guestService->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Hall Date</th>
+                        <td>{{ $order->guest_service_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ $order->guestService->price }}</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
