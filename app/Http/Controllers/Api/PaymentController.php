@@ -109,22 +109,36 @@ class PaymentController extends Controller
         if($order) {
 
             if($order->message_id) {
-                $services[] = ['name' => 'Message','amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y')];
+                if($order->message) {
+                    $services[] = ['name' => 'Message','amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y')];
+                }
+
             }
+
             if($order->buffet_package_id) {
-                $services[] = ['name' => 'Buffet ('.$order->buffetPackage->buffet->name.' - '.$order->buffetPackage->description.')','amount'=>$order->buffetPackage->price,'date'=>$order->buffet_date->format('d-m-Y')];
+                if($order->buffetPackage && $order->buffetPackage->buffet) {
+                    $services[] = ['name' => 'Buffet ('.$order->buffetPackage->buffet->name.' - '.$order->buffetPackage->description.')','amount'=>$order->buffetPackage->price,'date'=>$order->buffet_date->format('d-m-Y')];
+                }
             }
             if($order->hall_id) {
-                $services[] = ['name' => 'Hall ('.$order->hall->name.')','amount'=>$order->hall->price,'date'=>$order->hall_date->format('d-m-Y')];
+                if($order->hall) {
+                    $services[] = ['name' => 'Hall ('.$order->hall->name.')','amount'=>$order->hall->price,'date'=>$order->hall_date->format('d-m-Y')];
+                }
             }
             if($order->photographer_id) {
-                $services[] = ['name' => 'Photographer ('.$order->photographer->name.')','amount'=>$order->photographer->price,'date'=>$order->photographer_date->format('d-m-Y')];
+                if($order->photographer) {
+                    $services[] = ['name' => 'Photographer ('.$order->photographer->name.')','amount'=>$order->photographer->price,'date'=>$order->photographer_date->format('d-m-Y')];
+                }
             }
             if($order->light_service_id) {
-                $services[] = ['name' => 'Lighting ('.$order->lightService->name.')','amount'=>$order->lightService->price,'date'=>$order->light_service_date->format('d-m-Y')];
+                if($order->lightService) {
+                    $services[] = ['name' => 'Lighting ('.$order->lightService->name.')','amount'=>$order->lightService->price,'date'=>$order->light_service_date->format('d-m-Y')];
+                }
             }
             if($order->guest_service_id) {
-                $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
+                if($order->guestService) {
+                    $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
+                }
             }
 
             $emailArray = ['date' => date('d-m-Y'),'invoiceNo' => $order->id,'name' => $order->name,'transaction_id'=>$order->transaction_id,'total'=>$order->amount,'services'=>$services];
@@ -134,10 +148,10 @@ class PaymentController extends Controller
 //                $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
 //            });
 //
-//            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
-//                $m->from('payment@zajil.app','ZajilKnet Order');
-//                $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
-//            });
+            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
+                $m->from('payment@zajil.app','ZajilKnet Order');
+                $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
+            });
 //
 //            if(!empty($order->email)) {
 //                Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
