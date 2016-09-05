@@ -24,6 +24,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::get('payment/failure',['as'=>'payment.failure','uses'=>'PaymentController@getFailure']);
     Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
     Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
+    Route::get('hall/checkavailability',['as'=>'hall.availability','uses'=>'HallController@checkAvailability']);
     Route::resource('payments', 'PaymentController');
 });
 
