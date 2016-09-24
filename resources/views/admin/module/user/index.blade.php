@@ -1,4 +1,4 @@
-@extends('admin.layouts.one-col')
+@extends('admin.layouts.two-col')
 
 @section('breadcrumb')
     <div class="banner">
@@ -10,7 +10,14 @@
     </div>
 @endsection
 
-@section('middle')
+@section('left')
+    {!! Form::open(['action' => ['Admin\UserController@store'], 'method' => 'post'], ['class'=>'']) !!}
+    <h1>Add User</h1>
+    @include('admin.module.user.add-edit')
+    {!! Form::close() !!}
+@endsection
+
+@section('right')
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1>Users</h1>
@@ -23,7 +30,6 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Registered Date</th>
-                <th>Manages Company ? </th>
                 <th></th>
             </tr>
             </thead>
@@ -31,11 +37,10 @@
             @foreach($users as $user)
                 <tr class="gradeU">
                     <td>
-                        <a href="{{ action('Admin\UserController@show',$user->id)}}">{{ $user->name_en }} </a>
+                        <a href="{{ action('Admin\UserController@show',$user->id)}}">{{ $user->name }} </a>
                     </td>
                     <td class="f18">{{ $user->email }}</td>
                     <td class="f18">{{ $user->created_at->format('d-m-Y') }}</td>
-                    <td class="f18">{{ $user->hasCompany }}</td>
                     <td class="f18">
                         <a href="#" class="red" data-toggle="modal" data-target="#deleteModalBox"
                            data-link="{{action('Admin\UserController@destroy',$user->id)}}">

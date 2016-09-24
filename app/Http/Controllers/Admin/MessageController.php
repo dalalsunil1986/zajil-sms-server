@@ -73,7 +73,8 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        $message = $this->messageRepository->find($id);
+        dd('a');
+        $message = $this->messageRepository->with('services')->find($id);
         return view('admin.module.message.view',compact('message'));
     }
 

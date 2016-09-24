@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Src\Models\Photographer;
+use App\Src\Models\User\User;
+use App\Src\Models\UserService;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class PhotographerController extends Controller
@@ -14,15 +15,27 @@ class PhotographerController extends Controller
      * @var Photographer
      */
     private $photographerRepository;
+    /**
+     * @var User
+     */
+    private $userRepository;
+    /**
+     * @var UserService
+     */
+    private $userService;
 
     /**
      * PhotographerController constructor.
      * @param Photographer $photographerRepository
+     * @param User $userRepository
+     * @param UserService $userService
      */
-    public function __construct(Photographer $photographerRepository)
+    public function __construct(Photographer $photographerRepository, User $userRepository, UserService $userService)
     {
 
         $this->photographerRepository = $photographerRepository;
+        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     /**
@@ -59,7 +72,7 @@ class PhotographerController extends Controller
         $this->validate($request, [
             'name' => 'required|string|unique:buffets,name',
             'price' => 'required',
-            
+
         ]);
 
         $photographer = $this->photographerRepository->create($request->all());
@@ -77,7 +90,9 @@ class PhotographerController extends Controller
     {
         //
         $photographer = $this->photographerRepository->find($id);
-        return view('admin.module.photographer.view',compact('photographer'));
+        $users = $this->userRepository->lists('name','id');
+
+        return view('admin.module.photographer.view',compact('photographer','users'));
     }
 
     /**
@@ -120,5 +135,21 @@ class PhotographerController extends Controller
         $record = $this->photographerRepository->find($id);
         $record->delete();
         return redirect()->action('Admin\PhotographerController@index')->with('success','Deleted');
+    }
+
+    public function attachToUser(Request $request)
+    {
+        $this->validate($request,[
+            'user_id' => 'required|integer',
+            'photographer_id' => 'required|integer'
+        ]);
+
+        $user = $this->userRepository->find($request->user_id);
+
+        $photographer = $this->photographerRepository->find($request->photographer_id);
+
+        $photographer->services()->create(['user_id'=>$user->id]);
+
+        return $photographer->services;
     }
 }
