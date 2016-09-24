@@ -15,8 +15,23 @@
 @section('left')
     <hr>
     {!! Form::model($photographer,['action' => ['Admin\PhotographerController@update',$photographer->id], 'method' => 'patch'], ['class'=>'']) !!}
-    <h1>Edit Buffet </h1>
+    <h1>Edit Photographer </h1>
     @include('admin.module.photographer.add-edit')
+    {!! Form::close() !!}
+    <hr>
+    <h1> Attach Photographer</h1>
+
+    {!! Form::model($photographer,['action' => ['Admin\UserController@attachService'], 'method' => 'post'], ['class'=>'']) !!}
+
+    {!! Form::hidden('model_id',$photographer->id) !!}
+    {!! Form::hidden('model_type','photographer') !!}
+    <div class="form-group">
+        {!! Form::select('user_id',$users,null,['class'=>'form-control']) !!}
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" style="width: 100%; padding-top: 10px">{{ trans('word.save') }}</button>
+    </div>
     {!! Form::close() !!}
 @endsection
 

@@ -2,10 +2,14 @@
 
 namespace App\Src\Models;
 
+use App\Src\ServiceableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class GuestService extends Model
 {
+
+    use ServiceableTrait;
+
     protected $guarded = ['id'];
     protected $hidden = [];
     protected $table = 'guest_services';

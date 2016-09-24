@@ -2,23 +2,21 @@
 
 namespace App\Src\Models;
 
-use App\Src\ServiceableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Buffet extends Model
+class UserService extends Model
 {
-
-    use ServiceableTrait;
-
     protected $guarded = ['id'];
     protected $hidden = [];
-    protected $table = 'buffets';
+    protected $table = 'service_users';
     public $timestamps = false;
 
-    public function packages()
+    /**
+     * Get all of the owning commentable models.
+     */
+    public function service()
     {
-        return $this->hasMany(BuffetPackage::class);
+        return $this->morphTo();
     }
-
 }

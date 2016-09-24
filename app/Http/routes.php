@@ -43,6 +43,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
     Route::resource('photographer', 'PhotographerController');
     Route::resource('guest-service', 'GuestServiceController');
     Route::resource('light-service', 'LightServiceController');
+    Route::resource('user', 'UserController');
+    Route::post('user/attach-service','UserController@attachService');
+    Route::post('photographer/attach','PhotographerController@attachToUser');
     Route::get('/', 'HomeController@index');
 });
 
@@ -57,6 +60,10 @@ Route::group([], function () {
 
 Route::get('test',function(){
 
+
+    $buffet = \App\Src\Models\Buffet::find(1);
+    return $buffet->services()->toSql();
+    dd($buffet->services);
 //    Mail::send('emails.contact', [], function ($m)  {
 //        $m->from('hello@app.com', 'Your Application');
 //

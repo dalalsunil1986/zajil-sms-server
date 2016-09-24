@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Src\Models\GuestService;
+use App\Src\Models\User\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,15 +15,20 @@ class GuestServiceController extends Controller
      * @var GuestService
      */
     private $guestServiceRepository;
+    /**
+     * @var User
+     */
+    private $userRepository;
 
     /**
      * GuestServiceController constructor.
      * @param GuestService $guestServiceRepository
+     * @param User $userRepository
      */
-    public function __construct(GuestService $guestServiceRepository)
+    public function __construct(GuestService $guestServiceRepository, User $userRepository)
     {
-
         $this->guestServiceRepository = $guestServiceRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -77,7 +83,8 @@ class GuestServiceController extends Controller
     {
         //
         $guestservice = $this->guestServiceRepository->find($id);
-        return view('admin.module.guestservice.view',compact('guestservice'));
+        $users = $this->userRepository->lists('name','id');
+        return view('admin.module.guestservice.view',compact('guestservice','users'));
     }
 
     /**
