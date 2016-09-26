@@ -53,11 +53,39 @@
 
             </tbody>
         </table>
+
     </div>
     <div class="panel-footer ">
         <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$photographer->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
         <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$photographer->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
     </div>
     @include('admin.partials.delete-modal',['info' => 'This will delete company and related records (employees,services) etc .'])
+
+
+    <hr>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>
+                Attached Users
+            </h1>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-user-information">
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <th>Delete</th>
+            </tr>
+            @foreach($photographer->services as $service)
+                <tr>
+                    <td>{{ $service->user ? $service->user->name : '' }}</td>
+                    <td>X</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+
+    </div>
 
 @endsection
