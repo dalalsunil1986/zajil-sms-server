@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         //
         Relation::morphMap([
             'photographer' => Photographer::class,
-            'guestservice' => GuestService::class,
+            'guestService' => GuestService::class,
         ]);
     }
 

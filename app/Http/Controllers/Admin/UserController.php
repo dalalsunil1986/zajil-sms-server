@@ -72,14 +72,23 @@ class UserController extends Controller
             'user_id' => 'required|exists:users,id'
         ]);
 
-        $userService = $this->userService->create([
-            'service_id' => $modelID,
-            'service_type' => $modelType,
-            'user_id' => $userID
-        ]);
-
+        $hasService = $this->userService->where('service_type',$modelType)->where('service_id',$modelID)->where('user_id',$userID)->get();
+        if(!count($hasService)) {
+            $userService = $this->userService->create([
+                'service_id' => $modelID,
+                'service_type' => $modelType,
+                'user_id' => $userID
+            ]);
+        }
         return redirect()->back()->with('success','User Service Saved');
 
+    }
+
+    public function getServices($userID)
+    {
+        $user = $this->userRepository->find($userID);
+        $userServices = $user->services;
+        return $userServices;
     }
 
 }

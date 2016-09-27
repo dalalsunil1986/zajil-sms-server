@@ -2,6 +2,7 @@
 
 namespace App\Src\Models\User;
 
+use App\Src\Models\UserService;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -9,4 +10,10 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $fillable = ['name', 'email', 'password'];
     protected $hidden = ['password', 'remember_token'];
+
+    public function services()
+    {
+        return $this->hasMany(UserService::class);
+    }
+
 }

@@ -89,9 +89,8 @@ class PhotographerController extends Controller
     public function show($id)
     {
         //
-        $photographer = $this->photographerRepository->find($id);
+        $photographer = $this->photographerRepository->with('services.user')->find($id);
         $users = $this->userRepository->lists('name','id');
-
         return view('admin.module.photographer.view',compact('photographer','users'));
     }
 
