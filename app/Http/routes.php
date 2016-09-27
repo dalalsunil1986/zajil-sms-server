@@ -16,6 +16,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController');
     Route::get('user/{id}/services', 'UserController@getServices');
+    Route::post('photographers/activate', 'PhotographerController@activate');
 
 //    Route::post('payment/success','PaymentController@paymentSuccess');
     Route::get('payment/process','PaymentController@paymentProcess');

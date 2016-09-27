@@ -13,8 +13,7 @@ class InsertActiveCloumnToPhotographersTable extends Migration
     public function up()
     {
         Schema::table('photographers', function (Blueprint $table) {
-            //
-            $table->addColumn('boolean','active')->default(0);
+            $table->addColumn('boolean','active')->default(1);
         });
     }
 
