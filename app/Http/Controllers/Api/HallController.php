@@ -37,8 +37,8 @@ class HallController extends Controller
 
     public function checkAvailability(Request $request)
     {
-        $date = Carbon::parse($request->get('date'))->toDateString();
-        $hallID = $request->get('hall_id');
+        $date = Carbon::parse($request->json('date'))->toDateString();
+        $hallID = $request->json('hall_id');
 
         $hallBooked = $this->orderRepository->where('hall_id',$hallID)->whereDate('hall_date','=',$date)->get();
 

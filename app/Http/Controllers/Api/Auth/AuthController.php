@@ -43,7 +43,7 @@ class AuthController extends Controller
      */
     public function __construct(User $userRepository)
     {
-        $this->middleware('guest', ['except' => 'logout']);
+//        $this->middleware('guest', ['except' => 'logout']);
         $this->userRepository = $userRepository;
     }
 
@@ -96,7 +96,7 @@ class AuthController extends Controller
                 'message' => 'Validation failed',
                 'error' => $validator->errors()->all()
             ]);
-        } 
+        }
 
         try {
             $user = $this->userRepository->create([
