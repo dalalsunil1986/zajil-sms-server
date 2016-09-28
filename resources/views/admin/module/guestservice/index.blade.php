@@ -33,6 +33,7 @@
             <tr>
                 <th>{{ trans('word.name') }}</th>
                 <th>{{ trans('word.price') }}</th>
+                <th>{{ trans('word.active') }}</th>
                 <th></th>
             </tr>
             </thead>
@@ -43,6 +44,7 @@
                         <a href="{{ action('Admin\GuestServiceController@show',$guestservice->id)}}">{{ $guestservice->name }} </a>
                     </td>
                     <td class="f18">{{ $guestservice->price }}</td>
+                    <td class="f18">{{ $guestservice->active ? 'Yes' : 'No' }}</td>
                     <td class="f18">
                         <a href="#" class="red" data-toggle="modal" data-target="#deleteModalBox"
                            data-link="{{action('Admin\GuestServiceController@destroy',$guestservice->id)}}">
