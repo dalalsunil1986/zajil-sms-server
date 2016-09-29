@@ -52,7 +52,7 @@ class UserController extends Controller
         $this->validate($request,['email'=>'required|unique:users,email','name'=>'required','password'=>'required']);
 
         $user = $this->userRepository->create([
-            'email' => $request->email,
+            'email' => strtolower($request->email),
             'password' => bcrypt($request->password),
             'name' => $request->name,
             'active' => 1
