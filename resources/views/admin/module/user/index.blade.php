@@ -30,6 +30,8 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Registered Date</th>
+                <th>Active</th>
+                <th>Admin</th>
                 <th></th>
             </tr>
             </thead>
@@ -41,6 +43,8 @@
                     </td>
                     <td class="f18">{{ $user->email }}</td>
                     <td class="f18">{{ $user->created_at->format('d-m-Y') }}</td>
+                    <td class="f18">{{ $user->active  ? 'Yes' : 'No' }}</td>
+                    <td class="f18">{{ $user->admin ? 'Yes' : 'No' }}</td>
                     <td class="f18">
                         <a href="#" class="red" data-toggle="modal" data-target="#deleteModalBox"
                            data-link="{{action('Admin\UserController@destroy',$user->id)}}">
