@@ -23,7 +23,7 @@ class GuestServiceController extends Controller
 
     public function index()
     {
-        $guestServices = $this->guestService->where('active',1)->get();
+        $guestServices = $this->guestService->all();
         return response()->json(['data' => $guestServices]);
     }
 

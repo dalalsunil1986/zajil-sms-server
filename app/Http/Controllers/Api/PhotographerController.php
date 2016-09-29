@@ -23,7 +23,7 @@ class PhotographerController extends Controller
 
     public function index()
     {
-        $photographers = $this->photographer->where('active',1)->get();
+        $photographers = $this->photographer->all();
         return response()->json(['data' => $photographers]);
     }
 

@@ -15,6 +15,10 @@ class Photographer extends Model
     protected $table = 'photographers';
     public $timestamps = false;
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);

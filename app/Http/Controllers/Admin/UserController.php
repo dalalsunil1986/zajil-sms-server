@@ -54,7 +54,8 @@ class UserController extends Controller
         $user = $this->userRepository->create([
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'name' => $request->name
+            'name' => $request->name,
+            'active' => 1
         ]);
 
         return redirect()->back()->with('success','User Saved');
@@ -89,6 +90,14 @@ class UserController extends Controller
         $user = $this->userRepository->find($userID);
         $userServices = $user->services;
         return $userServices;
+    }
+
+    public function destroy($userID)
+    {
+        $user = $this->userRepository->find($userID);
+        $user->delete();
+        return redirect()->back()->with('success','User Deleted');
+
     }
 
 }
