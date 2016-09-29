@@ -55,8 +55,9 @@ class UserController extends Controller
             'email' => strtolower($request->email),
             'password' => bcrypt($request->password),
             'name' => $request->name,
-            'active' => 1
         ]);
+        $user->active = 1;
+        $user->save();
 
         return redirect()->back()->with('success','User Saved');
     }

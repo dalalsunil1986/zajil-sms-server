@@ -59,10 +59,10 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
+        Auth::logout();
         if (Auth::attempt(([
             'email' => strtolower($request->json('email')),
             'password' => $request->json('password'),
-            'active' => 1
         ]),
             true)
         ) {
