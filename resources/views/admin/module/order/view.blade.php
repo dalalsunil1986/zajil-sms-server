@@ -22,6 +22,7 @@
 {{--@endsection--}}
 
 @section('left')
+    {!! Form::model($order,['action' => ['Admin\OrderController@update',$order->id], 'method' => 'patch'], ['class'=>'']) !!}
     <div class="panel-body">
         <table class="table table-user-information">
             <tbody>
@@ -47,16 +48,28 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ $order->status }}</td>
+                <td>{!! Form::select('status',$statuses,$order->status,['class'=>'form-control']) !!}</td>
             </tr>
 
             </tbody>
         </table>
     </div>
+    <div class="panel-footer ">
+        {!! Form::submit('Save',['class'=>'btn btn-success']) !!}
+        {!! Form::close() !!}
+        <a href="#" class="red text-right" style="float: right" data-toggle="modal" data-target="#deleteModalBox"
+           data-link="{{action('Admin\OrderController@destroy',$order->id)}}">
+            <i class="fa fa-close ">Delete</i>
+        </a>
+        @include('admin.partials.delete-modal',['info' => 'Delete The Order ?'])
+    </div>
+
 @endsection
 @section('right')
 
     @if($order->message_id)
+        {!! Form::model($order,['action' => ['Admin\OrderController@update',$order->id], 'method' => 'patch'], ['class'=>'']) !!}
+        {!! Form::hidden('service_type','message') !!}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>Message</h1>
@@ -89,14 +102,16 @@
         </div>
 
         <div class="panel-footer ">
-            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+            {!! Form::close() !!}
         </div>
-        @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
+
 
     @endif
 
     @if($order->buffet_package_id)
-
+        {!! Form::model($order,['action' => ['Admin\OrderController@update',$order->id], 'method' => 'patch'], ['class'=>'']) !!}
+        {!! Form::hidden('service_type','buffet_package') !!}
         <hr>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -133,13 +148,15 @@
         </div>
 
         <div class="panel-footer ">
-            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+            {!! Form::close() !!}
         </div>
-        @include('admin.partials.delete-modal',['info' => 'Remove Buffet From Service ?.'])
 
     @endif
 
     @if($order->hall_id)
+        {!! Form::model($order,['action' => ['Admin\OrderController@update',$order->id], 'method' => 'patch'], ['class'=>'']) !!}
+        {!! Form::hidden('service_type','hall') !!}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>Hall</h1>
@@ -170,15 +187,17 @@
                 </tbody>
             </table>
         </div>
-
         <div class="panel-footer ">
-            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+            {!! Form::close() !!}
         </div>
-        @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
+
 
     @endif
 
     @if($order->photographer_id)
+        {!! Form::model($order,['action' => ['Admin\OrderController@update',$order->id], 'method' => 'patch'], ['class'=>'']) !!}
+        {!! Form::hidden('service_type','photographer') !!}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>Photographer</h1>
@@ -209,14 +228,14 @@
                 </tbody>
             </table>
         </div>
-
         <div class="panel-footer ">
-            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+            {!! Form::close() !!}
         </div>
-        @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
-
     @endif
     @if($order->light_service_id)
+        {!! Form::model($order,['action' => ['Admin\OrderController@update',$order->id], 'method' => 'patch'], ['class'=>'']) !!}
+        {!! Form::hidden('service_type','light_service') !!}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>Lighting</h1>
@@ -246,15 +265,15 @@
                 </tbody>
             </table>
         </div>
-
         <div class="panel-footer ">
-            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            {!! Form::submit('Save',['class'=>'btn btn-danger']) !!}
+            {!! Form::close() !!}
         </div>
-        @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
-
     @endif
 
     @if($order->guest_service_id)
+        {!! Form::model($order,['action' => ['Admin\OrderController@update',$order->id], 'method' => 'patch'], ['class'=>'']) !!}
+        {!! Form::hidden('service_type','guest_service') !!}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>Guest Service</h1>
@@ -285,12 +304,10 @@
                 </tbody>
             </table>
         </div>
-
         <div class="panel-footer ">
-            <a href="#" data-link="#" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
+            {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+            {!! Form::close() !!}
         </div>
-        @include('admin.partials.delete-modal',['info' => 'Remove Message From Service ?'])
-
     @endif
 
 
