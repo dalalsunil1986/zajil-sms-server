@@ -43,7 +43,7 @@ class UserController extends Controller
         $services = $this->userService->where('user_id',$user->id);
         $photographers = $services->where('service_type','photographers')->get();
         $guestServices = $services->where('service_type','guestServices')->get();
-        $userServices = [];
+        $userServices = ['photographers'=>[],'guestServices'=>[]];
         foreach($photographers as $photographer) {
             $userServices['photographers'][] = $photographer->service;
         }
