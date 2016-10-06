@@ -41,13 +41,13 @@ class UserController extends Controller
     {
         $user = $this->userRepository->find($userID);
         $services = $this->userService->where('user_id',$user->id);
-        $photographers = $services->where('service_type','photographer')->get();
-        $guestServices = $services->where('service_type','guestservice')->get();
-        $photographerArray = [];
+        $photographers = $services->where('service_type','photographers')->get();
+        $guestServices = $services->where('service_type','guestServices')->get();
+        $userServices = [];
         foreach($photographers as $photographer) {
-            $photographerArray[] = $photographer->service;
+//            $userServices['photographers'][] = $photographer->service;
         }
-        $user->photographers = $photographerArray;
+        $user->services = $userServices;
 
         return response()->json(['data'=>$user,'success'=>true],200);
     }
@@ -63,3 +63,4 @@ class UserController extends Controller
 
 
 }
+
