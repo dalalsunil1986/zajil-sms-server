@@ -39,25 +39,26 @@ class UserController extends Controller
 
     public function getServices($userID)
     {
-        $user = $this->userRepository->find($userID);
-        $services = $this->userService->where('user_id',$user->id);
-        $photographers = $services->where('service_type','photographers')->get();
-        $guestServices = $services->where('service_type','guestServices')->get();
-        $userServices = ['photographers'=>[],'guestServices'=>[]];
-        foreach($photographers as $photographer) {
-            $userServices['photographers'][] = $photographer->service;
-        }
-        $user->services = $userServices;
-
+        $user = $this->userRepository->with('services.service')->find($userID);
+        $user->userServices = $user->services->groupBy('service_type')->map(function($serviceable) {
+            return $serviceable->pluck('service');
+        });
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
     public function getAppointments($userID)
     {
         $user = $this->userRepository->find($userID);
-        $appointments = [];
-        $appointments['photographers'] = [];
-        $user->appointments = $appointments;
+//        $user->userOrders = $user->services->groupBy('service_type')->map(function($serviceables) {
+//            $serviceables->map(function($serviceable){
+//                return $serviceable->toArray();
+////                return $serviceable->service->orders->toArray();
+//            });
+//        });
+        $userOrders = [];
+        $userOrders['photographers'] = [];
+        $user->userOrders = $userOrders;
+
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 

@@ -64,21 +64,6 @@ Route::group([], function () {
 
 Route::get('test',function(){
     // services =  ['photogrpaher','guestService']
-    $user = Auth::loginUsingID(2);
-    dd($user->services->lists('service_type')->unique());
-//    $user = \App\Src\Models\UserService::ofType('photographer')->where('user_id',2)->get();
-//    dd($user);
-    //get user 1's services for photography section
-
-
-//    dd($user->services);
-//    $buffet = \App\Src\Models\Buffet::find(1);
-//    return $buffet->services()->toSql();
-//    dd($buffet->services);
-//    Mail::send('emails.contact', [], function ($m)  {
-//        $m->from('hello@app.com', 'Your Application');
-//
-//        $m->to('z4ls@live.com','ZaLs')->subject('Your Reminder!');
-//    });
-
+    $service = \App\Src\Models\Photographer::find(1);
+    dd($service->orders);
 });
