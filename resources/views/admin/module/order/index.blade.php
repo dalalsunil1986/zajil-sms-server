@@ -58,7 +58,7 @@
             @endforeach
             </tbody>
         </table>
-        @include('admin.partials.delete-modal',['info' => 'This will delete company and related records (employees,services) etc .'])
+        @include('admin.partials.delete-modal',['info' => 'Delete the Order ?'])
     </div>
 
 @endsection
