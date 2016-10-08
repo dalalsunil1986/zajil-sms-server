@@ -24,7 +24,7 @@
     {!! Form::model($photographer,['action' => ['Admin\UserController@attachService'], 'method' => 'post'], ['class'=>'']) !!}
 
     {!! Form::hidden('model_id',$photographer->id) !!}
-    {!! Form::hidden('model_type','photographer') !!}
+    {!! Form::hidden('model_type','photographers') !!}
     <div class="form-group">
         {!! Form::select('user_id',$users,null,['class'=>'form-control']) !!}
     </div>

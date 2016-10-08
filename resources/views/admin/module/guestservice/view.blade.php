@@ -22,7 +22,7 @@
     <h1> Attach Guest Service</h1>
     {!! Form::model($guestservice,['action' => ['Admin\UserController@attachService'], 'method' => 'post'], ['class'=>'']) !!}
     {!! Form::hidden('model_id',$guestservice->id) !!}
-    {!! Form::hidden('model_type','guestservice') !!}
+    {!! Form::hidden('model_type','guestServices') !!}
     <div class="form-group">
         {!! Form::select('user_id',$users,null,['class'=>'form-control']) !!}
     </div>

@@ -266,7 +266,7 @@
             </table>
         </div>
         <div class="panel-footer ">
-            {!! Form::submit('Save',['class'=>'btn btn-danger']) !!}
+            {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
             {!! Form::close() !!}
         </div>
     @endif
