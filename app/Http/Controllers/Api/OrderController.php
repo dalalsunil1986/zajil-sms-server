@@ -65,9 +65,12 @@ class OrderController extends Controller
             'photographer_date'=>$params->photographer_date,
             'light_service_date'=>$params->light_service_date,
             'guest_service_date'=>$params->guest_service_date,
+            'status' => 'pending'
         ]);
 
         $order = $this->order->where('secret_token',$params->secret_token)->first();
+        $order->status = 'pending';
+        $order->save();
 
         if(!$order) {
             return response()->json(['success'=>false,'message'=>'Unknown Error Occured, Try again']);

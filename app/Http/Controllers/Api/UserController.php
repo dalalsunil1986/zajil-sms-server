@@ -49,24 +49,19 @@ class UserController extends Controller
 
     public function getAppointments($userID)
     {
-        $user = $this->userRepository->find($userID);
-        $photographersOrders = $this->orderRepository->where('photographer_id',$user->id)->get();
-        $messagesOrders = $this->orderRepository->where('message_id',$user->id)->get();
-        $hallOrders = $this->orderRepository->where('hall_id',$user->id)->get();
-        $buffetOrders = $this->orderRepository->where('buffet_package_id',$user->id)->get();
-        $lightServicesOrders = $this->orderRepository->where('light_service_id',$user->id)->get();
-        $guestServicesOrders = $this->orderRepository->where('guest_service_id',$user->id)->get();
+        $user = $this->userRepository->with('services')->find($userID);
 
         $user->userOrders = $user->services->groupBy('service_type')->map(function($serviceable) use ($user) {
-//            return $serviceable->pluck('service');
             foreach ($serviceable as $service) {
+                $userServices = $user->services->where('service_type',$service->service_type);
+                $servicesIDs = $userServices->pluck('service_id')->toArray();
                 switch ($service->service_type) {
                     case 'photographers':
-                        $collection = $this->orderRepository->with('photographer')->where('photographer_id',$user->id)->get()->toArray();
+                        $collection = $this->orderRepository->with('photographer')->whereIn('photographer_id',$servicesIDs)->get()->toArray();
                         return $collection;
                         break;
                     case 'guestServices':
-                        $collection = $this->orderRepository->with('guestService')->where('guest_service_id',$user->id)->get()->toArray();
+                        $collection = $this->orderRepository->with('guestService')->whereIn('guest_service_id',$servicesIDs)->get()->toArray();
                         return $collection;
                         break;
                     default :
