@@ -10,7 +10,6 @@ class Buffet extends Model
 {
 
     use ServiceableTrait;
-    use OrderTrait;
 
     protected $guarded = ['id'];
     protected $hidden = [];

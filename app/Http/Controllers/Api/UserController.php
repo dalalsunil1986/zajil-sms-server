@@ -8,6 +8,7 @@ use App\Src\Models\UserService;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -49,17 +50,47 @@ class UserController extends Controller
     public function getAppointments($userID)
     {
         $user = $this->userRepository->find($userID);
-//        $user->userOrders = $user->services->groupBy('service_type')->map(function($serviceables) {
-//            $serviceables->map(function($serviceable){
-//                return $serviceable->toArray();
-////                return $serviceable->service->orders->toArray();
+        $photographersOrders = $this->orderRepository->where('photographer_id',$user->id)->get();
+        $messagesOrders = $this->orderRepository->where('message_id',$user->id)->get();
+        $hallOrders = $this->orderRepository->where('hall_id',$user->id)->get();
+        $buffetOrders = $this->orderRepository->where('buffet_package_id',$user->id)->get();
+        $lightServicesOrders = $this->orderRepository->where('light_service_id',$user->id)->get();
+        $guestServicesOrders = $this->orderRepository->where('guest_service_id',$user->id)->get();
+
+        $user->userOrders = $user->services->groupBy('service_type')->map(function($serviceable) use ($user) {
+//            return $serviceable->pluck('service');
+            foreach ($serviceable as $service) {
+                switch ($service->service_type) {
+                    case 'photographers':
+                        $collection = $this->orderRepository->with('photographer')->where('photographer_id',$user->id)->get()->toArray();
+                        return $collection;
+                        break;
+                    case 'guestServices':
+                        $collection = $this->orderRepository->with('guestService')->where('guest_service_id',$user->id)->get()->toArray();
+                        return $collection;
+                        break;
+                    default :
+                        break;
+                }
+            }
+//            $serviceable->map(function($service) use ($user) {
+//                switch ($service->service_type) {
+//                    case 'photographers':
+//                        $collection = $this->orderRepository->where('photographer_id',$user->id)->get()->toArray();
+//                        return $service;
+//                        break;
+//                    case 'guestServices':
+//                        $collection = $this->orderRepository->where('guest_service_id',$user->id)->get()->toArray();
+//                        return $collection;
+//                        break;
+//                    default :
+//                        break;
+//                }
 //            });
-//        });
-        $userOrders = [];
-        $userOrders['photographers'] = [];
-        $user->userOrders = $userOrders;
+        });
 
         return response()->json(['data'=>$user,'success'=>true],200);
+//        return response()->json(['data'=>$user,'success'=>true],200);
     }
 
 
