@@ -2,6 +2,7 @@
 
 Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'], function () {
 
+
     Route::post('auth/login', 'Auth\AuthController@postLogin');
 //    Route::post('auth/register', 'Auth\AuthController@postRegister');
 //    Route::post('auth/activate', 'Auth\AuthController@postActivate');
@@ -30,6 +31,9 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
     Route::get('hall/checkavailability',['as'=>'hall.availability','uses'=>'HallController@checkAvailability']);
     Route::resource('payments', 'PaymentController');
+
+    Route::post('orders/editorder','OrderController@editOrder');
+
 });
 
 /*********************************************************************************************************
