@@ -68,24 +68,9 @@ class UserController extends Controller
                         break;
                 }
             }
-//            $serviceable->map(function($service) use ($user) {
-//                switch ($service->service_type) {
-//                    case 'photographers':
-//                        $collection = $this->orderRepository->where('photographer_id',$user->id)->get()->toArray();
-//                        return $service;
-//                        break;
-//                    case 'guestServices':
-//                        $collection = $this->orderRepository->where('guest_service_id',$user->id)->get()->toArray();
-//                        return $collection;
-//                        break;
-//                    default :
-//                        break;
-//                }
-//            });
         });
 
         return response()->json(['data'=>$user,'success'=>true],200);
-//        return response()->json(['data'=>$user,'success'=>true],200);
     }
 
 
