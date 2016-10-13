@@ -15,9 +15,10 @@
 @section('left')
     <hr>
     {!! Form::model($hall,['action' => ['Admin\HallController@update',$hall->id], 'method' => 'patch'], ['class'=>'']) !!}
-    <h1>Edit Buffet </h1>
+    <h1>Edit Hall </h1>
     @include('admin.module.hall.add-edit')
     {!! Form::close() !!}
+    <hr>
     @include('admin.module.service.attach',['model'=>$hall,'users'=>$users,'modelType'=>$modelType])
 @endsection
 

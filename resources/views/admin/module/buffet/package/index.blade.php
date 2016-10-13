@@ -40,7 +40,7 @@
             <tbody>
             @foreach($buffet->packages as $package)
                 <tr class="gradeU">
-                    <td class="f18">{{ $package->description }}</td>
+                    <td class="f18"><a href="{{ action('Admin\BuffetController@getPackage',$package->id) }}">{{ $package->description }}</a></td>
                     <td class="f18">{{ $package->price }}</td>
                     <td class="f18">
                         <a href="{{action('Admin\BuffetController@deletePackage',$package->id)}}" class="red"

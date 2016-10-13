@@ -42,7 +42,9 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('message', 'MessageController');
     Route::get('buffet/{id}/packages', 'BuffetController@getPackages');
+    Route::get('buffet/packages/{id}/show', 'BuffetController@getPackage');
     Route::post('buffet/{id}/package/create', 'BuffetController@createPackage');
+    Route::post('package/{id}/edit', 'BuffetController@editPackage');
     Route::get('package/{id}/delete', 'BuffetController@deletePackage');
     Route::resource('buffet', 'BuffetController');
     
