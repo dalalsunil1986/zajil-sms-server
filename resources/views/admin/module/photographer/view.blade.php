@@ -47,5 +47,5 @@
     </div>
     @include('admin.partials.delete-modal',['info' => 'This will delete company and related records (employees,services) etc .'])
     <hr>
-    @include('admin.module.service.users',['model'=>$photographer])
+    @include('admin.module.service.users',['model'=>$photographer,'modelType'=>$modelType])
 @endsection

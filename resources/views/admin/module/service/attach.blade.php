@@ -1,5 +1,5 @@
 {!! Form::model($model,['action' => ['Admin\UserController@attachService'], 'method' => 'post'], ['class'=>'']) !!}
-<h1> Attach Photographer</h1>
+<h1> Attach {{ ucfirst($modelType) }}</h1>
 {!! Form::hidden('model_id',$model->id) !!}
 {!! Form::hidden('model_type',$modelType) !!}
 <div class="form-group">

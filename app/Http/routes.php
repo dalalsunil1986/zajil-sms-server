@@ -53,7 +53,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
     Route::resource('light-service', 'LightServiceController');
     Route::resource('user', 'UserController');
     Route::post('user/attach-service','UserController@attachService');
-    Route::post('photographer/attach','PhotographerController@attachToUser');
+    Route::post('user/detach-service','UserController@detachService');
     Route::get('/', 'HomeController@index');
 });
 

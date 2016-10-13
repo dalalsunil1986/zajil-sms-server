@@ -87,6 +87,18 @@ class UserController extends Controller
 
     }
 
+    public function detachService(Request $request)
+    {
+        $modelID = $request->model_id;
+        $modelType = $request->model_type;
+        $userID = $request->user_id;
+        $userService = $this->userService->where('service_id',$modelID)->where('service_type',$modelType)->where('user_id',$userID)->get();
+        $userService->map(function($service) {
+            $service->delete();
+        });
+        return redirect()->back()->with('success','User Service Deleted');
+    }
+
     public function getServices($userID)
     {
         $user = $this->userRepository->find($userID);

@@ -84,7 +84,7 @@ class GuestServiceController extends Controller
         //
         $guestservice = $this->guestServiceRepository->find($id);
         $users = $this->userRepository->lists('name','id');
-        $modelType = 'photgraphers';
+        $modelType = 'guestServices';
         return view('admin.module.guestservice.view',compact('guestservice','users','modelType'));
     }
 
