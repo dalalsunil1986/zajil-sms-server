@@ -18,6 +18,8 @@
     <h1>{{ trans('word.edit') . ' ' . $lightservice->name }}</h1>
     @include('admin.module.lightservice.add-edit')
     {!! Form::close() !!}
+    <hr>
+    @include('admin.module.service.attach',['model'=>$lightservice,'users'=>$users,'modelType'=>$modelType])
 @endsection
 
 @section('right')
@@ -44,5 +46,6 @@
         <a href="#" data-link="{{ action('Admin\LightServiceController@destroy',$lightservice->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
     </div>
     @include('admin.partials.delete-modal',['info' => 'This will delete company and related records (employees,services) etc .'])
-
+    <hr>
+    @include('admin.module.service.users',['model'=>$lightservice])
 @endsection

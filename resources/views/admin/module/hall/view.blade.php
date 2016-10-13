@@ -18,6 +18,7 @@
     <h1>Edit Buffet </h1>
     @include('admin.module.hall.add-edit')
     {!! Form::close() !!}
+    @include('admin.module.service.attach',['model'=>$hall,'users'=>$users,'modelType'=>$modelType])
 @endsection
 
 @section('right')
@@ -47,5 +48,6 @@
         <a href="#" data-link="{{ action('Admin\HallController@destroy',$hall->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
     </div>
     @include('admin.partials.delete-modal',['info' => 'This will delete company and related records (employees,services) etc .'])
-
+    <hr>
+    @include('admin.module.service.users',['model'=>$hall])
 @endsection

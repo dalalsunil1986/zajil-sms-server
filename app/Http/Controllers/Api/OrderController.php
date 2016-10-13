@@ -160,9 +160,9 @@ class OrderController extends Controller
                         break;
                 }
                 if($service) {
-                    $order->{$serviceType.'_id'} = NULL;
-                    $order->{$serviceType.'_date'} = NULL;
-                    $order->amount = $order->amount - $service->price;
+//                    $order->{$serviceType.'_id'} = NULL;
+//                    $order->{$serviceType.'_date'} = NULL;
+//                    $order->amount = $order->amount - $service->price;
                 }
         }
         $order->save();

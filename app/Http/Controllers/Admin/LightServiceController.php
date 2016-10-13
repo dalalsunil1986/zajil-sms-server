@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Src\Models\LightService;
+use App\Src\Models\User\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,15 +15,21 @@ class LightServiceController extends Controller
      * @var LightService
      */
     private $lightServiceRepository;
+    /**
+     * @var User
+     */
+    private $userRepository;
 
     /**
      * LightServiceController constructor.
      * @param LightService $lightServiceRepository
+     * @param User $userRepository
      */
-    public function __construct(LightService $lightServiceRepository)
+    public function __construct(LightService $lightServiceRepository,User $userRepository)
     {
 
         $this->lightServiceRepository = $lightServiceRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -75,9 +82,10 @@ class LightServiceController extends Controller
      */
     public function show($id)
     {
-        //
         $lightservice = $this->lightServiceRepository->find($id);
-        return view('admin.module.lightservice.view',compact('lightservice'));
+        $users = $this->userRepository->lists('name','id');
+        $modelType = 'lightServices';
+        return view('admin.module.lightservice.view',compact('lightservice','modelType','users'));
     }
 
     /**

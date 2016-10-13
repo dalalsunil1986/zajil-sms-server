@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Src\Models\Message;
+use App\Src\Models\User\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,15 +15,21 @@ class MessageController extends Controller
      * @var Message
      */
     private $messageRepository;
+    /**
+     * @var User
+     */
+    private $userRepository;
 
     /**
      * MessageController constructor.
      * @param Message $messageRepository
+     * @param User $userRepository
      */
-    public function __construct(Message $messageRepository)
+    public function __construct(Message $messageRepository,User $userRepository)
     {
 
         $this->messageRepository = $messageRepository;
+        $this->userRepository = $userRepository;
     }
     /**
      * Display a listing of the resource.
@@ -74,7 +81,9 @@ class MessageController extends Controller
     public function show($id)
     {
         $message = $this->messageRepository->with('services')->find($id);
-        return view('admin.module.message.view',compact('message'));
+        $users = $this->userRepository->lists('name','id');
+        $modelType = 'messages';
+        return view('admin.module.message.view',compact('message','modelType','users'));
     }
 
     /**

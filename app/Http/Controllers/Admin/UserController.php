@@ -68,6 +68,7 @@ class UserController extends Controller
         $modelType = $request->model_type;
         $userID = $request->user_id;
 
+
         $this->validate($request,[
             'model_id'=> 'required|integer',
             'model_type' => 'required',

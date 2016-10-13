@@ -91,7 +91,8 @@ class PhotographerController extends Controller
         //
         $photographer = $this->photographerRepository->with('services.user')->find($id);
         $users = $this->userRepository->lists('name','id');
-        return view('admin.module.photographer.view',compact('photographer','users'));
+        $modelType = 'photgraphers';
+        return view('admin.module.photographer.view',compact('photographer','users','modelType'));
     }
 
     /**

@@ -19,18 +19,7 @@
     @include('admin.module.guestservice.add-edit')
     {!! Form::close() !!}
 
-    <h1> Attach Guest Service</h1>
-    {!! Form::model($guestservice,['action' => ['Admin\UserController@attachService'], 'method' => 'post'], ['class'=>'']) !!}
-    {!! Form::hidden('model_id',$guestservice->id) !!}
-    {!! Form::hidden('model_type','guestServices') !!}
-    <div class="form-group">
-        {!! Form::select('user_id',$users,null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-success" style="width: 100%; padding-top: 10px">{{ trans('word.save') }}</button>
-    </div>
-    {!! Form::close() !!}
+    @include('admin.module.service.attach',['model'=>$guestservice,'users'=>$users,'model_type'=>$modelType])
 @endsection
 
 @section('right')
