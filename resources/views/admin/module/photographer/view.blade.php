@@ -19,20 +19,8 @@
     @include('admin.module.photographer.add-edit')
     {!! Form::close() !!}
     <hr>
-    <h1> Attach Photographer</h1>
+    @include('admin.module.service.attach',['model'=>$photographer,'users'=>$users,'modelType'=>$modelType])
 
-    {!! Form::model($photographer,['action' => ['Admin\UserController@attachService'], 'method' => 'post'], ['class'=>'']) !!}
-
-    {!! Form::hidden('model_id',$photographer->id) !!}
-    {!! Form::hidden('model_type','photographers') !!}
-    <div class="form-group">
-        {!! Form::select('user_id',$users,null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-success" style="width: 100%; padding-top: 10px">{{ trans('word.save') }}</button>
-    </div>
-    {!! Form::close() !!}
 @endsection
 
 @section('right')
@@ -50,42 +38,14 @@
                 <th>Price</th>
                 <td>{{ $photographer->price }}</td>
             </tr>
-
             </tbody>
         </table>
-
     </div>
     <div class="panel-footer ">
         <a data-toggle="tooltip" href="{{ action('Admin\PhotographerController@edit',$photographer->id) }}" data-original-title="Edit Company" type="button" class="btn btn-sm btn-warning"><i class="fa fa-2x fa-edit"></i></a>
         <a href="#" data-link="{{ action('Admin\PhotographerController@destroy',$photographer->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
     </div>
     @include('admin.partials.delete-modal',['info' => 'This will delete company and related records (employees,services) etc .'])
-
-
     <hr>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h1>
-                Attached Users
-            </h1>
-        </div>
-    </div>
-    <div class="panel-body">
-        <table class="table table-user-information">
-            <tbody>
-            <tr>
-                <th>Name</th>
-                <th>Delete</th>
-            </tr>
-            @foreach($photographer->services as $service)
-                <tr>
-                    <td>{{ $service->user ? $service->user->name : '' }}</td>
-                    <td>X</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-
-    </div>
-
+    @include('admin.module.service.users',['model'=>$photographer,'modelType'=>$modelType])
 @endsection

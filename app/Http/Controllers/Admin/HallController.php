@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Src\Models\Hall;
+use App\Src\Models\User\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,14 +15,20 @@ class HallController extends Controller
      * @var Hall
      */
     private $hallRepository;
+    /**
+     * @var User
+     */
+    private $userRepository;
 
     /**
      * HallController constructor.
      * @param Hall $hallRepository
+     * @param User $userRepository
      */
-    public function __construct(Hall $hallRepository)
+    public function __construct(Hall $hallRepository, User $userRepository)
     {
         $this->hallRepository = $hallRepository;
+        $this->userRepository = $userRepository;
     }
     /**
      * Display a listing of the resource.
@@ -72,7 +79,9 @@ class HallController extends Controller
     public function show($id)
     {
         $hall = $this->hallRepository->find($id);
-        return view('admin.module.hall.view',compact('hall'));
+        $users = $this->userRepository->lists('name','id');
+        $modelType = 'halls';
+        return view('admin.module.hall.view',compact('hall','users','modelType'));
     }
 
     /**

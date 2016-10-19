@@ -132,6 +132,24 @@ class BuffetController extends Controller
         return view('admin.module.buffet.package.index',compact('buffet'));
     }
 
+    public function getPackage($packageID)
+    {
+        $package = $this->buffetPackageRepository->with('buffet')->find($packageID);
+        return view('admin.module.buffet.package.view',compact('package'));
+    }
+
+    public function editPackage(Request $request,$packageID)
+    {
+        $this->validate($request, [
+            'description' => 'required',
+            'price' => 'required'
+        ]);
+        $package = $this->buffetPackageRepository->with('buffet')->find($packageID);
+
+        $package->update($request->all());
+        return redirect()->back()->with('success','Updated');
+
+    }
 
     public function createPackage(Request $request)
     {

@@ -18,19 +18,8 @@
     <h1>{{ trans('word.edit') . ' ' . $guestservice->name }}</h1>
     @include('admin.module.guestservice.add-edit')
     {!! Form::close() !!}
-
-    <h1> Attach Guest Service</h1>
-    {!! Form::model($guestservice,['action' => ['Admin\UserController@attachService'], 'method' => 'post'], ['class'=>'']) !!}
-    {!! Form::hidden('model_id',$guestservice->id) !!}
-    {!! Form::hidden('model_type','guestServices') !!}
-    <div class="form-group">
-        {!! Form::select('user_id',$users,null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-success" style="width: 100%; padding-top: 10px">{{ trans('word.save') }}</button>
-    </div>
-    {!! Form::close() !!}
+    <hr>
+    @include('admin.module.service.attach',['model'=>$guestservice,'users'=>$users,'model_type'=>$modelType])
 @endsection
 
 @section('right')
@@ -57,5 +46,7 @@
         <a href="#" data-link="{{ action('Admin\GuestServiceController@destroy',$guestservice->id) }}" data-target="#deleteModalBox" data-original-title="Delete Company" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
     </div>
     @include('admin.partials.delete-modal',['info' => 'This will delete company and related records (employees,services) etc .'])
+    <hr>
+    @include('admin.module.service.users',['model'=>$guestservice,'modelType'=>$modelType])
 
 @endsection

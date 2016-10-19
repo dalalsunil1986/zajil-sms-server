@@ -17,6 +17,8 @@
     {!! Form::model($message,['action' => ['Admin\MessageController@update',$message->id], 'method' => 'patch'], ['class'=>'']) !!}
     <h1>Edit Message </h1>
     @include('admin.module.message.add-edit')
+    <hr>
+    @include('admin.module.service.attach',['model'=>$message,'users'=>$users,'modelType'=>$modelType])
     {!! Form::close() !!}
 
 @endsection
@@ -44,5 +46,8 @@
         <a href="#" data-link="{{ action('Admin\MessageController@destroy',$message->id) }}" data-target="#deleteModalBox" data-original-title="Delete Message" data-toggle="modal" type="button" class="btn btn-sm btn-danger"><i class="fa fa-2x fa-remove"></i></a>
     </div>
     @include('admin.partials.delete-modal',['info' => 'Delete Message '])
+
+    <hr>
+    @include('admin.module.service.users',['model'=>$message])
 
 @endsection

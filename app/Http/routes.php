@@ -18,7 +18,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('orders', 'OrderController');
     Route::get('user/{id}/services', 'UserController@getServices');
     Route::get('user/{id}/appointments', 'UserController@getAppointments');
-    Route::post('photographers/activate', 'PhotographerController@activate');
+    Route::post('services/activate', 'UserController@activateService');
 
 //    Route::post('payment/success','PaymentController@paymentSuccess');
     Route::get('payment/process','PaymentController@paymentProcess');
@@ -31,9 +31,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
     Route::get('hall/checkavailability',['as'=>'hall.availability','uses'=>'HallController@checkAvailability']);
     Route::resource('payments', 'PaymentController');
-
-    Route::post('orders/editorder','OrderController@editOrder');
-
+    Route::post('orders/edit','OrderController@editOrder');
 });
 
 /*********************************************************************************************************
@@ -42,7 +40,9 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('message', 'MessageController');
     Route::get('buffet/{id}/packages', 'BuffetController@getPackages');
+    Route::get('buffet/packages/{id}/show', 'BuffetController@getPackage');
     Route::post('buffet/{id}/package/create', 'BuffetController@createPackage');
+    Route::post('package/{id}/edit', 'BuffetController@editPackage');
     Route::get('package/{id}/delete', 'BuffetController@deletePackage');
     Route::resource('buffet', 'BuffetController');
     
@@ -53,7 +53,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
     Route::resource('light-service', 'LightServiceController');
     Route::resource('user', 'UserController');
     Route::post('user/attach-service','UserController@attachService');
-    Route::post('photographer/attach','PhotographerController@attachToUser');
+    Route::post('user/detach-service','UserController@detachService');
     Route::get('/', 'HomeController@index');
 });
 
