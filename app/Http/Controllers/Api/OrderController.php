@@ -127,10 +127,7 @@ class OrderController extends Controller
         $id  = $request->json('id');
         $serviceType = $request->json('service_type');
         $order = $this->order->find($id);
-//        $statuses = ['pending'=>'pending','success'=>'success','failed'=>'failed'];
-//        if($request->has('status') && in_array($request->status,$statuses)) {
-//            $order->status = $request->status;
-//        }
+
         switch ($serviceType) {
             case 'buffet_package':
                 $service = $this->buffetPackage->find($order->{$serviceType.'_id'});
@@ -160,9 +157,9 @@ class OrderController extends Controller
                         break;
                 }
                 if($service) {
-//                    $order->{$serviceType.'_id'} = NULL;
-//                    $order->{$serviceType.'_date'} = NULL;
-//                    $order->amount = $order->amount - $service->price;
+                    $order->{$serviceType.'_id'} = NULL;
+                    $order->{$serviceType.'_date'} = NULL;
+                    $order->amount = $order->amount - $service->price;
                 }
         }
         $order->save();

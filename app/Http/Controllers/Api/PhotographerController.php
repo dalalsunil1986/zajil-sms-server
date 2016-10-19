@@ -27,14 +27,4 @@ class PhotographerController extends Controller
         return response()->json(['data' => $photographers]);
     }
 
-    public function activate(Request $request)
-    {
-        $value = $request->json('value');
-        $photographerID = $request->json('id');
-
-        $photographer = $this->photographer->find($photographerID);
-        $photographer->active = $value;
-        $photographer->save();
-        return response()->json(['success'=>true,'data'=>$photographer]);
-    }
 }

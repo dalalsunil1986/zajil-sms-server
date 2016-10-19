@@ -18,7 +18,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('orders', 'OrderController');
     Route::get('user/{id}/services', 'UserController@getServices');
     Route::get('user/{id}/appointments', 'UserController@getAppointments');
-    Route::post('photographers/activate', 'PhotographerController@activate');
+    Route::post('services/activate', 'UserController@activateService');
 
 //    Route::post('payment/success','PaymentController@paymentSuccess');
     Route::get('payment/process','PaymentController@paymentProcess');
@@ -31,9 +31,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::get('payment/end',['as'=>'payment.end','uses'=>'PaymentController@endPayment']);
     Route::get('hall/checkavailability',['as'=>'hall.availability','uses'=>'HallController@checkAvailability']);
     Route::resource('payments', 'PaymentController');
-
-    Route::post('orders/editorder','OrderController@editOrder');
-
+    Route::post('orders/edit','OrderController@editOrder');
 });
 
 /*********************************************************************************************************
