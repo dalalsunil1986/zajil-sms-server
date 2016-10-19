@@ -15,6 +15,10 @@ class GuestService extends Model
     protected $table = 'guest_services';
     public $timestamps = false;
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);

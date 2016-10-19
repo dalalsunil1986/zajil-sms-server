@@ -15,6 +15,10 @@ class LightService extends Model
     protected $table = 'light_services';
     public $timestamps = false;
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);
