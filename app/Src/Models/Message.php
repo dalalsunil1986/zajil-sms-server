@@ -15,6 +15,10 @@ class Message extends Model
     protected $table = 'messages';
     public $timestamps = false;
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);

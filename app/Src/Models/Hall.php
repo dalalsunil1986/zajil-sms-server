@@ -14,6 +14,10 @@ class Hall extends Model
     protected $table = 'halls';
     public $timestamps = false;
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);
