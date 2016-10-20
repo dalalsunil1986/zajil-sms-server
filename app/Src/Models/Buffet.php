@@ -15,6 +15,7 @@ class Buffet extends Model
     protected $hidden = [];
     protected $table = 'buffets';
     public $timestamps = false;
+    protected $with = ['packages'];
 
     public function packages()
     {

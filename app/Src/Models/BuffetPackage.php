@@ -11,6 +11,9 @@ class BuffetPackage extends Model
     protected $table = 'buffet_packages';
     public $timestamps = false;
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
 
     public function buffet()
     {
