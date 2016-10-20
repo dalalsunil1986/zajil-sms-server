@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Src\Models\Buffet;
 use App\Src\Models\BuffetPackage;
 use App\Src\Models\GuestService;
 use App\Src\Models\Hall;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
             'messages' => Message::class,
             'lightServices' => LightService::class,
             'buffetPackages' => BuffetPackage::class,
+            'buffets' => Buffet::class,
             'halls' => Hall::class
         ]);
     }
