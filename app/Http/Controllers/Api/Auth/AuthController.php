@@ -67,6 +67,7 @@ class AuthController extends Controller
             true)
         ) {
             $user = Auth::user();
+            $user->makeVisible('api_token');
             return response()->json(['success' => true,'data'=>$user],200);
         }
 

@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     protected $table = 'users';
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token','activation_code','api_token'];
 
     public function services()
     {

@@ -49,6 +49,7 @@ class UserController extends Controller
         $user->userServices = $user->services->groupBy('service_type')->map(function($serviceable) {
             return $serviceable->pluck('service');
         });
+        unset($user->services);
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
@@ -85,6 +86,7 @@ class UserController extends Controller
                 }
             }
         });
+
 
         return response()->json(['data'=>$user,'success'=>true],200);
     }
