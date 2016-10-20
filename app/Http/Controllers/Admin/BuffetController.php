@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Src\Models\Buffet;
 use App\Src\Models\BuffetPackage;
+use App\Src\Models\User\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,16 +20,22 @@ class BuffetController extends Controller
      * @var BuffetPackage
      */
     private $buffetPackageRepository;
+    /**
+     * @var User
+     */
+    private $userRepository;
 
     /**
      * BuffetController constructor.
      * @param Buffet $buffetRepository
      * @param BuffetPackage $buffetPackageRepository
+     * @param User $userRepository
      */
-    public function __construct(Buffet $buffetRepository, BuffetPackage $buffetPackageRepository)
+    public function __construct(Buffet $buffetRepository, BuffetPackage $buffetPackageRepository, User $userRepository)
     {
         $this->buffetRepository = $buffetRepository;
         $this->buffetPackageRepository = $buffetPackageRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -79,7 +86,9 @@ class BuffetController extends Controller
     public function show($id)
     {
         $buffet = $this->buffetRepository->find($id);
-        return view('admin.module.buffet.view',compact('buffet'));
+        $users = $this->userRepository->lists('name','id');
+        $modelType = 'buffets';
+        return view('admin.module.buffet.view',compact('buffet','users','modelType'));
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Src\Models\BuffetPackage;
 use App\Src\Models\GuestService;
 use App\Src\Models\Hall;
 use App\Src\Models\LightService;
@@ -11,9 +13,6 @@ use App\Src\Models\Photographer;
 use App\Src\Models\User\User;
 use App\Src\Models\UserService;
 use Illuminate\Http\Request;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -49,6 +48,7 @@ class UserController extends Controller
         $user->userServices = $user->services->groupBy('service_type')->map(function($serviceable) {
             return $serviceable->pluck('service');
         });
+        unset($user->services);
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
@@ -80,6 +80,7 @@ class UserController extends Controller
                         $collection = $this->orderRepository->with('lightService')->whereIn('light_service_id',$servicesIDs)->get()->toArray();
                         return $collection;
                         break;
+
                     default :
                         break;
                 }
@@ -89,7 +90,8 @@ class UserController extends Controller
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
-    public function activateService(Request $request,Message $message, Hall $hall, Photographer $photographer, GuestService $guestService, LightService $lightService)
+    public function activateService(Request $request,Message $message, Hall $hall, Photographer $photographer, GuestService $guestService, LightService $lightService,
+BuffetPackage $buffetPackage)
     {
         $id  = $request->json('id');
         $serviceType = $request->json('service_type');
@@ -110,6 +112,9 @@ class UserController extends Controller
                 break;
             case 'light_service' :
                 $service = $lightService->find($id);
+                break;
+            case 'buffet_package':
+                $service = $buffetPackage->find($id);
                 break;
         }
 
