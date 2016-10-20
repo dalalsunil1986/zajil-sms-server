@@ -17,6 +17,10 @@ class Buffet extends Model
     public $timestamps = false;
     protected $with = ['packages'];
 
+    protected $casts = [
+        'buffet_id' => 'int',
+    ];
+
     public function packages()
     {
         return $this->hasMany(BuffetPackage::class);
