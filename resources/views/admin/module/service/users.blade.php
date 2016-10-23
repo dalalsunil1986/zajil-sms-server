@@ -19,7 +19,7 @@
                     {!! Form::open(['action' => ['Admin\UserController@detachService'], 'method' => 'post'], ['class'=>'']) !!}
                     {!! Form::hidden('model_type',$modelType) !!}
                     {!! Form::hidden('model_id',$model->id) !!}
-                    {!! Form::hidden('user_id',$service->user->id) !!}
+                    {!! Form::hidden('user_id',$service->user ? $service->user->id : 'User Not Found') !!}
                     <button type="submit" class="" style="">X</button>
                     {!! Form::close() !!}
                 </td>
