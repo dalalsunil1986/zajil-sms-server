@@ -44,7 +44,7 @@ class UserController extends Controller
 
     public function getServices($userID)
     {
-        $user = $this->userRepository->with('services.service')->find($userID);
+        $user = $this->userRepository->has('services.service.user')->with('services.service')->find($userID);
         $user->userServices = $user->services->groupBy('service_type')->map(function($serviceable) {
             return $serviceable->pluck('service');
         });
