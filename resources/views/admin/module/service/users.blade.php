@@ -14,12 +14,12 @@
         </tr>
         @foreach($model->services as $service)
             <tr>
-                <td>{{ $service->user ? $service->user->name : '' }}</td>
+                <td>{{ $service->user ? $service->user->name : 'User Not Found' }}</td>
                 <td>
                     {!! Form::open(['action' => ['Admin\UserController@detachService'], 'method' => 'post'], ['class'=>'']) !!}
                     {!! Form::hidden('model_type',$modelType) !!}
                     {!! Form::hidden('model_id',$model->id) !!}
-                    {!! Form::hidden('user_id',$service->user ? $service->user->id : 'User Not Found') !!}
+                    {!! Form::hidden('user_id',$service->user ? $service->user->id : null) !!}
                     <button type="submit" class="" style="">X</button>
                     {!! Form::close() !!}
                 </td>

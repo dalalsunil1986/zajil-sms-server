@@ -18,6 +18,7 @@ $factory->define(App\Src\Models\User\User::class, function (Faker\Generator $fak
         'password' => bcrypt('password'),
         'api_token' => $faker->word,
         'remember_token' => str_random(10),
+        'active' => 1
     ];
 });
 
@@ -26,6 +27,7 @@ $factory->define(\App\Src\Models\Message::class, function (Faker\Generator $fake
         'location' => $faker->name,
         'price' => '100.00',
         'recepient_count' => '2000',
+        'active' => 1
     ];
 });
 
@@ -43,6 +45,7 @@ $factory->define(\App\Src\Models\BuffetPackage::class, function (Faker\Generator
         'buffet_id' => App\Src\Models\Buffet::orderByRaw("RAND()")->first()->id,
         'description' => $faker->sentence(5),
         'price' => '20.00',
+        'active' => 1
     ];
 });
 
@@ -52,6 +55,7 @@ $factory->define(\App\Src\Models\Hall::class, function (Faker\Generator $faker) 
         'description' => $faker->sentence(5),
         'address' => $faker->address,
         'price' => '20.00',
+        'active' => 1
     ];
 });
 
@@ -59,6 +63,8 @@ $factory->define(\App\Src\Models\Photographer::class, function (Faker\Generator 
     return [
         'name' => $faker->name,
         'price' => '20.00',
+        'description' => $faker->sentence(5),
+        'active' => 1
     ];
 });
 
@@ -66,6 +72,8 @@ $factory->define(\App\Src\Models\GuestService::class, function (Faker\Generator 
     return [
         'name' => $faker->name,
         'price' => '20.00',
+        'description' => $faker->sentence(5),
+        'active' => 1
     ];
 });
 
@@ -73,6 +81,8 @@ $factory->define(\App\Src\Models\LightService::class, function (Faker\Generator 
     return [
         'name' => $faker->name,
         'price' => '20.00',
+        'description' => $faker->sentence(5),
+        'active' => 1
     ];
 });
 
