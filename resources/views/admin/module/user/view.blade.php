@@ -5,7 +5,7 @@
         <h2>
             <a href="/admin">Home</a>
             <i class="fa fa-angle-right"></i>
-            <a href="{{action('Admin\HallController@index')}}">Halls</a>
+            <a href="{{action('Admin\UserController@index')}}">Users</a>
             <i class="fa fa-angle-right"></i>
             <span>{{ $user->name }}</span>
         </h2>
@@ -15,8 +15,8 @@
 @section('left')
     <hr>
     {!! Form::model($user,['action' => ['Admin\UserController@update',$user->id], 'method' => 'patch'], ['class'=>'']) !!}
-    <h1>Edit Buffet </h1>
-    @include('admin.module.hall.add-edit')
+    <h1>Edit User </h1>
+    @include('admin.module.user.add-edit')
     {!! Form::close() !!}
 @endsection
 
@@ -32,12 +32,12 @@
         <table class="table table-user-information">
             <tbody>
             <tr>
-                <th>Description</th>
-                <td>{{ $user->description }}</td>
+                <th>Email</th>
+                <td>{{ $user->email }}</td>
             </tr>
             <tr>
-                <th>Address</th>
-                <td>{{ $user->address }}</td>
+                <th>Active</th>
+                <td>{{ $user->active ? 'true' : 'false' }}</td>
             </tr>
             </tbody>
         </table>

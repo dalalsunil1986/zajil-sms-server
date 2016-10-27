@@ -7,6 +7,7 @@ use App\Src\Models\UserService;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,11 +56,27 @@ class UserController extends Controller
             'email' => strtolower($request->email),
             'password' => bcrypt($request->password),
             'name' => $request->name,
+            'active' => 1
         ]);
-        $user->active = 1;
-        $user->save();
 
         return redirect()->back()->with('success','User Saved');
+    }
+
+    public function update(Request $request,$id)
+    {
+        $user = $this->userRepository->find($id);
+        $this->validate($request,['name'=>'required','password'=>'confirmed']);
+        if($request->password) {
+            if (!Hash::check($request->password, $user->password))
+            {
+                $user->update(array_merge([$request->except(['password','password_confirmation'])],['password'=>bcrypt($request->password)]));
+            }
+        } else {
+            $user->update($request->except(['password','password_confirmation']));
+        }
+
+        return redirect()->back()->with('success','Saved');
+
     }
 
     public function attachService(Request $request)

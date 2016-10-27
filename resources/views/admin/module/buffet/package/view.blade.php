@@ -36,6 +36,10 @@
                 <th>Price</th>
                 <td>{{ $package->price }}</td>
             </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ $package->active ? 'true' : 'false'}}</td>
+            </tr>
             </tbody>
         </table>
     </div>

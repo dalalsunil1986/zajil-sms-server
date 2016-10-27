@@ -65,7 +65,7 @@ class HallController extends Controller
             'name' => 'required|string|unique:buffets,name',
         ]);
 
-        $hall = $this->hallRepository->create($request->all());
+        $hall = $this->hallRepository->create(array_merge($request->all(),['active'=>1]));
 
         return redirect()->action('Admin\HallController@show',$hall->id)->with('success','Saved');
     }

@@ -39,6 +39,11 @@
                 <th>Recepient Count</th>
                 <td>{{ $message->recepient_count }}</td>
             </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ $message->active ? 'true' : 'false'}}</td>
+            </tr>
+
             </tbody>
         </table>
     </div>

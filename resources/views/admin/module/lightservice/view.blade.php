@@ -37,7 +37,10 @@
                 <th>Price</th>
                 <td>{{ $lightservice->price }}</td>
             </tr>
-
+            <tr>
+                <th>Active</th>
+                <td>{{ $lightservice->active ? 'true' : 'false'}}</td>
+            </tr>
             </tbody>
         </table>
     </div>

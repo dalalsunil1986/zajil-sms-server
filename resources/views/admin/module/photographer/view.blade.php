@@ -38,6 +38,10 @@
                 <th>Price</th>
                 <td>{{ $photographer->price }}</td>
             </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ $photographer->active ? 'true' : 'false'}}</td>
+            </tr>
             </tbody>
         </table>
     </div>

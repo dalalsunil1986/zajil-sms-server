@@ -69,7 +69,7 @@ class LightServiceController extends Controller
 
         ]);
 
-        $lightservice = $this->lightServiceRepository->create($request->all());
+        $lightservice = $this->lightServiceRepository->create(array_merge($request->all(),['active'=>1]));
 
         return redirect()->action('Admin\LightServiceController@show',$lightservice->id)->with('success','Saved');
     }
