@@ -67,7 +67,7 @@ class MessageController extends Controller
             'recepient_count' => 'required|numeric'
         ]);
 
-        $message = $this->messageRepository->create($request->all());
+        $message = $this->messageRepository->create(array_merge($request->all(),['active'=>1]));
 
         return redirect()->action('Admin\MessageController@show',$message->id)->with('success','Saved');
     }

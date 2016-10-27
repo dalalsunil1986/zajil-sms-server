@@ -37,7 +37,10 @@
                 <th>Price</th>
                 <td>{{ $guestservice->price }}</td>
             </tr>
-
+            <tr>
+                <th>Active</th>
+                <td>{{ $guestservice->active ? 'true' : 'false'}}</td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -68,7 +68,7 @@ class GuestServiceController extends Controller
 
         ]);
 
-        $guestservice = $this->guestServiceRepository->create($request->all());
+        $guestservice = $this->guestServiceRepository->create(array_merge($request->all(),['active'=>1]));
 
         return redirect()->action('Admin\GuestServiceController@show',$guestservice->id)->with('success','Saved');
     }

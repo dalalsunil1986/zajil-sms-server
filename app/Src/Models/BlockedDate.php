@@ -6,11 +6,11 @@ use App\Src\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class UserService extends Model
+class BlockedDate extends Model
 {
     protected $guarded = ['id'];
     protected $hidden = [];
-    protected $table = 'service_users';
+    protected $table = 'blocked_dates';
     public $timestamps = false;
 
     public function service()
@@ -27,4 +27,5 @@ class UserService extends Model
     {
         return $query->where('service_type', $type);
     }
+
 }

@@ -2,7 +2,6 @@
 
 Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'], function () {
 
-
     Route::post('auth/login', 'Auth\AuthController@postLogin');
 //    Route::post('auth/register', 'Auth\AuthController@postRegister');
 //    Route::post('auth/activate', 'Auth\AuthController@postActivate');
@@ -19,6 +18,8 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::get('user/{id}/services', 'UserController@getServices');
     Route::get('user/{id}/appointments', 'UserController@getAppointments');
     Route::post('services/activate', 'UserController@activateService');
+    Route::get('services/check-availability',['as'=>'service.availability','uses'=>'ServiceController@checkAvailability']);
+    Route::post('services/block-date',['as'=>'service.block_date','uses'=>'ServiceController@blockDate']);
 
 //    Route::post('payment/success','PaymentController@paymentSuccess');
     Route::get('payment/process','PaymentController@paymentProcess');

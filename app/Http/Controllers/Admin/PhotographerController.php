@@ -75,7 +75,7 @@ class PhotographerController extends Controller
 
         ]);
 
-        $photographer = $this->photographerRepository->create($request->all());
+        $photographer = $this->photographerRepository->create(array_merge($request->all(),['active'=>1]));
 
         return redirect()->action('Admin\PhotographerController@show',$photographer->id)->with('success','Saved');
     }

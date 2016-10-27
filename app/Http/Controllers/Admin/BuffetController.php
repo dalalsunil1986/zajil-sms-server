@@ -166,7 +166,7 @@ class BuffetController extends Controller
             'description' => 'required',
             'price' =>'required'
         ]);
-        $package = $this->buffetPackageRepository->create($request->all());
+        $package = $this->buffetPackageRepository->create(array_merge($request->all(),['active'=>1]));
         return redirect()->back()->with('success','Saved');
     }
 

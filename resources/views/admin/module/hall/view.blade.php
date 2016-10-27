@@ -41,6 +41,10 @@
                 <th>Address</th>
                 <td>{{ $hall->address }}</td>
             </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ $hall->active ? 'true' : 'false'}}</td>
+            </tr>
             </tbody>
         </table>
     </div>

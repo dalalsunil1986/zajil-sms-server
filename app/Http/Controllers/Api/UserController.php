@@ -91,8 +91,9 @@ class UserController extends Controller
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
-    public function activateService(Request $request,Message $message, Hall $hall, Photographer $photographer, GuestService $guestService, LightService $lightService,
-BuffetPackage $buffetPackage)
+    public function activateService(Request $request,Message $message, Hall $hall,
+                                    Photographer $photographer, GuestService $guestService, LightService $lightService,
+                                    BuffetPackage $buffetPackage)
     {
         $id  = $request->json('id');
         $serviceType = $request->json('service_type');
