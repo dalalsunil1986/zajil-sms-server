@@ -96,10 +96,10 @@ class UserController extends Controller
                                     BuffetPackage $buffetPackage)
     {
         $id  = $request->json('id');
-        $serviceType = $request->json('service_type');
+        $serviceColumn = $request->json('service_column');
         $service = false;
 
-        switch ($serviceType) {
+        switch ($serviceColumn) {
             case 'message' :
                 $service = $message->find($id);
                 break;
