@@ -125,12 +125,12 @@ class OrderController extends Controller
     public function editOrder(Request $request)
     {
         $id  = $request->json('id');
-        $serviceType = $request->json('service_type');
+        $serviceColumn = $request->json('service_column');
         $order = $this->order->find($id);
 
-        switch ($serviceType) {
+        switch ($serviceColumn) {
             case 'buffet_package':
-                $service = $this->buffetPackage->find($order->{$serviceType.'_id'});
+                $service = $this->buffetPackage->find($order->{$serviceColumn.'_id'});
                 if($service) {
                     $order->buffet_package_id = NULL;
                     $order->buffet_date = NULL;
@@ -139,26 +139,26 @@ class OrderController extends Controller
                 break;
             default:
                 $service = false;
-                switch ($serviceType) {
+                switch ($serviceColumn) {
                     case 'message' :
-                        $service = $this->message->find($order->{$serviceType.'_id'});
+                        $service = $this->message->find($order->{$serviceColumn.'_id'});
                         break;
                     case 'hall' :
-                        $service = $this->hall->find($order->{$serviceType.'_id'});
+                        $service = $this->hall->find($order->{$serviceColumn.'_id'});
                         break;
                     case 'photographer' :
-                        $service = $this->photographer->find($order->{$serviceType.'_id'});
+                        $service = $this->photographer->find($order->{$serviceColumn.'_id'});
                         break;
                     case 'guest_service' :
-                        $service = $this->guestService->find($order->{$serviceType.'_id'});
+                        $service = $this->guestService->find($order->{$serviceColumn.'_id'});
                         break;
                     case 'light_service' :
-                        $service = $this->lightService->find($order->{$serviceType.'_id'});
+                        $service = $this->lightService->find($order->{$serviceColumn.'_id'});
                         break;
                 }
                 if($service) {
-                    $order->{$serviceType.'_id'} = NULL;
-                    $order->{$serviceType.'_date'} = NULL;
+                    $order->{$serviceColumn.'_id'} = NULL;
+                    $order->{$serviceColumn.'_date'} = NULL;
                     $order->amount = $order->amount - $service->price;
                 }
         }
