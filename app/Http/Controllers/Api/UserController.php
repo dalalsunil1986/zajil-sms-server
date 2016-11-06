@@ -50,6 +50,8 @@ class UserController extends Controller
             return $serviceable->pluck('service');
         });
         unset($user->services);
+        $user->services = $user->userServices;
+        unset($user->userServices);
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
@@ -87,7 +89,7 @@ class UserController extends Controller
                 }
             }
         });
-
+        unset($user->services);
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
