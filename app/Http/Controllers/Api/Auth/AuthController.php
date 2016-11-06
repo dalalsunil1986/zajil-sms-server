@@ -49,6 +49,10 @@ class AuthController extends Controller
 
     public function loginUsingToken(Request $request)
     {
+        if( $request->json('api_token') === null) {
+            return response()->json(['success' => false,'message'=>'Invalid Token'], 401);
+        }
+
         $user =  User::where('api_token',$request->json('api_token'))->first();
         if($user = Auth::loginUsingId($user->id)){
             return response()->json(['data'=>$user,'success'=>true],200);
