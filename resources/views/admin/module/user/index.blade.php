@@ -20,9 +20,10 @@
         </div>
 
         <div class="form-group" style="padding-top: 20px">
-            <label for="name">Name</label>
+            <label for="name">Email</label>
             {!! Form::text('email',null,['class'=>'form-control','placeholder'=>'Email']) !!}
         </div>
+        
         <div class="form-group" style="padding-top: 20px">
             <label for="name">Password</label>
             {!! Form::password('password',null,['class'=>'form-control','placeholder'=>'Password']) !!}
