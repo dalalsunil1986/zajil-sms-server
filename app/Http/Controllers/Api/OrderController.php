@@ -12,6 +12,7 @@ use App\Src\Models\Message;
 use App\Src\Models\Order;
 use App\Src\Models\Photographer;
 use App\Src\Models\User\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -132,6 +133,22 @@ class OrderController extends Controller
     }
 
     public function editOrder(Request $request)
+    {
+        $id  = $request->json('id');
+        $order = $this->order->find($id);
+        $serviceColumn = $request->json('service_column');
+        $serviceDate = $request->json('selected_date');
+        $order->email = $request->json('email');
+        $order->phone = $request->json('phone');
+        $order->address = $request->json('address');
+        $order->name = $request->json('name');
+        $order->{$serviceColumn.'_date'} = Carbon::createFromFormat('Y-m-d', $serviceDate)->toDateString();
+        $order->save();
+
+        return response()->json(['success'=>true,'data'=>$order]);
+    }
+
+    public function deleteOrder(Request $request)
     {
         $id  = $request->json('id');
         $serviceColumn = $request->json('service_column');

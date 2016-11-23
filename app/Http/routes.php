@@ -14,7 +14,9 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('photographers', 'PhotographerController');
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
-    Route::resource('orders', 'OrderController');
+    Route::resource('orders', 'OrderController',['only'=>['index','store']]);
+    Route::post('orders/edit', 'OrderController@editOrder');
+    Route::post('orders/delete', 'OrderController@deleteOrder');
     Route::get('user/{id}/services', 'UserController@getServices');
     Route::get('user/{id}/appointments', 'UserController@getAppointments');
     Route::post('services/activate', 'UserController@activateService');
