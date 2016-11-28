@@ -18,7 +18,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::post('orders/edit', 'OrderController@editOrder');
     Route::post('orders/delete', 'OrderController@deleteOrder');
     Route::get('user/{id}/services', 'UserController@getServices');
-    Route::get('user/{id}/appointments', 'UserController@getAppointments');
+    Route::get('user/{id}/orders', 'UserController@getOrders');
     Route::post('services/activate', 'UserController@activateService');
     Route::get('services/check-availability',['as'=>'service.availability','uses'=>'ServiceController@checkAvailability']);
     Route::post('services/block-date',['as'=>'service.block_date','uses'=>'ServiceController@blockDate']);

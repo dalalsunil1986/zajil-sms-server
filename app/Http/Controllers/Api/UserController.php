@@ -55,10 +55,10 @@ class UserController extends Controller
         return response()->json(['data'=>$user,'success'=>true],200);
     }
 
-    public function getAppointments($userID)
+    public function getOrders($userID)
     {
         $user = $this->userRepository->with('services')->find($userID);
-        $user->userOrders = $user->services->groupBy('service_type')->map(function($serviceable) use ($user) {
+        $user->orders = $user->services->groupBy('service_type')->map(function($serviceable) use ($user) {
             foreach ($serviceable as $service) {
                 $userServices = $user->services->where('service_type',$service->service_type);
                 $servicesIDs = $userServices->pluck('service_id')->toArray();
