@@ -63,6 +63,11 @@ class UserController extends Controller
                 $userServices = $user->services->where('service_type',$service->service_type);
                 $servicesIDs = $userServices->pluck('service_id')->toArray();
                 switch ($service->service_type) {
+                    case 'buffets':
+                        // replace buffet_id to buffet_package_id
+                        $collection = $this->orderRepository->with('buffets')->whereIn('buffet_id',$servicesIDs)->get()->toArray();
+                        return $collection;
+                        break;
                     case 'messages':
                         $collection = $this->orderRepository->with('message')->whereIn('message_id',$servicesIDs)->get()->toArray();
                         return $collection;

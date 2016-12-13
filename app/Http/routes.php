@@ -71,6 +71,11 @@ Route::group([], function () {
 
 Route::get('test',function(){
     // services =  ['photogrpaher','guestService']
-    $service = \App\Src\Models\Photographer::find(1);
-    dd($service->orders);
+//    Mail::send('z4ls@live.com',[],function(){
+//       return 'z';
+//    });
+    Mail::send('emails.test', [], function ($m)  {
+        $m->from('zajil.knet1@gmail.com', 'Your Application');
+        $m->to('z4ls@live.com')->subject('Your Reminder!');
+    });
 });
