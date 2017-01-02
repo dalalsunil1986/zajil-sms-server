@@ -62,9 +62,10 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'location' => 'required|string|unique:messages,location',
+            'location' => 'required|string',
             'price' => 'required',
-            'recepient_count' => 'required|numeric'
+            'recepient_count' => 'required|numeric',
+            'characters_count' => 'required|numeric|in:70,140'
         ]);
 
         $message = $this->messageRepository->create(array_merge($request->all(),['active'=>1]));
@@ -106,10 +107,12 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $array = [70,140];
         $this->validate($request, [
-            'location' => 'required|string|unique:messages,location,'.$id,
+            'location' => 'required|string',
             'price' => 'required',
-            'recepient_count' => 'required|numeric'
+            'recepient_count' => 'required|numeric',
+            'characters_count' => 'required|numeric|in:70,140'
         ]);
         $message = $this->messageRepository->find($id);
         $message->update($request->all());

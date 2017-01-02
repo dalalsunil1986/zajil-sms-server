@@ -29,6 +29,7 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Character Count</th>
                 <th>Recepient Count</th>
                 <th></th>
             </tr>
@@ -38,6 +39,7 @@
                 <tr class="gradeU">
                     <td><span class="title"><a href="{{action('Admin\MessageController@show',$message->id)}}">{{ $message->location }}</a></span></td>
                     <td><span class="title">{{ $message->price }}</span></td>
+                    <td><span class="title">{{ $message->characters_count }}</span></td>
                     <td><span class="title">{{ $message->recepient_count }}</span></td>
                     <td class="f18">
                         <a href="#" class="red" data-toggle="modal" data-target="#deleteModalBox"

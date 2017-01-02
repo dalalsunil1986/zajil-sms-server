@@ -8,6 +8,10 @@
         {!! Form::text('price',null,['class'=>'form-control','placeholder'=>'Price']) !!}
     </div>
     <div class="form-group" >
+        <label for="recepient_count">Character Count</label>
+        {!! Form::text('characters_count',null,['class'=>'form-control','placeholder'=>'Character Count']) !!}
+    </div>
+    <div class="form-group" >
         <label for="recepient_count">Recepient Count</label>
         {!! Form::text('recepient_count',null,['class'=>'form-control','placeholder'=>'Recepient Count']) !!}
     </div>
