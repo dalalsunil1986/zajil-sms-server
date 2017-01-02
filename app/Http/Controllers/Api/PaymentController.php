@@ -142,10 +142,10 @@ class PaymentController extends Controller
 
             $emailArray = ['date' => date('d-m-Y'),'invoiceNo' => $order->id,'name' => $order->name,'transaction_id'=>$order->transaction_id,'total'=>$order->amount,'services'=>$services];
 
-            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
-                $m->from('payment@zajil.app', 'ZajilKnet Order');
-                $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
-            });
+//            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
+//                $m->from('payment@zajil.app', 'ZajilKnet Order');
+//                $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
+//            });
 
             Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
                 $m->from('payment@zajil.app','ZajilKnet Order');
