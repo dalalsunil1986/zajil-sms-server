@@ -75,9 +75,9 @@ class PaymentController extends Controller
                 $order->status = 'success';
                 $order->save();
             }
-            return 'Redirect=http://zajil.izal.me/api/v1/payment/success';
+            return 'Redirect=http://zajil.ideasowners.net/api/v1/payment/success';
         }  else {
-            return 'Redirect=http://zajil.izal.me/api/v1/payment/failure';
+            return 'Redirect=http://zajil.ideasowners.net/api/v1/payment/failure';
         }
 
     }
