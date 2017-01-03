@@ -21,13 +21,12 @@ class AdController extends Controller
      */
     public function __construct(Ad $adRepository)
     {
-
         $this->adRepository = $adRepository;
     }
 
     public function index()
     {
-        $ads = $this->adRepository->latest()->paginate(10);
+        $ads = $this->adRepository->latest()->limit(4)->get();
         return response()->json(['data' => $ads]);
     }
 

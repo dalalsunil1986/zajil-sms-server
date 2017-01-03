@@ -54,11 +54,11 @@ class AdController extends Controller
         $imagePath = self::UPLOAD_PATH.$imageName;
         try {
             Image::make($file)
-//                ->resize(null, 736, function ($constraint) {
-//                    $constraint->aspectRatio();
-//                    $constraint->upsize();
-//                })
-                ->save(public_path().$imagePath);
+                ->resize(null, 736, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->save(public_path().$imagePath,100);
             $fullImagePath = app()->make('url')->to($imagePath);
             $this->adRepository->create([
                 'url' => $fullImagePath,
