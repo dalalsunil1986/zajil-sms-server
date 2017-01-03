@@ -15,6 +15,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' =>'api', 'namespace' => 'Api'],
     Route::resource('guest_services', 'GuestServiceController');
     Route::resource('light_services', 'LightServiceController');
     Route::resource('orders', 'OrderController',['only'=>['index','store']]);
+    Route::resource('ads', 'AdController',['only'=>['index']]);
     Route::post('orders/edit', 'OrderController@editOrder');
     Route::post('orders/delete', 'OrderController@deleteOrder');
     Route::get('user/{id}/services', 'UserController@getServices');
@@ -48,7 +49,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
     Route::post('package/{id}/edit', 'BuffetController@editPackage');
     Route::get('package/{id}/delete', 'BuffetController@deletePackage');
     Route::resource('buffet', 'BuffetController');
-    
+    Route::resource('ad', 'AdController');
+
     Route::resource('hall', 'HallController');
     Route::resource('order', 'OrderController');
     Route::resource('photographer', 'PhotographerController');
