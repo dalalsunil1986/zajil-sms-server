@@ -48,7 +48,6 @@ class AdController extends Controller
         $this->validate($request, [
             'cover'          => 'image',
         ]);
-
         $file = $request->file('cover');
         $imageName = md5(uniqid(rand() * (time()))) . '.' . $file->getClientOriginalExtension();
         $imagePath = self::UPLOAD_PATH.$imageName;

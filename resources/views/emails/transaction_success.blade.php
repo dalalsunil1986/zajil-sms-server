@@ -316,14 +316,18 @@
                                     <td class="content-block aligncenter">
                                         <table class="invoice">
                                             <tr>
-                                                <td>{{ $name }}<br>Invoice #{{ $invoiceNo }}<br>{{ $date }}<br>TransactionID #{{ $transaction_id }}</td>
+                                                <td>{{ $name }} - {{ $mobile }}}<br>Invoice #{{ $invoiceNo }}<br>{{ $date }}<br>TransactionID #{{ $transaction_id }}</td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <table class="invoice-items" cellpadding="0" cellspacing="0">
                                                         @foreach($services as $service)
                                                             <tr>
-                                                                <td>{{ $service['name'] }}</td>
+                                                                <td>{{ $service['name'] }}
+                                                                    @if($service['content'])
+                                                                        <br>{{ $service['content'] }}
+                                                                    @endif
+                                                                </td>
                                                                 <td class="alignright">{{ $service['amount'] }} KD</td>
                                                             </tr>
                                                         @endforeach
