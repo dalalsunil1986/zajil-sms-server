@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Src\Models\BlockedDate;
 use App\Src\Models\BuffetPackage;
 use App\Src\Models\GuestService;
 use App\Src\Models\Hall;
@@ -11,8 +10,6 @@ use App\Src\Models\LightService;
 use App\Src\Models\Message;
 use App\Src\Models\Order;
 use App\Src\Models\Photographer;
-use App\Src\Models\User\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -47,10 +44,6 @@ class OrderController extends Controller
      * @var LightService
      */
     private $lightService;
-    /**
-     * @var BlockedDate
-     */
-    private $blockedDate;
 
     /**
      * @param Order $order
@@ -60,9 +53,8 @@ class OrderController extends Controller
      * @param Photographer $photographer
      * @param GuestService $guestService
      * @param LightService $lightService
-     * @param BlockedDate $blockedDate
      */
-    public function __construct(Order $order,Message $message, BuffetPackage $buffetPackage, Hall $hall, Photographer $photographer, GuestService $guestService, LightService $lightService, BlockedDate $blockedDate)
+    public function __construct(Order $order,Message $message, BuffetPackage $buffetPackage, Hall $hall, Photographer $photographer, GuestService $guestService, LightService $lightService)
     {
         $this->order = $order;
         $this->message = $message;
@@ -71,7 +63,6 @@ class OrderController extends Controller
         $this->photographer = $photographer;
         $this->guestService = $guestService;
         $this->lightService = $lightService;
-        $this->blockedDate = $blockedDate;
     }
 
     public function index()
@@ -105,6 +96,7 @@ class OrderController extends Controller
             'phone' => $params->phone,
             'amount'=>$params->amount,
             'message_id' => $params->message_id,
+            'message_text' => $params->textMessage,
             'hall_id' => $params->hall_id,
             'buffet_package_id' => $params->buffet_package_id,
             'light_service_id' => $params->light_service_id,
@@ -120,76 +112,18 @@ class OrderController extends Controller
         ]);
 
         $order = $this->order->where('secret_token',$params->secret_token)->first();
-
-
-        if($order->message_id) {
-            if($order->message) {
-                $services[] = ['name' => 'Message','content'=>$order->message_text,'amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y')];
-            }
-        }
-
-        if($order->buffet_package_id) {
-            if($order->buffetPackage && $order->buffetPackage->buffet) {
-                $services[] = ['name' => 'Buffet ('.$order->buffetPackage->buffet->name.' - '.$order->buffetPackage->description.')','amount'=>$order->buffetPackage->price,'date'=>$order->buffet_date->format('d-m-Y')];
-            }
-        }
-        if($order->hall_id) {
-            if($order->hall) {
-                $services[] = ['name' => 'Hall ('.$order->hall->name.')','amount'=>$order->hall->price,'date'=>$order->hall_date->format('d-m-Y')];
-            }
-        }
-        if($order->photographer_id) {
-            if($order->photographer) {
-                $services[] = ['name' => 'Photographer ('.$order->photographer->name.')','amount'=>$order->photographer->price,'date'=>$order->photographer_date->format('d-m-Y')];
-            }
-        }
-        if($order->light_service_id) {
-            if($order->lightService) {
-                $services[] = ['name' => 'Lighting ('.$order->lightService->name.')','amount'=>$order->lightService->price,'date'=>$order->light_service_date->format('d-m-Y')];
-            }
-        }
-        if($order->guest_service_id) {
-            if($order->guestService) {
-                $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
-            }
-        }
-
-        $emailArray = ['date' => date('d-m-Y'),'invoiceNo' => $order->id,'name' => $order->name,'mobile'=>$order->phone,'transaction_id'=>$order->transaction_id,'total'=>$order->amount,'services'=>$services];
-
-        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
-            $m->from('payment@zajil.app','ZajilKnet Order');
-            $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
-        });
+        $order->status = 'pending';
+        $order->save();
 
         if(!$order) {
             return response()->json(['success'=>false,'message'=>'Unknown Error Occured, Try again']);
         }
-
-        $order->status = 'pending';
-        $order->save();
-        $this->blockDates($order);
 
         return response()->json(['success'=>true,'data'=>$order]);
 
     }
 
     public function editOrder(Request $request)
-    {
-        $id  = $request->json('id');
-        $order = $this->order->find($id);
-        $serviceColumn = $request->json('service_column');
-        $serviceDate = $request->json('selected_date');
-        $order->email = $request->json('email');
-        $order->phone = $request->json('phone');
-        $order->address = $request->json('address');
-        $order->name = $request->json('name');
-        $order->{$serviceColumn.'_date'} = Carbon::createFromFormat('Y-m-d', $serviceDate)->toDateString();
-        $order->save();
-
-        return response()->json(['success'=>true,'data'=>$order]);
-    }
-
-    public function deleteOrder(Request $request)
     {
         $id  = $request->json('id');
         $serviceColumn = $request->json('service_column');
@@ -232,33 +166,6 @@ class OrderController extends Controller
         $order->save();
         return response()->json(['success'=>true,'data'=>$order]);
 
-    }
-
-    public function blockDates($order)
-    {
-        $blockedDates= collect();
-        $userID = 1;
-        if ($order->buffet_package_id) {
-            $blockedDates->push(['service_id' => $order->buffet_package_id, 'service_type' => 'buffetPackages', 'date' => $order->buffet_date, 'user_id' => $userID]);
-        }
-
-        if ($order->hall_id) {
-            $blockedDates->push(['service_id' => $order->hall_id, 'service_type' => 'halls', 'date' => $order->hall_date, 'user_id' => $userID]);
-        }
-
-        if ($order->photographer_id) {
-            $blockedDates->push(['service_id' => $order->photographer_id, 'service_type' => 'photographers', 'date' => $order->photographer_date, 'user_id' => $userID]);
-        }
-
-        if ($order->light_service_id) {
-            $blockedDates->push(['service_id' => $order->light_service_id, 'service_type' => 'lightServices', 'date' => $order->light_service_date, 'user_id' => $userID]);
-        }
-
-        if ($order->guest_service_id) {
-            $blockedDates->push(['service_id' => $order->guest_service_id, 'service_type' => 'guestServices', 'date' => $order->guest_service_date, 'user_id' => $userID]);
-        }
-
-        return $this->blockedDate->insert($blockedDates->toArray());
     }
 
 

@@ -316,7 +316,7 @@
                                     <td class="content-block aligncenter">
                                         <table class="invoice">
                                             <tr>
-                                                <td>{{ $name }} - {{ $mobile }}}<br>Invoice #{{ $invoiceNo }}<br>{{ $date }}<br>TransactionID #{{ $transaction_id }}</td>
+                                                <td>{{ $name }} - ({{ $mobile }})<br>Invoice #{{ $invoiceNo }}<br>{{ $date }}<br>TransactionID #{{ $transaction_id }}</td>
                                             </tr>
                                             <tr>
                                                 <td>
