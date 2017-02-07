@@ -316,7 +316,7 @@
                                     <td class="content-block aligncenter">
                                         <table class="invoice">
                                             <tr>
-                                                <td>{{ $name }} - ({{ $mobile }})<br>Invoice #{{ $invoiceNo }}<br>{{ $date }}<br>TransactionID #{{ $transaction_id }}</td>
+                                                <td>{{ $name }} - ({{ $phone }})<br>Invoice #{{ $invoiceNo }}<br>{{ $date }}<br>TransactionID #{{ $transaction_id }}</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -325,10 +325,14 @@
                                                             <tr>
                                                                 <td>{{ $service['name'] }}
                                                                     @if($service['content'])
-                                                                        <br>{{ $service['content'] }}
+                                                                        <br><br>{{ $service['content'] }}
                                                                     @endif
                                                                 </td>
                                                                 <td class="alignright">{{ $service['amount'] }} KD</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> Date </td>
+                                                                <td class="alignright"> {{ $service['date'] }}</td>
                                                             </tr>
                                                         @endforeach
                                                         <tr class="total">
