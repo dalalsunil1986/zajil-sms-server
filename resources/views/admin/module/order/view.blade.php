@@ -88,6 +88,10 @@
                     <td>{{ $order->message_text }}</td>
                 </tr>
                 <tr>
+                    <th>Message Time</th>
+                    <td>{{ $order->message_time }}</td>
+                </tr>
+                <tr>
                     <th>Message Date</th>
                     <td>{{ $order->message_date }}</td>
                 </tr>
