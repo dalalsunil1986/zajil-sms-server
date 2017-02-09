@@ -103,6 +103,7 @@ class OrderController extends Controller
             'guest_service_id' => $params->guest_service_id,
             'photographer_id' => $params->photographer_id,
             'message_date'=>$params->message_date,
+            'message_time'=>$params->message_time,
             'buffet_date'=>$params->buffet_date,
             'hall_date'=>$params->hall_date,
             'photographer_date'=>$params->photographer_date,
@@ -114,6 +115,49 @@ class OrderController extends Controller
         $order = $this->order->where('secret_token',$params->secret_token)->first();
         $order->status = 'pending';
         $order->save();
+
+
+        if($order->message_id) {
+            if($order->message) {
+                $services[] = ['name' => 'Message','content'=>$order->message_text,'amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y'),'time'=>$order->message_time];
+            }
+        }
+
+        if($order->buffet_package_id) {
+            if($order->buffetPackage && $order->buffetPackage->buffet) {
+                $services[] = ['name' => 'Buffet ('.$order->buffetPackage->buffet->name.' - '.$order->buffetPackage->description.')','amount'=>$order->buffetPackage->price,'date'=>$order->buffet_date->format('d-m-Y')];
+            }
+        }
+        if($order->hall_id) {
+            if($order->hall) {
+                $services[] = ['name' => 'Hall ('.$order->hall->name.')','amount'=>$order->hall->price,'date'=>$order->hall_date->format('d-m-Y')];
+            }
+        }
+        if($order->photographer_id) {
+            if($order->photographer) {
+                $services[] = ['name' => 'Photographer ('.$order->photographer->name.')','amount'=>$order->photographer->price,'date'=>$order->photographer_date->format('d-m-Y')];
+            }
+        }
+        if($order->light_service_id) {
+            if($order->lightService) {
+                $services[] = ['name' => 'Lighting ('.$order->lightService->name.')','amount'=>$order->lightService->price,'date'=>$order->light_service_date->format('d-m-Y')];
+            }
+        }
+        if($order->guest_service_id) {
+            if($order->guestService) {
+                $services[] = ['name' => 'Guest Service ('.$order->guestService->name.')','amount'=>$order->guestService->price,'date'=>$order->guest_service_date->format('d-m-Y')];
+            }
+        }
+
+        $emailArray = ['date' => date('d-m-Y'),'invoiceNo' => $order->id,'name' => $order->name,'phone' => $order->phone,'transaction_id'=>$order->transaction_id,'total'=>$order->amount,'services'=>$services];
+
+
+        Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
+            $m->from('zajil.knet1@gmail.com','ZajilKnet Order');
+            $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
+        });
+
+
 
         if(!$order) {
             return response()->json(['success'=>false,'message'=>'Unknown Error Occured, Try again']);

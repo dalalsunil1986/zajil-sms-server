@@ -110,7 +110,7 @@ class PaymentController extends Controller
 
             if($order->message_id) {
                 if($order->message) {
-                    $services[] = ['name' => 'Message','content'=>$order->message_text,'amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y')];
+                    $services[] = ['name' => 'Message','content'=>$order->message_text,'amount'=>$order->message->price,'date'=>$order->message_date->format('d-m-Y'),'time'=>$order->message_time];
                 }
             }
 

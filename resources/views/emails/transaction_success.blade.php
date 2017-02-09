@@ -332,7 +332,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <td> Date </td>
-                                                                <td class="alignright"> {{ $service['date'] }}</td>
+                                                                <td class="alignright">
+                                                                    {{ $service['date'] }}
+                                                                    @if($service['time'])
+                                                                        ({{$service['time'] }})
+                                                                    @endif
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                         <tr class="total">
