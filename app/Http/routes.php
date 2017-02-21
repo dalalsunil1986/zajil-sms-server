@@ -69,6 +69,7 @@ Route::group([], function () {
     Route::auth();
     Route::get('/home', ['as'=>'home','uses'=>'HomeController@index']);
     Route::get('/', 'HomeController@index');
-    Route::get('test','HomeController@uploadImage');
 });
+
+Route::get('test','HomeController@uploadImage');
 
