@@ -69,15 +69,6 @@ Route::group([], function () {
     Route::auth();
     Route::get('/home', ['as'=>'home','uses'=>'HomeController@index']);
     Route::get('/', 'HomeController@index');
+    Route::get('test','HomeController@uploadImage');
 });
 
-Route::get('test',function(){
-    // services =  ['photogrpaher','guestService']
-//    Mail::send('z4ls@live.com',[],function(){
-//       return 'z';
-//    });
-    Mail::send('emails.test', [], function ($m)  {
-        $m->from('zajil.knet1@gmail.com', 'Your Application');
-        $m->to('z4ls@live.com')->subject('Your Reminder!');
-    });
-});
