@@ -143,23 +143,23 @@ class PaymentController extends Controller
             $emailArray = ['date' => date('d-m-Y'),'invoiceNo' => $order->id,'name' => $order->name,'phone' => $order->phone,'transaction_id'=>$order->transaction_id,'total'=>$order->amount,'services'=>$services];
 
 
-            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
-                $m->from('zajil.knet1@gmail.com','ZajilKnet Order');
-                $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
-            });
+//            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
+//                $m->from('zajil.knet1@gmail.com','ZajilKnet Order');
+//                $m->to('z4ls@live.com','Zajil')->subject('New Order From ZajilKnet');
+//            });
 
-            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
-                $m->from('zajil.knet1@gmail.com', 'ZajilKnet Order');
-                $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
-            });
-
-
-            if(!empty($order->email)) {
-                Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
-                    $m->from('zajil.knet1@gmail.com', 'ZajilKnet Order');
-                    $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
-                });
-            }
+//            Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order)  {
+//                $m->from('zajil.knet1@gmail.com', 'ZajilKnet Order');
+//                $m->to('zajil.knet@gmail.com','Zajil')->subject('New Order From ZajilKnet');
+//            });
+//
+//
+//            if(!empty($order->email)) {
+//                Mail::send('emails.transaction_success', $emailArray, function ($m) use ($order) {
+//                    $m->from('zajil.knet1@gmail.com', 'ZajilKnet Order');
+//                    $m->to($order->email,$order->name)->subject('Your Order From Zajil App');
+//                });
+//            }
 
             return response()->json(['success'=>true]);
         } else {

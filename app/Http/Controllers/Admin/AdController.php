@@ -51,6 +51,13 @@ class AdController extends Controller
         $file = $request->file('cover');
         $imageName = md5(uniqid(rand() * (time()))) . '.' . $file->getClientOriginalExtension();
         $imagePath = self::UPLOAD_PATH.$imageName;
+
+        $ads = $this->adRepository->count();
+
+        if($ads >= 4) {
+            return redirect()->back()->with('error', 'Ads Limit Reached. You can add upto 4 Ads only');
+        }
+
         try {
             Image::make($file)
                 ->resize(null, 736, function ($constraint) {

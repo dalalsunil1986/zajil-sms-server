@@ -1,7 +1,9 @@
 /vendor
 /node_modules
 /public/storage
+/public/uploads
 Homestead.yaml
 Homestead.json
+zajil.sql
 .env
 .idea
