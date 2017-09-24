@@ -44,19 +44,24 @@ class PaymentController extends Controller
         $order->status = 'payment';
         $order->save();
 
+        $transactionID = uniqid();
+        $remotePassword = 'E02CEB71';
+        $amount = $order->amount;
+        $secKey = md5($transactionID.$amount.$remotePassword);
+
         $params = [
 //            'merchant'=>'EPG2014', // test
             'merchant'=>'EPG0011', // live
-            'transaction_id'=>uniqid(),
-            'amount'=>$order->amount,
+            'transaction_id'=>$transactionID,
+            'amount'=>$amount,
             'processpage'=>url('api/v1/payment/process'),
-            'sec_key'=>'E02CEB71',
+            'sec_key'=>$secKey,
             'op_post'=> 'false',
             'md_flds'=>'transaction_id:amount:processpage',
             'user_mail'=>$order->email,
             'currency'=>'KWD',
 //            'remotepassword'=>'F82D2878', // test
-            'remotepassword'=>'E02CEB71', // live
+            'remotepassword'=>$remotePassword, // live
             'UDF1' => $secretToken,
             'UDF2' => $order->name,
         ];
